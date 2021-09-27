@@ -29,4 +29,6 @@ Route::get('/callback/{provider}', [SocialController::class, 'callback']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/quiz', [QuizController::class, 'index']);
+    Route::post('/quiz', [QuizController::class, 'create']);
+    Route::delete('/quiz/{id}', [QuizController::class, 'delete']);
 });

@@ -12,7 +12,26 @@
                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModal">
                             CREATE
                         </button>
-                          
+                        <div class="row">
+                        @foreach ($data as $quiz)
+
+                            <div class="col-md-3">
+                              <div class="item" style="background-image: linear-gradient(to right,#1ABCF4,#5DEFB8);">
+                                  <div class="e-flex-content">{{ $quiz->quiz_name }}</div>
+                                  <span>{{ $quiz->number_questions }} questions</span>
+                                  <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()">
+                                    <i class="fal fa-calendar sidebar-icon"></i>
+                                  </a>
+                              </div>
+                            </div>
+
+                              
+                              <form method="POST" id="delete-{{ $quiz->id }}" action="{{ url("/quiz/{$quiz->id}") }}" >
+                                @method('DELETE')
+                                @csrf
+                              </form>
+                        @endforeach
+                      </div>
                     </div>
                 </div>
             </div>
@@ -22,7 +41,8 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="" method="post">
+        <form action="{{ url('/quiz') }}" method="post">
+        @csrf
       <div class="modal-content form-group">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">ABOUT YOUR QUIZ</h5>
@@ -33,12 +53,12 @@
         <div class="modal-body">
           
             <div>
-                <label for="">Subject: </label>
-                <input type="text" name="" id="" class="form-control form-control-lg">
+                <label for="name">Subject: </label>
+                <input type="text" name="quiz_name" id="name" class="form-control form-control-lg">
             </div>
             <div>
-                <label for="">Number of questions: </label>
-                <input type="text" name="" id="" class="form-control form-control-lg">
+                <label for="num">Number of questions: </label>
+                <input type="text" name="number_questions" id="num" class="form-control form-control-lg">
             </div>
           
         </div>
