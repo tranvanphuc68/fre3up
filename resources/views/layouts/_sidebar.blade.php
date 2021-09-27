@@ -1,7 +1,7 @@
 @if (Auth::check())
     
     <div class="sidebar-menu" >
-            <a href="#" class="sidebar-item">
+            <a href="{{ url('/quiz') }}" class="sidebar-item">
               <i class="fal fa-home sidebar-icon"></i>
               <span class="sidebar-text">Quiz</span>
               <span class="sidebar-status"></span>

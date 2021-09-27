@@ -9,13 +9,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
-    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    
     <link href="{{ asset('vendor/icofont/icofont.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/venobox/venobox.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -59,7 +59,7 @@
 </head>
 <body>
 <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="position: fixed; width: 100%">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="position: fixed; width: 100%; z-index: 2000;">
             <div class="container">
                 @if (Auth::check())
                     <button class="navbar-toggler sidebar-toggler" type="button">
