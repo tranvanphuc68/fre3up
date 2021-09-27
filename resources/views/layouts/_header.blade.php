@@ -59,7 +59,7 @@
 </head>
 <body>
 <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="position: fixed; width: 100%; z-index: 2000;">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="position: fixed; width: 100%;">
             <div class="container">
                 @if (Auth::check())
                     <button class="navbar-toggler sidebar-toggler" type="button">
