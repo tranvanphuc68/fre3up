@@ -14,15 +14,18 @@
                         </button>
                         <div class="row">
                         @foreach ($data as $quiz)
-
-                            <div class="col-md-3">
-                              <div class="item" style="background-image: linear-gradient(to right,#1ABCF4,#5DEFB8);">
-                                  <div class="e-flex-content">{{ $quiz->quiz_name }}</div>
-                                  <span>{{ $quiz->number_questions }} questions</span>
-                                  <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()">
-                                    <i class="fal fa-calendar sidebar-icon"></i>
-                                  </a>
+                            <a href="{{ url("/detail_quiz/edit/{$quiz->id}") }}">
+                              <div class="col-md-3">
+                                <div class="item" style="background-image: linear-gradient(to right,#1ABCF4,#5DEFB8);">
+                                    <div class="e-flex-content">{{ $quiz->quiz_name }}</div>
+                                    <span>{{ $quiz->number_questions }} questions</span>
+                                    
                               </div>
+                            </a>
+                            
+                              <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()">
+                                    <i class="fal fa-calendar sidebar-icon"></i>
+                              </a>
                             </div>
 
                               

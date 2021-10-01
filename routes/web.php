@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Q\DetailQuizController;
 use App\Http\Controllers\Q\QuizController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialController;
@@ -17,9 +18,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [QuizController::class, 'getAll']);
 
 Auth::routes();
 
@@ -29,6 +28,13 @@ Route::get('/callback/{provider}', [SocialController::class, 'callback']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/quiz', [QuizController::class, 'index']);
-    Route::post('/quiz', [QuizController::class, 'create']);
+    Route::post('/quiz', [QuizController::class, 'store']);
     Route::delete('/quiz/{id}', [QuizController::class, 'delete']);
+
+
+    Route::get('/detail_quiz/{id}', [DetailQuizController::class, 'create']);
+    Route::post('/detail_quiz/{id}', [DetailQuizController::class, 'store']);
+    Route::get('/detail_quiz/edit/{id}', [DetailQuizController::class, 'edit']);
+    Route::put('/detail_quiz/edit/{id}', [DetailQuizController::class, 'update']);
+    Route::get('/do_quiz/{id}', [DetailQuizController::class, 'do_quiz']);
 });
