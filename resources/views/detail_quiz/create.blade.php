@@ -47,7 +47,9 @@
                                 
                             </div>
                             @endfor
-                            <button class="btn btn-primary" type="submit">SAVE</button>
+                            <div class="text-center mt-5">
+                                <button class="btn btn-primary" type="submit">SAVE</button>
+                            </div>
                         </form>
                     </div>
                 </div>

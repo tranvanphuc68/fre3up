@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Q\DetailQuizController;
 use App\Http\Controllers\Q\QuizController;
+use App\Http\Controllers\Q\ResultController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Auth;
@@ -37,4 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/detail_quiz/edit/{id}', [DetailQuizController::class, 'edit']);
     Route::put('/detail_quiz/edit/{id}', [DetailQuizController::class, 'update']);
     Route::get('/do_quiz/{id}', [DetailQuizController::class, 'do_quiz']);
+
+    Route::get('/result/{id}', [ResultController::class, 'show_result']);
+    Route::post('/result/quiz/{id}', [ResultController::class, 'check']);
 });

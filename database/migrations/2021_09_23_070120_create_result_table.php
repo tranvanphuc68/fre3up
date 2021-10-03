@@ -14,6 +14,7 @@ class CreateResultTable extends Migration
     public function up()
     {
         Schema::create('result', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_quiz')->unsigned();
             $table->tinyInteger('result')->unsigned();
@@ -21,7 +22,6 @@ class CreateResultTable extends Migration
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_quiz')->references('id')->on('quiz')->onDelete('cascade');
-            $table->primary(['id_quiz','id_user']);
         });
     }
 
