@@ -24,6 +24,20 @@
                                 @enderror
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="radio" name="gender" value="Nam" @if (old('gender') == "Nam") checked @endif><span class="m-3">Male</span> 
+                                <input type="radio" name="gender" value="Nữ" @if (old('gender') == "Nữ") checked @endif><span class="m-3">Female</span>
+                                @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>

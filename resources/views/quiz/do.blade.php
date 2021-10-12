@@ -15,7 +15,7 @@
                             <div >
                                 <?php $i++; ?>
                                 <div class="m-4">
-                                    <span class="p-3 rounded-pill alert-info">Question: {{ $i }} / {{ $count }}</span> 
+                                    <span class="p-3 rounded-pill alert-info font-weight-bold">Question: {{ $i }} / {{ $count }}</span> 
                                 </div>
                                 <input type="hidden" name="id_{{$i}}" value={{ $item->id }}>
                                 <div class="p-4 rounded alert-primary">
@@ -45,12 +45,18 @@
                                     </div>
                                     <div class="m-2 border-bottom">{{ $item->ans_4 }}</div>  
                                 </div>
-                                <input type="hidden" name="ques_{{$i}}true_ans" id="ques_{{$i}}true_ans" value="{{ $item->true_ans }}">
+                                <input type="hidden" name="ques_{{$i}}true_ans" id="ques_{{$i}}true_ans" required>
                                 
                             </div>
                             @endforeach
                             <div class="text-center mt-5">
                                     <div class="btn btn-primary" onclick="if (confirm('Check carefully! Are your sure?')) document.getElementById('form').submit()">SAVE</div>                         
+                                @if (Auth::user()->role == 'admin')
+                                    <a href="{{ url("/eviction/{$data[0]->id_quiz}") }}">
+                                        <div class="btn btn-primary m-3">Evict this Quiz</div> 
+                                    
+                                    </a>
+                                @endif
                             </div>
                         </form>
                     </div>

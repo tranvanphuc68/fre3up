@@ -5,6 +5,7 @@ use App\Http\Controllers\Q\QuizController;
 use App\Http\Controllers\Q\ResultController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [QuizController::class, 'getAll']);
+Route::get('/', [QuizController::class, 'get_CheckedQuiz']);
 
 Auth::routes();
 
@@ -41,4 +42,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/result/{id}', [ResultController::class, 'show_result']);
     Route::post('/result/quiz/{id}', [ResultController::class, 'check']);
+
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::get('/auth/user/profile', [UserController::class, 'profile']);
+    Route::post('/update/profile', [UserController::class, 'update_profile']);
+});
+
+Route::middleware('admin')->group(function(){
+    Route::get('/censorship', [QuizController::class, 'censorship']);
+    Route::get('/censorship/{id}', [QuizController::class, 'censorship_ed']);
+    Route::get('/eviction/{id}', [QuizController::class, 'eviction']);
 });

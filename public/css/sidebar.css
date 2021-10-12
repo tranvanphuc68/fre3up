@@ -47,7 +47,6 @@
     margin: 0;
     padding: 0;
     border-radius: 0;
-    -webkit-appearance: none;
   }
 
   button {
@@ -114,6 +113,8 @@
           overflow: hidden;
           border-radius: 10px;
           box-shadow: 0.5rem 0.5rem black, -0.5rem -0.5rem #ccc;
+          font-family: cursive;
+          font-weight: bold;
       }
 
       .e-flex-content {
@@ -167,6 +168,16 @@
     }
     .question{
       margin-top: 20px;
+    }
+    .showed{
+      opacity: 1;
+    }
+
+    .faded:not(.showed){
+      transition: opacity .5s linear;
+    }
+    .faded{
+      opacity: 0;
     }
 
 @media only screen and (max-width: 767px){

@@ -13,8 +13,11 @@
           $(".alert-success").siblings().removeClass("alert alert-success");
           $(answer).addClass("alert alert-success") 
           
-          var a = $(answer).attr("id")
-          var b = $(answer).siblings().last().val(a)
+          var hidden = $(answer).attr("id")
+          var b = $(answer).siblings().last().val(hidden)
+
+          var choice = $(answer).children().last().val()
+          var c = $(answer).siblings().last().prev().children().val(choice)
         }
     </script>
     </body>

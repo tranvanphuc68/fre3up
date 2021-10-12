@@ -8,6 +8,7 @@ use App\Models\Quiz;
 use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ResultController extends Controller
 {
@@ -25,19 +26,29 @@ class ResultController extends Controller
             'id_quiz' => $id->id,
             'result' => $count
          ]);
-        
         return redirect("/result/{$id->id}");
     }
 
     public function show_result(Quiz $id){
         $data = DetailQuiz::where('id_quiz', $id->id)->get();
-        $result = Result::where('id_user', Auth::id())->where('id_quiz', $id->id)->get();
+        $result = Result::where('id_user', Auth::id())->where('id_quiz', $id->id)->orderBy('created_at', 'desc')->get();
         $count = $result[0]->result;
+
+        $wrank = DB::table('result')->where('id_quiz',$id->id)
+        ->selectRaw(' max(`result`.`result`) as `result`, `id_user`')
+        ->groupBy('id_user');
+        //select MAX(`result`.`result`) as `result`, `users`.`name`, `users`.`id` from `result` inner join `users` 
+        //on `users`.`id` = `result`.`id_user` where `id_quiz` = 2 group by `id` ORDER by MAX(`result`.`result`) desc;
+        $rank = DB::table($wrank, $as ='table')->join('users', 'users.id', '=','table.id_user')
+        ->select("table.*", 'users.name')
+        ->orderby('result', 'desc')
+        ->get();
         return view('quiz.result', [
             'data' => $data,
             'result' => $count,
             'quiz' => $id,
-            'all_result' => $result
+            'all_result' => $result,
+            'rank' => $rank
         ]);
     }
 }
