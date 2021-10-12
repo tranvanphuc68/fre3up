@@ -3,6 +3,8 @@
 use App\Http\Controllers\Q\DetailQuizController;
 use App\Http\Controllers\Q\QuizController;
 use App\Http\Controllers\Q\ResultController;
+use App\Http\Controllers\Process\DetailProcessController;
+use App\Http\Controllers\Process\ProcessController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialController;
 use Illuminate\Support\Facades\Auth;
@@ -41,4 +43,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/result/{id}', [ResultController::class, 'show_result']);
     Route::post('/result/quiz/{id}', [ResultController::class, 'check']);
+
+    Route::get('/process', [ProcessController::class, 'index']);
+    Route::post('/process', [ProcessController::class, 'store']);
+    Route::delete('/process/{id}', [ProcessController::class, 'delete']);
+
+    Route::get('/detail_process/{id_process}', [DetailProcessController::class, 'detail']);
+    Route::get('/detail_process/{id_process}', [DetailProcessController::class, 'create']);
+    Route::post('/detail_process/{id_process}', [DetailProcessController::class, 'store']);
+    Route::get('/detail_process/edit/{id_process}', [DetailProcessController::class, 'edit']);
+    Route::put('/detail_process/edit/{id_process}', [DetailProcessController::class, 'update']);
 });
