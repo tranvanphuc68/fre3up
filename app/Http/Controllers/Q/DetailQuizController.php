@@ -39,9 +39,12 @@ class DetailQuizController extends Controller
     public function edit(Quiz $id){
         $data = DetailQuiz::where('id_quiz', $id->id)->get();
         $count = $data->count();
+        $id_user = Quiz::where('id',$id->id)->get();
+        
         return view('detail_quiz.edit', [
             'data' => $data,
-            'count' => $count
+            'count' => $count,
+            'id_user' => $id_user[0]->id_user
         ]);
     }
 

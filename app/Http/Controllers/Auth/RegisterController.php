@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'gender' => ['required']
         ]);
     }
 
@@ -63,11 +64,22 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
+    {   
+        if($data['gender'] == 'Nam')
+        {
+            $avatar = 'defaultMale.jpg';
+        }
+        else 
+        {
+            $avatar = 'defaultFemale.jpg';
+        };
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'gender' => $data['gender'],
+            'avatar' => $avatar,
+            'role' => 'user'
         ]);
     }
 }

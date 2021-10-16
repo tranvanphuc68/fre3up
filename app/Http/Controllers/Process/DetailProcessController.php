@@ -11,18 +11,17 @@ use Illuminate\Support\Facades\Auth;
 class DetailProcessController extends Controller
 {
     public function detail($id_process){
-        $data = DetailProcess::where("id_process", $id_process)->get();
+        $data = DetailProcess::where("id_process", $id_process)->orderBy('date')->get();
+        $data1 = Process::where("id", $id_process)
+        ->where("id_user", Auth::id())
+        ->get();
+        $process = $data1[0];
         return view('process.detail', [
             'data' => $data,
+            'id_process' => $id_process,
+            'process' => $process
             
         ]);
-    }
-    public function create($id_process){
-        $data = DetailProcess::where('id_process', $id_process)->get();
-            return view('process.detail', [
-                'data' => $data,
-                'id_process' => $id_process
-            ]);
     }
 
     public function store(Request $request, $id_process){
@@ -34,22 +33,32 @@ class DetailProcessController extends Controller
             return redirect("/detail_process/{$id_process}");
         }
 
-    public function edit(Process $id){
-        $data = DetailProcess::where('id', $id->id)->get();
-        return view('process.detail', [
+    public function edit($id_process){
+        $data = DetailProcess::where("id_process", $id_process)->get();
+        return view('process.edit', [
             'data' => $data,
-            'id_process' => $id->id_process,
-            'id' => $id->id
+            'id_process' => $id_process
         ]);
     }
 
-    public function update(Request $request, $id_process, $id){
-        $data = DetailProcess::where('id', $id)->get();
-        dd($data);
-            $update = DetailProcess::where('id',$id)->update([
-                'content' => $request->input("content$id"),
-                'date' => $request->input("date$id")
+    public function update(Request $request, $id_process){
+        $data = DetailProcess::where("id_process", $id_process)->get();
+        //($request->input());
+        foreach ($data as $detail) {
+            $status = '0';
+            if ( $request->input("status$detail->id") == '1'){
+                $status = $request->input("status$detail->id");
+            }
+            DetailProcess::where("id_process", $id_process)
+            ->where('id',$detail->id)
+            ->update([
+                'content' => $request->input("content$detail->id"),
+                'date' => $request->input("date$detail->id"),
+                'status' => $status
             ]);
+        }
         return redirect("/detail_process/{$id_process}");
+        
+     
     } 
 }

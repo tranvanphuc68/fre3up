@@ -18,6 +18,7 @@ class CreateQuizTable extends Migration
             $table->bigInteger('id_user')->unsigned();
             $table->string('quiz_name');
             $table->tinyInteger('number_questions')->unsigned();
+            $table->boolean('check');
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

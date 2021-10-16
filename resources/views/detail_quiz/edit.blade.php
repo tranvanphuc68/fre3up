@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@if(Auth::id() == $id_user || Auth::user()->role == 'admin')
 <div class="block">
     <div class="container">
         <div class="row justify-content-center">
@@ -16,7 +17,7 @@
                             <div >
                                 <?php $i++; ?>
                                 <div class="m-4">
-                                    <span class="p-3 rounded-pill alert-info">Question: {{ $i }} / {{ $count }}</span> 
+                                    <span class="p-3 rounded-pill alert-info font-weight-bold">Question: {{ $i }} / {{ $count }}</span> 
                                 </div>
                                 <input type="hidden" name="id_{{$i}}" value={{ $item->id }}>
                                 <div>
@@ -51,7 +52,12 @@
                             </div>
                             @endforeach
                             <div class="text-center mt-5">
-                                <button class="btn btn-primary" type="submit">SAVE</button>
+                                <button class="btn btn-primary" type="submit">SAVE</button> 
+                                @if (Auth::user()->role == 'admin')
+                                <a href="{{ url("/censorship/{$data[0]->id_quiz}") }}">
+                                    <div class="btn btn-primary m-3">Agree to Release</div> 
+                                </a>
+                                @endif
                             </div>
                         </form>
                     </div>
@@ -66,4 +72,5 @@
         document.getElementsByName(ans)[0].classList.add('alert-success')
     }
 </script>
+@endif
 @endsection

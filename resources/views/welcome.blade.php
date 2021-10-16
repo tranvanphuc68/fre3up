@@ -17,12 +17,14 @@
             @endif    
         </div>
         <div class="container">
+            <form action="" method="get">
             <div class="row">
                           <div class="simple-search">
-                            <input type="text" placeholder="Type here and hit Enter"/>
-                            <button><i class="fa fa-search"></i></button>
+                                <input type="text" placeholder="Type here and hit Enter" name="search" value="<?php if (isset($_GET['search'])) { echo $_GET['search'];} ?>"/>
+                                <button><i class="fa fa-search"></i></button>
                           </div>
             </div>
+            </form>
 
             <div class="row">
                 @foreach ($data as $item)
@@ -37,5 +39,6 @@
                     </a>
                 </div>
                 @endforeach  
+                {{ $data->links('') }}
         </div>
 @endsection

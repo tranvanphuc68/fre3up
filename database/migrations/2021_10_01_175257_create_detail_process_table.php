@@ -18,7 +18,8 @@ class CreateDetailProcessTable extends Migration
             $table->bigInteger('id_process')->unsigned()->nullable();
             $table->string('content');
             $table->date('date');
-            $table->integer('checked')->default('0');
+            $table->integer('status')->default('0');
+            $table->integer('show')->default('0');
             $table->timestamps();
 
             $table->foreign('id_process')->references('id')->on('process')->onDelete('set null');

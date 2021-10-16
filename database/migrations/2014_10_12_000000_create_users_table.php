@@ -14,11 +14,16 @@
  Schema::create('users', function (Blueprint $table) {
      $table->id();
      $table->string('name');
+     $table->string('dob')->nullable();
+     $table->string('gender')->nullable();
+     $table->string('description')->nullable();
      $table->string('email')->unique()->nullable();
      $table->string('provider')->nullable();
      $table->string('provider_id')->nullable();
      $table->timestamp('email_verified_at')->nullable();
      $table->string('password')->nullable();
+     $table->string('avatar');
+     $table->string('role');
      $table->rememberToken()->nullable();
      $table->timestamps();
  });

@@ -7,6 +7,8 @@ use App\Http\Controllers\Process\DetailProcessController;
 use App\Http\Controllers\Process\ProcessController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -21,11 +23,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [QuizController::class, 'getAll']);
+Route::get('/', [QuizController::class, 'get_CheckedQuiz']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/auth/redirect/{provider}', [SocialController::class, 'redirect']);
 Route::get('/callback/{provider}', [SocialController::class, 'callback']);
 
@@ -49,8 +51,20 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/process/{id}', [ProcessController::class, 'delete']);
 
     Route::get('/detail_process/{id_process}', [DetailProcessController::class, 'detail']);
-    Route::get('/detail_process/{id_process}', [DetailProcessController::class, 'create']);
     Route::post('/detail_process/{id_process}', [DetailProcessController::class, 'store']);
     Route::get('/detail_process/edit/{id_process}', [DetailProcessController::class, 'edit']);
     Route::put('/detail_process/edit/{id_process}', [DetailProcessController::class, 'update']);
+
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::get('/auth/user/profile', [UserController::class, 'profile']);
+    Route::post('/update/profile', [UserController::class, 'update_profile']);
+
+});
+
+Route::middleware('admin')->group(function(){
+    Route::get('/censorship', [QuizController::class, 'censorship']);
+    Route::get('/censorship/{id}', [QuizController::class, 'censorship_ed']);
+    Route::get('/eviction/{id}', [QuizController::class, 'eviction']);
+    
 });

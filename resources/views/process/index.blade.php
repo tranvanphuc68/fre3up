@@ -7,28 +7,28 @@
                 <div class="card">
                     <div class="card-header">{{ __('Your Process') }}</div>
     
-                    <div class="card-body">
+                      <div class="card-body">
                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModal">
                             CREATE
                         </button>
                         <div class="row">
-                        @foreach ($data as $process)
-                            <a href="{{ url("/detail_process/{$process->id}") }}">
-                              <div class="col-md-3">
-                                <div class="item" style="background-image: linear-gradient(to right,#1ABCF4,#5DEFB8);">
-                                    <div class="e-flex-content">{{ $process->name }}</div>
-                              </div>
-                            </a>
-                            
-                              <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $process->id }}').submit()">
-                                    <i class="fal fa-calendar sidebar-icon"></i>
-                              </a>
-                            </div>
-                              <form method="POST" id="delete-{{ $process->id }}" action="{{ url("/process/{$process->id}") }}" >
-                                @method('DELETE')
-                                @csrf
-                              </form>
-                        @endforeach
+                          @foreach ($data as $process)
+                                <div class="col-lg-3">
+                                  <a href="{{ url("/detail_process/{$process->id}") }}">
+                                    <div class="item" style="background-image: linear-gradient(to right,#1ABCF4,#5DEFB8);">
+                                        <div class="e-flex-content">{{ $process->name }}</div>
+                                    </div>
+                                  </a>
+                                </div>
+                                  <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $process->id }}').submit()">
+                                      <i class="fal fa-calendar sidebar-icon"></i>
+                                  </a>
+                                <form method="POST" id="delete-{{ $process->id }}" action="{{ url("/process/{$process->id}") }}" >
+                                  @method('DELETE')
+                                  @csrf
+                                </form>
+                          @endforeach
+                        </div>
                       </div>
                     </div>
                 </div>
