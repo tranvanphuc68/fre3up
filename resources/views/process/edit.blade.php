@@ -24,10 +24,15 @@
                                 </td>
                                 <td>
                                     <input type="date" name="date{{ $detail->id }}" id="date{{ $detail->id }}" value="{{$detail->date}}">
-                                </td>
-                                <td>
-                                    <input type="checkbox" id="status{{ $detail->id }}" name="status{{ $detail->id }}" value="1" <?php echo ($detail->checked == 0) ? '':'checked';?>>
-                                </td>
+                                </td>           
+                                <td class="w15">
+                                  <input type="radio" id="status{{ $detail->id }}_0" name="status{{ $detail->id }}" value="0" <?php echo ($detail->status == 0) ? 'checked' : '' ?>>
+                                  <label for="status{{ $detail->id }}_0">Pending</label>
+                                  <input type="radio" id="status{{ $detail->id }}_1" name="status{{ $detail->id }}" value="1" <?php echo ($detail->status == 1) ? 'checked' : '' ?>>
+                                  <label for="status{{ $detail->id }}_1">in Progress</label>
+                                  <input type="radio" id="status{{ $detail->id }}_2" name="status{{ $detail->id }}" value="2" <?php echo ($detail->status == 2) ? 'checked' : '' ?>>
+                                  <label for="status{{ $detail->id }}_2">Completed</label>
+                                </td>                              
                               </tr>
                             @endforeach
                             </table>
@@ -46,7 +51,6 @@
         </div>
     </div>
 </div>
-@include('process.timeline1')
 <!-- Modal -->
   <!--create -->
   <div class="modal fade" id="create" tabindex="-1" aria-labelledby="createLabel" aria-hidden="true">

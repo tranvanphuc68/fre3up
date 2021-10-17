@@ -7,45 +7,21 @@
                 <div class="card">
                     <div class="card-header">{{ $process->name}}</div>
                     <div class="card-body">
-                    <div>
-                      <label for="cars">Choose type:</label>
-                      <select name="show" id="show">
-                        <option value="0">Todo list</option>
-                        <option value="1">Timeline</option>
-                      </select>
-                    </div>
+                      <div>
+                        <form action="{{ url("/process/edit/{$process->id}")}}" method="post">
+                        @csrf
+                          <label for="theme">Choose type:</label>
+                          <select name="theme" id="theme">
+                            <option value="0">Todo list</option>
+                            <option value="1">Timeline</option>
+                          </select>
+                              <button type="submit">Select</button>
+                            </form>
+                      </div>
                         <a href="{{ url("/detail_process/edit/$id_process") }}" class="btn btn-info btn-lg">
                           EDIT <i class="fas fa-edit"></i>
                         </a>
-                        <table  class="table table-bordered table-hover">
-                          <thead>
-                            <td>Content</td>
-                            <td>Date</td>
-                            <td>Status</td>
-                            <td></td>
-                            <td>Link</td>
-                          </thead>
-                        @csrf
-                        @foreach ($data as $detail)
-                            <tr>
-                              <td style="width: 60%">{{ $detail->content }}</td>
-                              <td style="width: 20%, text-align:center">{{ date('d/m/Y', strtotime($detail->date)) }}</td>
-                              <td style="width: 10%">
-                                    <?php echo ($detail->checked == 1) ? 'Done':'Nope';?>
-                              </td>
-                              <td style="width: 2%">
-                                  <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $detail->id }}').submit()">
-                                    <i class="fas fa-trash-alt"></i>
-                                  </a>
-                                <form method="POST" id="delete-{{ $detail->id }}" action="{{ url("/detail_process/{$detail->id}") }}" >
-                                  @method('DELETE')
-                                  @csrf
-                                </form>         
-                              </td>
-                            </tr>
-                            
-                        @endforeach
-                        </table>
+                        @include('process.timeline0')
                         <form method="POST">
                             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create">
                                 ADD CONTENT

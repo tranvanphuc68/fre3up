@@ -27,11 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-            $data = Process::where("id_user", Auth::id())->get();
-            $detail = DetailProcess::get();
+            $all_process = Process::where("id_user", Auth::id())->get();
+            $data = DetailProcess::orderBy('date')->get();
             return view('home', [
                 'data' => $data,
-                'detail' => $detail
+                'all_process' => $all_process
             ]);
     }
 

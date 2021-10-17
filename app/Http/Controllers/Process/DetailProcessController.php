@@ -45,20 +45,15 @@ class DetailProcessController extends Controller
         $data = DetailProcess::where("id_process", $id_process)->get();
         //($request->input());
         foreach ($data as $detail) {
-            $status = '0';
-            if ( $request->input("status$detail->id") == '1'){
-                $status = $request->input("status$detail->id");
-            }
             DetailProcess::where("id_process", $id_process)
             ->where('id',$detail->id)
             ->update([
                 'content' => $request->input("content$detail->id"),
                 'date' => $request->input("date$detail->id"),
-                'status' => $status
+                'status' => $request->input("status$detail->id")
             ]);
         }
         return redirect("/detail_process/{$id_process}");
-        
-     
+      
     } 
 }

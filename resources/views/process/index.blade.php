@@ -19,7 +19,6 @@
                                         <div class="e-flex-content">{{ $process->name }}</div>
                                     </div>
                                   </a>
-                                </div>
                                   <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $process->id }}').submit()">
                                       <i class="fal fa-calendar sidebar-icon"></i>
                                   </a>
@@ -27,6 +26,7 @@
                                   @method('DELETE')
                                   @csrf
                                 </form>
+                                </div>
                           @endforeach
                         </div>
                       </div>

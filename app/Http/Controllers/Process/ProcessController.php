@@ -29,4 +29,12 @@ class ProcessController extends Controller
         $id->delete();
         return redirect('/process');
     }
+
+    public function theme(Request $request, $id){
+        $data = Process::where('id',$id)
+            ->update([
+            'theme' => $request->input('theme')
+        ]);
+        return redirect("/detail_process/{$id}");
+    }
 }

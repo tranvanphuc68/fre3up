@@ -14,44 +14,58 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @foreach ($data as $process)
-                    <div data-toggle="modal" data-target="show{{ $process->id }}">
-                        <div class="col-md-3">
+                    <div class="row">
+                    
+                    @foreach ($all_process as $process)
+                        <div class="col-md-3" >
                                 <div class="item" style="background-image: linear-gradient(to right,#1ABCF4,#5DEFB8);">
-                                    <div class="e-flex-content">{{ $process->name }}</div>
+                                    <div class="e-flex-content" >{{ $process->name }}</div>
                               </div>
                             <a href="{{ url("/detail_process/{$process->id}") }}">
                                     <i class="fas fa-edit"></i>
                             </a>
-                        </div>
-                    @endforeach
+                            <div id="timeline" style="display: none;">
+                              <table  class="table table-bordered table-hover">
+                                <thead>
+                                  <td>Content</td>
+                                  <td>Date</td>
+                                  <td>Status</td>
+                                </thead>
+                                @csrf
+                                  @foreach ($data as $detail)
+                                    @if ($detail->id_process == $process->id)
+                                    <tr>
+                                    <td style="width: 60%">{{ $detail->content }}</td>
+                                    <td style="width: 20%, text-align:center">{{ date('d/m/Y', strtotime($detail->date)) }}</td>
+                                    <td style="width: 10%">
+                                      @switch($detail->status)
+                                          @case(0)
+                                            Pending
+                                            @break
+                                          @case(1)
+                                              In Progress
+                                              @break
+                                          @default
+                                            Completed
+                                        @endswitch
+                                    </td>
+                                  </tr>
+                                    @endif
+                                  @endforeach
+                                </table>  
+                            </div>
+                          </div>
+                      @endforeach
+                    </div>
                    
                     {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-<!-- <div class="modal fade" id="show{{$process->id}}" tabindex="-1" aria-labelledby="{{ $process->id }}Label" aria-hidden="true">
-  <div class="modal-dialog">
-        <div class="modal-content form-group">
-          <div class="modal-header">
-            <h5 class="modal-title" id="{{$process->id}}Label">EDIT CONTENT</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-          aaaaaaa
-          </div>
-          <div class="modal-footer">
-            <button  type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button id="edit-btn" type="submit" class="btn btn-primary">Save</button>
-          </div>
-        </div>
-    </form>
   </div>
-</div> -->
+</div>
+
+
 @endsection
 

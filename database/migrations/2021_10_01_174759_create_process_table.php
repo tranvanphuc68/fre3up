@@ -17,7 +17,7 @@ class CreateProcessTable extends Migration
             $table->id();
             $table->bigInteger('id_user')->unsigned()->nullable();
             $table->string('name');
-            $table->tinyInteger('theme')->default(1);
+            $table->tinyInteger('theme')->default(0);
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('set null');

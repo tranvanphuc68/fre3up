@@ -48,12 +48,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/process', [ProcessController::class, 'index']);
     Route::post('/process', [ProcessController::class, 'store']);
+    Route::put('/process/edit/{id}', [ProcessController::class, 'theme']);
     Route::delete('/process/{id}', [ProcessController::class, 'delete']);
 
     Route::get('/detail_process/{id_process}', [DetailProcessController::class, 'detail']);
     Route::post('/detail_process/{id_process}', [DetailProcessController::class, 'store']);
     Route::get('/detail_process/edit/{id_process}', [DetailProcessController::class, 'edit']);
     Route::put('/detail_process/edit/{id_process}', [DetailProcessController::class, 'update']);
+    
 
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{id}', [UserController::class, 'show']);
