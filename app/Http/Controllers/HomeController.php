@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+use App\Models\Process;
+use Illuminate\Support\Facades\Auth;
+use App\Models\DetailProcess;
 
 use Illuminate\Http\Request;
 
@@ -23,6 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+            $all_process = Process::where("id_user", Auth::id())->get();
+            $data = DetailProcess::orderBy('date')->get();
+            return view('home', [
+                'data' => $data,
+                'all_process' => $all_process
+            ]);
     }
+
 }

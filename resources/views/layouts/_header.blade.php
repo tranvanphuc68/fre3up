@@ -9,7 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
-    <link rel="shortcut icon" type="image/png" href="{{ asset("/uploads/light.png") }}"/>
+
     <link href="{{ asset('vendor/icofont/icofont.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/venobox/venobox.css') }}" rel="stylesheet">
@@ -24,7 +24,11 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous"/>
     <link href="{{ asset("css/sidebar.css") }}" rel="stylesheet">
-        
+
+    <link rel="stylesheet" href="{{ asset("css/timeline1.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/timeline2.css") }}">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
+
     <style>
         /* width */
         ::-webkit-scrollbar {
@@ -33,17 +37,17 @@
 
         /* Track */
         ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
+        background: #f1f1f1;
         }
-        
+
         /* Handle */
         ::-webkit-scrollbar-thumb {
-        background: #888; 
+        background: #888;
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
+        background: #555;
         }
         .gradient{
           background-color: rgb(255, 255, 255);
@@ -66,10 +70,10 @@
             text-decoration: none;
         }
 
-        a{  
+        a{
             color:black;
             transition: color 0.5s linear;
-        } 
+        }
         a:hover  {
             color: white;
             text-decoration: none;
@@ -82,7 +86,7 @@
         p.text-sm.text-gray-700.leading-5, div.flex.justify-between.flex-1{
             display: none;
         }
-        
+
     </style>
 </head>
 <body>
@@ -109,7 +113,7 @@
                     <a href="{{ url("/home") }}">
                         <div class="gradient">
                             <div class="content">Home</div>
-                        </div> 
+                        </div>
                     </a>
                     <a href="{{ url("/") }}">
                         <div class="gradient">
@@ -133,14 +137,14 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>                              
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <span>
                                     @if (Auth::check() && Auth::user()->provider != null )
                                         <img src="{{ Auth::user()->avatar }}" alt="" style="height: 40px; width: 40px; border-radius: 50%; display:inline-block;">
                                     @else
                                         <img src="{{ asset("/uploads/avatars/".Auth::user()->avatar) }}" style="height: 40px; width: 40px; border-radius: 50%; display:inline-block;">
                                     @endif
-                                    </span> 
+                                    </span>
                                     <span> {{ Auth::user()->name }}</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

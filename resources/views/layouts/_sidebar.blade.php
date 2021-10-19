@@ -24,7 +24,7 @@
               <span class="sidebar-status"></span>
             </a>
 
-            <a href="#" class="sidebar-item">
+            <a href=" {{ url('/process')}}" class="sidebar-item">
               <i class="fal fa-calendar sidebar-icon"></i>
               <span class="sidebar-text">Work list</span>
               <span class="sidebar-status"></span>
