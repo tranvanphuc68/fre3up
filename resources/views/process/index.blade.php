@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">{{ __('Your Process') }}</div>
-    
+
                       <div class="card-body">
                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModal">
                             CREATE
@@ -63,4 +63,5 @@
     </form>
   </div>
 </div>
+
 @endsection

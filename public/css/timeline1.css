@@ -1,26 +1,7 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
-@import url("https://static.fontawesome.com/css/fontawesome-app.css");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-* {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-  padding: 0;
-  background: #eee;
-  color: #333;
-  line-height: 1.4;
-  font-size: 16px;
-  padding-bottom: 20em;
-}
-
-p {
-  font-size: 16px;
-  font-weight: 300;
-}
 
 .paragraph__content-container {
   max-width: 75em;
@@ -103,7 +84,7 @@ p {
   content: "";
   background: #79a37a;
 }
-.paragraph__timeline__entry.--is-inprogress > span:before, .paragraph__timeline__entry.--is-inprogress > span:after {
+.paragraph__timeline__entry.--is-inprogress > span:before, .paragraph__timeline__entry.--is-pending > span:after {
   content: "";
   background: #00aeef;
 }
@@ -144,6 +125,11 @@ p {
   margin-bottom: 5px;
 }
 
+.paragraph__timeline__title input{
+    background-color: inherit !important;
+    color: #fff;
+}
+
 .paragraph__timeline__name {
   margin-top: 10px;
   font-style: italic;
@@ -154,17 +140,11 @@ p {
   position: absolute;
   left: -117px;
   color: #1c1c1c;
-  font-size: 0.8125rem;
+  font-size: 1.4rem;
   font-weight: bold;
 }
 .paragraph__timeline__date-time span.paragraph__timeline__date {
   top: -11px;
-}
-.paragraph__timeline__date-time span.paragraph__timeline__time {
-  top: 10px;
-  font-size: 0.6875rem;
-  color: #aaa;
-  left: -117px;
 }
 
 @media (min-width: 992px) {

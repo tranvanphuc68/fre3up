@@ -34,16 +34,16 @@
                               <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()">
                                   <i class="far fa-times-octagon sidebar-icon"></i>
                               </a>
+                              <form method="POST" id="delete-{{ $quiz->id }}" action="{{ url("/quiz/{$quiz->id}") }}" >
+                                  @method('DELETE')
+                                  @csrf
+                              </form>
                           </div>                     
                             
                         @endforeach
                         
                       </div>
                       {{ $data->links('') }}
-                        <form method="POST" id="delete-{{ $quiz->id }}" action="{{ url("/quiz/{$quiz->id}") }}" >
-                            @method('DELETE')
-                            @csrf
-                        </form>
                       </div>
                 </div>
             </div>

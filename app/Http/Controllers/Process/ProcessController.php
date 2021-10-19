@@ -31,8 +31,7 @@ class ProcessController extends Controller
     }
 
     public function theme(Request $request, $id){
-        $data = Process::where('id',$id)
-            ->update([
+        $data = Process::where('id',$id)->update([
             'theme' => $request->input('theme')
         ]);
         return redirect("/detail_process/{$id}");

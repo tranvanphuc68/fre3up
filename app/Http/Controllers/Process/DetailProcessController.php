@@ -20,7 +20,7 @@ class DetailProcessController extends Controller
             'data' => $data,
             'id_process' => $id_process,
             'process' => $process
-            
+
         ]);
     }
 
@@ -50,10 +50,24 @@ class DetailProcessController extends Controller
             ->update([
                 'content' => $request->input("content$detail->id"),
                 'date' => $request->input("date$detail->id"),
-                'status' => $request->input("status$detail->id")
             ]);
         }
         return redirect("/detail_process/{$id_process}");
-      
-    } 
+
+    }
+
+    public function updateStatus(Request $request, $id_detail){
+        $data = DetailProcess::where("id", $id_detail)->get("id_process");
+        //dd($data);
+        $data = $data[0]->id_process;
+        DetailProcess::where('id',$id_detail)->update([
+            'status' => $request->input("$id_detail")
+        ]);
+        return redirect("/detail_process/{$data}");
+    }
+
+    public function delete(DetailProcess $id){
+        $id->delete();
+        return redirect("/detail_process/{$id->id_process}");
+    }
 }

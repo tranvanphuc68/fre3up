@@ -7,24 +7,24 @@
                 <div class="card">
                     <div class="card-header">{{ $process->name}}</div>
                     <div class="card-body">
-                      <div>
-                        <form action="{{ url("/process/edit/{$process->id}")}}" method="post">
+                      {{-- <div>
+                        {{-- <form action="{{ url("/process/edit/{$process->id}")}}" method="post">
                         @csrf
                           <label for="theme">Choose type:</label>
                           <select name="theme" id="theme">
-                            <option value="0">Todo list</option>
-                            <option value="1">Timeline</option>
+                            <option value="0" <?php echo ($process->theme == 0) ? 'selected':'' ?> >Todo list</option>
+                            <option value="1" <?php echo ($process->theme == 1) ? 'selected':'' ?>>Timeline</option>
                           </select>
                               <button type="submit">Select</button>
-                            </form>
-                      </div>
+                          </form>
+                      </div> --}}
                         <a href="{{ url("/detail_process/edit/$id_process") }}" class="btn btn-info btn-lg">
-                          EDIT <i class="fas fa-edit"></i>
+                          <i class="fas fa-edit"></i>
                         </a>
-                        @include('process.timeline0')
+                        @include('process.timeline1')
                         <form method="POST">
                             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create">
-                                ADD CONTENT
+                                <i class="fas fa-plus"></i>
                             </button>
                         </form>
                       </div>

@@ -46,16 +46,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/result/{id}', [ResultController::class, 'show_result']);
     Route::post('/result/quiz/{id}', [ResultController::class, 'check']);
 
+    //Process
     Route::get('/process', [ProcessController::class, 'index']);
     Route::post('/process', [ProcessController::class, 'store']);
-    Route::put('/process/edit/{id}', [ProcessController::class, 'theme']);
+    Route::post('/process/edit/{id}', [ProcessController::class, 'theme']);
     Route::delete('/process/{id}', [ProcessController::class, 'delete']);
 
+    //Detail_process
     Route::get('/detail_process/{id_process}', [DetailProcessController::class, 'detail']);
     Route::post('/detail_process/{id_process}', [DetailProcessController::class, 'store']);
     Route::get('/detail_process/edit/{id_process}', [DetailProcessController::class, 'edit']);
     Route::put('/detail_process/edit/{id_process}', [DetailProcessController::class, 'update']);
-    
+    Route::post('/update/detail_process/{id_detail}',[DetailProcessController::class, 'updateStatus']);
+    Route::delete('/delete/detail_process/{id}', [DetailProcessController::class, 'delete']);
+
 
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{id}', [UserController::class, 'show']);
@@ -68,5 +72,5 @@ Route::middleware('admin')->group(function(){
     Route::get('/censorship', [QuizController::class, 'censorship']);
     Route::get('/censorship/{id}', [QuizController::class, 'censorship_ed']);
     Route::get('/eviction/{id}', [QuizController::class, 'eviction']);
-    
+
 });
