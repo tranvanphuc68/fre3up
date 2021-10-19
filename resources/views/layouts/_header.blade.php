@@ -7,9 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Fre3Up</title>
     <!-- Scripts -->
-
+    <link rel="shortcut icon" href="{{ asset("/uploads/light.png")}}">
     <link href="{{ asset('vendor/icofont/icofont.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/venobox/venobox.css') }}" rel="stylesheet">
@@ -26,7 +26,6 @@
     <link href="{{ asset("css/sidebar.css") }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset("css/timeline1.css") }}">
-    <link rel="stylesheet" href="{{ asset("css/timeline2.css") }}">
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
 
     <style>

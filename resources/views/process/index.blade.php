@@ -15,7 +15,7 @@
                           @foreach ($data as $process)
                                 <div class="col-lg-3">
                                   <a href="{{ url("/detail_process/{$process->id}") }}">
-                                    <div class="item" style="background-image: linear-gradient(to right,#1ABCF4,#5DEFB8);">
+                                    <div class="item" style="background-image: linear-gradient(to right,#ce4ece,#e2e6ab);">
                                         <div class="e-flex-content">{{ $process->name }}</div>
                                     </div>
                                   </a>

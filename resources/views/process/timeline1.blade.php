@@ -17,7 +17,7 @@
                                 <div class="paragraph__timeline__name d-flex" style="align-items: center; justify-content:space-between;">
                                     <div>
                                         <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $detail->id }}').submit()">
-                                            <i class="far fa-times-octagon sidebar-icon" style="font-size: 20px;"></i>
+                                            <i class="far fa-trash-alt sidebar-icon" style="font-size: 20px;"></i>
                                         </a>
                                         <form method="POST" id="delete-{{ $detail->id }}" action="{{ url("/delete/detail_process/{$detail->id}") }}" >
                                             @method('DELETE')
@@ -28,8 +28,8 @@
                                         <form action="{{ url("/update/detail_process/{$detail->id}")}}" method="post">
                                             @csrf
                                             <input type="hidden" name="{{ $detail->id }}" value="1">
-                                            <button type="submit" class="btn btn-primary"  style="font-size: 15px;">
-                                                Completed
+                                            <button type="submit" class="btn btn-success"  style="font-size: 15px;">
+                                                Complete
                                             </button>
                                         </form>
                                     </div>
@@ -53,7 +53,7 @@
                                     <form action="{{ url("/update/detail_process/{$detail->id}")}}" method="post">
                                         @csrf
                                         <input type="hidden" name="{{ $detail->id }}" value="0">
-                                        <button type="submit" class="btn btn-primary" style="font-size: 15px;">
+                                        <button type="submit" class="btn btn-danger" style="font-size: 15px;">
                                             Cancel
                                         </button>
                                     </form>

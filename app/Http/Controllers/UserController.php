@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailProcess;
+use App\Models\Process;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,8 +46,12 @@ class UserController extends Controller
     public function show(User $id){
         $user = User::find($id->id);
         //Pham Nhu Hoa => here
+        $all_process = Process::where("id_user", $id->id)->get();
+        $data = DetailProcess::orderBy('date')->get();
         return view('user.show', [
-            'user' => $user
+            'user' => $user,
+            'data' => $data,
+            'all_process' => $all_process
         ]);
     }
 }
