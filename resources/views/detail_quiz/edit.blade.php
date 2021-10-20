@@ -47,6 +47,9 @@
                                     </div>
                                     <input type="text" class="form-control input-lg" name="ques_{{$i}}ans_4" placeholder="Answer 4" value="{{ $item->ans_4 }}">
                                 </div>
+                                <div class="m-3 font-italic d-none"> ==> Answer:  
+                                    <input type="text" value name="ques_{{$i}}choice">
+                                </div>
                                 <input type="hidden" name="ques_{{$i}}true_ans" id="ques_{{$i}}true_ans" value="{{ $item->true_ans }}">
                                 
                             </div>
