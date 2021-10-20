@@ -15,12 +15,12 @@
                           @foreach ($data as $process)
                                 <div class="col-lg-3">
                                   <a href="{{ url("/detail_process/{$process->id}") }}">
-                                    <div class="item" style="background-image: linear-gradient(to right,#ce4ece,#e2e6ab);">
-                                        <div class="e-flex-content">{{ $process->name }}</div>
+                                    <div class="item" style="background-image: linear-gradient(to right,#ce4ece,#e2e6ab); padding:20px;">
+                                        <div style="text-align: center;">{{ $process->name }}</div>
                                     </div>
                                   </a>
                                   <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $process->id }}').submit()">
-                                      <i class="fal fa-calendar sidebar-icon"></i>
+                                      <i class="fal fa-trash-alt sidebar-icon"></i>
                                   </a>
                                 <form method="POST" id="delete-{{ $process->id }}" action="{{ url("/process/{$process->id}") }}" >
                                   @method('DELETE')
@@ -52,7 +52,7 @@
       <div class="modal-body">
           <div>
               <label for="name">Process: </label>
-              <input type="text" name="name" id="name" class="form-control form-control-lg">
+              <input type="text" name="name" id="name" class="form-control form-control-lg" required>
           </div>
       </div>
       <div class="modal-footer">

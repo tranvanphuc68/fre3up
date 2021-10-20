@@ -18,7 +18,7 @@ class CreateDetailProcessTable extends Migration
             $table->bigInteger('id_process')->unsigned()->nullable();
             $table->string('content');
             $table->date('date');
-            $table->string('addition');
+            $table->string('addition')->nullable();
             $table->integer('status')->default('0');
             $table->timestamps();
 

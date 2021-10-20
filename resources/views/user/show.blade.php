@@ -37,8 +37,8 @@
                     <div class="row mt-5" style="border-top: 1px dashed #000">
 
                         @foreach ($all_process as $process)
-                            <div class="col-md-3" data-toggle="modal" data-target="#exampleModal{{$process->id}}">
-                                    <div class="item" style="background-image: linear-gradient(to right,#ce4ece,#e2e6ab); border-radius:50%;">
+                            <div class="col-lg-3" data-toggle="modal" data-target="#exampleModal{{$process->id}}">
+                                    <div class="item" style="background-image: linear-gradient(to right,#ce4ece,#e2e6ab); padding:20px;">
                                         <div style="text-align: center;" >{{ $process->name }}</div>
                                   </div>
                             </div>
@@ -66,35 +66,55 @@
           </button>
         </div>
         <div class="modal-body">
-          @foreach ($data as $item)
-          @if ($item->id_process == $process->id)
-
-            <div class="paragraph__timeline__entry --entry-1 --is-pending">
-                <span></span>
-                <div class="paragraph__timeline__content-container">
-                    <div class="paragraph__timeline__content">
-                        <div class="paragraph__timeline__title">{{ $item->content }}</div>
-                        <div class="paragraph__timeline__info">
-                            @if (substr($item->addition,0,4) == 'http')
-                                        <a href="{{$item->addition}}" style="font-style: italic;">Addition</a>
-                                    @else
-                                        <div> {{$item->addition}} </div>
-                                    @endif
-                        </div>
-                        <div class="paragraph__timeline__date-time">
-                            <span class="paragraph__timeline__date">{{ $item->date }}</span>
-                        </div>
-                    <div>
-                        <div class="paragraph__timeline__name d-flex" style="align-items: center; justify-content:space-between;">
-
-                        </div>
-
-                    </div>
+            <div class="paragraph__content-container">
+                <div class="paragraph__timeline">
+                    <div class="paragraph__timeline__container">
+                        @foreach ($data as $item)
+                            @if ($item->id_process == $process->id)
+                                @if ($item->status == 0)
+                                    <div class="paragraph__timeline__entry --entry-1 --is-pending">
+                                        <span></span>
+                                        <div class="paragraph__timeline__content-container">
+                                            <div class="paragraph__timeline__content">
+                                                <div class="paragraph__timeline__title">{{ $item->content }}</div>
+                                                <div class="paragraph__timeline__info">
+                                                    @if (substr($item->addition,0,4) == 'http')
+                                                        <a href="{{$item->addition}}" style="font-style: italic;">Addition</a>
+                                                    @else
+                                                        <div> {{$item->addition}} </div>
+                                                    @endif
+                                                </div>
+                                                <div class="paragraph__timeline__date-time">
+                                                    <span class="paragraph__timeline__date">{{ date('d/m/Y', strtotime($item->date)) }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="paragraph__timeline__entry --entry-1 --is-completed">
+                                        <span></span>
+                                        <div class="paragraph__timeline__content-container">
+                                            <div class="paragraph__timeline__content">
+                                                <div class="paragraph__timeline__title">{{ $item->content }}</div>
+                                                <div class="paragraph__timeline__info">
+                                                    @if (substr($item->addition,0,4) == 'http')
+                                                                <a href="{{$item->addition}}" style="font-style: italic;">Addition</a>
+                                                            @else
+                                                                <div> {{$item->addition}} </div>
+                                                            @endif
+                                                </div>
+                                                <div class="paragraph__timeline__date-time">
+                                                    <span class="paragraph__timeline__date">{{ date('d/m/Y', strtotime($item->date)) }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
-            @endif
-            @endforeach
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

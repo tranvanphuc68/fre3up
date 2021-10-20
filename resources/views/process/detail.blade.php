@@ -52,11 +52,11 @@
           <div class="modal-body">
               <div>
                   <label for="content">Content:</label>
-                  <input type="text" name="content" id="content" class="form-control form-control-lg">
+                  <input type="text" name="content" id="content" class="form-control form-control-lg" required>
               </div>
               <div>
                   <label for="name">Date:</label>
-                  <input type="date" name="date" id="date" class="form-control form-control-lg">
+                  <input type="date" name="date" id="date" class="form-control form-control-lg" required>
               </div>
               <div>
                   <label for="name">Addition:</label>
@@ -86,7 +86,7 @@
           <div class="modal-body">
               <div>
                   <label for="name">Name:</label>
-                  <input type="text" name="name" id="name" class="form-control form-control-lg" value="{{ $process->name}}">
+                  <input type="text" name="name" id="name" class="form-control form-control-lg" required value="{{ $process->name}}">
               </div>
           </div>
           <div class="modal-footer">

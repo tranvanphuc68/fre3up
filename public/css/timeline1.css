@@ -104,6 +104,14 @@
   box-shadow: 0 0 11px 0 rgba(150, 150, 150, 0.15);
   transition: 0.2s;
 }
+
+.paragraph__timeline__content input {
+    margin-bottom: 10px ;
+    font-size: 15px;
+    background-color: inherit;
+    color: white;
+}
+
 .paragraph__timeline__content:focus {
   outline: none;
 }
@@ -126,8 +134,8 @@
 }
 
 .paragraph__timeline__title input{
-    background-color: inherit !important;
     color: #fff;
+    font-weight: bold;
 }
 
 .paragraph__timeline__name {
