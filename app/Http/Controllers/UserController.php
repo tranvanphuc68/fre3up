@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
-{   
+{
     public function index(){
         if(isset($_GET['search'])){
             $data = User::where('name','LIKE','%'.$_GET['search'].'%')->orWhere('email','LIKE','%'.$_GET['search'].'%')->paginate(10)->withQueryString();
@@ -53,5 +53,26 @@ class UserController extends Controller
             'data' => $data,
             'all_process' => $all_process
         ]);
+    }
+
+    public function duplicate($id_process){
+        $detail = DetailProcess::where('id_process', $id_process)->get();
+
+        $data = Process::where('id',$id_process)->get();
+        $process = Process::create([
+            'id_user' => Auth::id(),
+            'name' => $data[0]->name
+        ]);
+        foreach ($detail as $item){
+            $detailProcess= DetailProcess::create([
+                'content' => $item->content,
+                'date' => $item->date,
+                'addition' => $item->addition,
+                'id_process' => $process->id
+            ]);
+        }
+        return redirect("/detail_process/{$process->id}");
+
+
     }
 }

@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     //Process
     Route::get('/process', [ProcessController::class, 'index']);
     Route::post('/process', [ProcessController::class, 'store']);
+    Route::post('rename/process/{id}', [ProcessController::class, 'rename']);
     Route::post('/process/edit/{id}', [ProcessController::class, 'theme']);
     Route::delete('/process/{id}', [ProcessController::class, 'delete']);
 
@@ -65,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show']);
     Route::get('/auth/user/profile', [UserController::class, 'profile']);
     Route::post('/update/profile', [UserController::class, 'update_profile']);
+    Route::get('/duplicate/{id_process}', [UserController::class, 'duplicate']);
 
 });
 

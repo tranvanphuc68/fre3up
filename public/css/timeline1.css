@@ -84,9 +84,9 @@
   content: "";
   background: #79a37a;
 }
-.paragraph__timeline__entry.--is-inprogress > span:before, .paragraph__timeline__entry.--is-pending > span:after {
+.paragraph__timeline__entry.--is-pending > span:before, .paragraph__timeline__entry.--is-pending > span:after {
   content: "";
-  background: #00aeef;
+  background: grey;
 }
 .paragraph__timeline__entry:focus {
   outline: none;
@@ -146,6 +146,7 @@
 .paragraph__timeline__date-time span.paragraph__timeline__date {
   top: -11px;
 }
+
 
 @media (min-width: 992px) {
   .paragraph__timeline.--is-horizontal {
@@ -228,9 +229,5 @@
   .paragraph__timeline.--is-horizontal .paragraph__timeline__date-time .paragraph__timeline__date {
     left: 0;
     top: 0;
-  }
-  .paragraph__timeline.--is-horizontal .paragraph__timeline__date-time .paragraph__timeline__time {
-    left: 65px;
-    top: 2px;
   }
 }

@@ -3,7 +3,7 @@ tippy(
     {
       content: "Completed",
       placement: "top-start",
-      offset: [-20, 10]
+      offset: [0, 10]
     }
   );
   tippy(

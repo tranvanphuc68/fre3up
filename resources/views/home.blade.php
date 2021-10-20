@@ -54,19 +54,25 @@
         <div class="modal-body">
           @foreach ($data as $item)
           @if ($item->id_process == $process->id)
-           
+
             <div class="paragraph__timeline__entry --entry-1 --is-pending">
                 <span></span>
                 <div class="paragraph__timeline__content-container">
                     <div class="paragraph__timeline__content">
                         <div class="paragraph__timeline__title">{{ $item->content }}</div>
-                        <div class="paragraph__timeline__info"><a href="https://www.youtube.com/watch?v=U3ASj1L6_sY">This is link <i class="fal fa-alicorn"></i></a></div>
+                        <div class="paragraph__timeline__info">
+                            @if (substr($item->addition,0,4) == 'http')
+                                        <a href="{{$item->addition}}" style="font-style: italic;">Addition</a>
+                                    @else
+                                        <div> {{$item->addition}} </div>
+                                    @endif
+                        </div>
                         <div class="paragraph__timeline__date-time">
                             <span class="paragraph__timeline__date">{{ $item->date }}</span>
                         </div>
                     <div>
                         <div class="paragraph__timeline__name d-flex" style="align-items: center; justify-content:space-between;">
-                            <div>    
+                            <div>
                                   @if ($item->status == 0)
                                     <div class="btn btn-danger"  style="font-size: 15px;">Not Completed</div>
                                   @else
@@ -79,7 +85,7 @@
                     </div>
                 </div>
             </div>
-               
+
             @endif
             @endforeach
         </div>

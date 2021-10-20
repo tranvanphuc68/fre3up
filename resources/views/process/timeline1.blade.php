@@ -1,5 +1,4 @@
 <div class="paragraph__content-container">
-
     <div class="paragraph__timeline">
         <div class="paragraph__timeline__container">
             @foreach ($data as $detail)
@@ -9,7 +8,13 @@
                         <div class="paragraph__timeline__content-container">
                             <div class="paragraph__timeline__content">
                                 <div class="paragraph__timeline__title">{{ $detail->content }}</div>
-                                <div class="paragraph__timeline__info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                <div class="paragraph__timeline__info">
+                                    @if (substr($detail->addition,0,4) == 'http')
+                                        <a href="{{$detail->addition}}" style="font-style: italic;">Addition</a>
+                                    @else
+                                        <div> {{$detail->addition}} </div>
+                                    @endif
+                                </div>
                                 <div class="paragraph__timeline__date-time">
                                     <span class="paragraph__timeline__date">{{ date('d/m/Y', strtotime($detail->date)) }}</span>
                                 </div>
@@ -45,7 +50,13 @@
                         <div class="paragraph__timeline__content-container">
                             <div class="paragraph__timeline__content">
                                 <div class="paragraph__timeline__title">{{ $detail->content }}</div>
-                                <div class="paragraph__timeline__info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                <div class="paragraph__timeline__info">
+                                    @if (substr($detail->addition,0,4) == 'http')
+                                        <a href="{{$detail->addition}}" style="font-style: italic;">Addition</a>
+                                    @else
+                                        <div> {{$detail->addition}} </div>
+                                    @endif
+                                </div>
                                 <div class="paragraph__timeline__date-time">
                                     <span class="paragraph__timeline__date">{{ date('d/m/Y', strtotime($detail->date)) }}</span>
                                 </div>

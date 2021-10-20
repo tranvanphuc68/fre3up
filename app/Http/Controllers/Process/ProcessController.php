@@ -36,4 +36,13 @@ class ProcessController extends Controller
         ]);
         return redirect("/detail_process/{$id}");
     }
+
+    public function rename(Request $request, $id){
+        $data = Process::where('id',$id)->update([
+            'name' => $request->input('name')
+        ]);
+        return redirect("/detail_process/{$id}");
+    }
+
+
 }

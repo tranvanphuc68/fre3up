@@ -28,7 +28,8 @@ class DetailProcessController extends Controller
             $data = DetailProcess::create([
                 'id_process' => $id_process,
                 'content' => $request->input('content'),
-                'date' =>$request->input('date')
+                'date' =>$request->input('date'),
+                'addition' =>$request->input('addition')
             ]);
             return redirect("/detail_process/{$id_process}");
         }
@@ -50,6 +51,7 @@ class DetailProcessController extends Controller
             ->update([
                 'content' => $request->input("content$detail->id"),
                 'date' => $request->input("date$detail->id"),
+                'addition' => $request->input("addition$detail->id")
             ]);
         }
         return redirect("/detail_process/{$id_process}");
