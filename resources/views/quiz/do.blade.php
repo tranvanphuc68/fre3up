@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="m-2 border-bottom">{{ $item->ans_4 }}</div>  
                                 </div>
-                                <input type="hidden" name="ques_{{$i}}true_ans" id="ques_{{$i}}true_ans" required>
+                                <input type="hidden" name="ques_{{$i}}ans" id="ques_{{$i}}ans" required>
                                 
                             </div>
                             @endforeach

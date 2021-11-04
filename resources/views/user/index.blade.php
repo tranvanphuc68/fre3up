@@ -33,7 +33,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->role }}</td>
-                                    <td><a href="{{ url("/users/{$user->id}") }}"><i class="fal fa-eye sidebar-icon"></i></a></td>
+                                    <td><a href="{{ url("/users/{$user->id}") }}"><i class="fal fa-eye sidebar-icon" style="color: wheat"></i></a></td>
                                 </tr>
                                 
                             @endforeach

@@ -38,14 +38,20 @@ class DetailQuizController extends Controller
 
     public function edit(Quiz $id){
         $data = DetailQuiz::where('id_quiz', $id->id)->get();
-        $count = $data->count();
-        $id_user = Quiz::where('id',$id->id)->get();
+        if($data->count() == 0 && Auth::id() == $id->id_user){
+            return redirect('/quiz')->withErrors(["offset0" => "No question was created. Please delete and create again."]);
+        } elseif($data->count() == 0){
+            return redirect('/censorship')->withErrors(["offset0" => "User is creating... Or no question was created..."]);
+        } else {
+            $count = $data->count();
+            $id_user = Quiz::where('id',$id->id)->get();
         
         return view('detail_quiz.edit', [
             'data' => $data,
             'count' => $count,
             'id_user' => $id_user[0]->id_user
         ]);
+        }
     }
 
     public function update(Request $request, Quiz $id){

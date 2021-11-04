@@ -12,7 +12,9 @@
                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModal">
                             CREATE
                         </button>
-
+                        @error('offset0')
+                          <div class="form-text text-danger" style="font-size: 17px; font-weight: bold;">{{ $message }}</div>
+                        @enderror
                       <div class="row">
                         @foreach ($data as $quiz)
 
@@ -41,7 +43,6 @@
                           </div>                     
                             
                         @endforeach
-                        
                       </div>
                       {{ $data->links('') }}
                     </div>

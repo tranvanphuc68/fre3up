@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Your Quiz To People') }}</div>
+                    <div class="card-header">{{ $quiz->quiz_name }}</div>
 
                     <div class="card-body">
                         <!-- result & rank -->
@@ -53,7 +53,7 @@
                             <?php $i = 0; ?>
                             @foreach ($data as $item)
                             <div>
-                                <?php $i++; $count = $quiz->number_questions; ?>
+                                <?php $i++; $count = $quiz->number_questions; $_answers = $_answers;?>
                                 <div class="m-4">
                                     <span class="p-3 rounded-pill alert-info font-weight-bold">Question: {{ $i }} / {{ $quiz->number_questions }}</span> 
                                 </div>
@@ -77,7 +77,14 @@
                                 
                             </div>
                             @endforeach
+                   
+                                @for ($i = 1; $i <= $count; $i++)
+                                    <input type="hidden" name="ques_{{$i}}ans" id="ques_{{$i}}ans" value="<?php echo ($_answers["ques_".$i."ans"] != null) ? $_answers["ques_".$i."ans"] : 0 ?>">
+                                @endfor
+ 
+                            
                         </div>
+                        <a href="{{ url("/do_quiz/{$quiz->id}") }}"><div class="btn btn-info" style="font-size: 15px;">Do Again</div></a>
                     </div>
                 </div>
             </div>
@@ -92,11 +99,16 @@
         setTimeout(function(){
             document.getElementById('all_ans').classList.toggle('d-none'); 
         },600);
-        
     }
     for(i=1; i <= {{ $count }} ; i++){
-        ans = document.getElementById("ques_"+i+"true_ans").value
-        document.getElementById(ans).classList.add('alert-success')
+        true_ans = document.getElementById("ques_"+i+"true_ans").value
+        ans = document.getElementById("ques_"+i+"ans").value
+        if(ans == 0){
+            document.getElementById(true_ans).classList.add('alert-success')
+        } else if(true_ans !== ans ){
+            document.getElementById(ans).classList.add('alert-danger')
+        }
+        document.getElementById(true_ans).classList.add('alert-success')
     }
 </script>
 @endsection
