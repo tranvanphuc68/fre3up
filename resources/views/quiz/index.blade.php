@@ -67,11 +67,11 @@
           
             <div>
                 <label for="name">Subject: </label>
-                <input type="text" name="quiz_name" id="name" class="form-control form-control-lg">
+                <input type="text" name="quiz_name" id="name" class="form-control form-control-lg" required>
             </div>
             <div>
                 <label for="num">Number of questions: </label>
-                <input type="text" name="number_questions" id="num" class="form-control form-control-lg">
+                <input type="text" name="number_questions" id="num" class="form-control form-control-lg" required>
             </div>
           
         </div>
