@@ -10,11 +10,6 @@
     <title>Fre3Up</title>
     <!-- Scripts -->
     <link rel="shortcut icon" href="{{ asset("/uploads/light.png")}}">
-    <link href="{{ asset('vendor/icofont/icofont.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/venobox/venobox.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Fonts -->
@@ -26,7 +21,6 @@
     <link href="{{ asset("css/sidebar.css") }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset("css/timeline1.css") }}">
-    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
 
     <style>
         /* width */
