@@ -61,7 +61,7 @@
 
                             @if (Route::has('register'))
                                 <li id="sign-up-btn">
-                                    <a href="{{ route('register') }}"><div>Sign </div></a>
+                                    <a href="{{ route('register') }}"><div>Sign Up</div></a>
                                 </li>
                             @endif
                         @else
