@@ -68,7 +68,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update/profile', [UserController::class, 'update_profile']);
     Route::get('/duplicate/{id_process}', [UserController::class, 'duplicate']);
 
+    Route::get('/search', [QuizController::class, 'get_CheckedQuiz']);
 });
+
+
 
 Route::middleware('admin')->group(function(){
     Route::get('/censorship', [QuizController::class, 'censorship']);

@@ -20,7 +20,7 @@
   }
 
   body {
-    font-family:'Times New Roman', Times, serif  !important;
+    font-family: Arial, Helvetica, sans-serif !important;
     font-size: 1.4rem;
     overflow-x: hidden;
     font-weight: 300;
@@ -52,6 +52,60 @@
   button {
     cursor: pointer;
   }
+
+  ::-webkit-scrollbar {
+    width: 1px;
+    }
+
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background: #888;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    }
+    .gradient{
+      background-color: rgb(255, 255, 255);
+      border-right: 1px solid rgba(69, 77, 69, 0.067);
+      font-size: 1.6rem;
+      cursor: pointer;
+      outline: none;
+      padding: 13px 0;
+      transition: background-color 0.5s linear;
+    }
+
+    .gradient:hover{
+        background-color: rgb(185, 174, 196);
+    }
+    .content{
+        margin: 0 2rem;
+        padding:0 20px;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+    a{
+        color:black;
+        transition: color 0.5s linear;
+    }
+    a:hover  {
+        color: #005bc9;
+        text-decoration: none;
+    }
+
+    .w-5{
+        display: inline;
+        width: 20px;
+        height: 10px;
+    }
+    p.text-sm.text-gray-700.leading-5, div.flex.justify-between.flex-1{
+        display: none;
+    }
   
           .sidebar-menu {
             position: fixed;
@@ -90,21 +144,22 @@
             padding-top: .3125rem;
             padding-bottom: .3125rem;
             margin-right: 1rem;
+            font-family: fantasy;
             font-size: 3rem;
             font-weight: lighter;
             line-height: inherit;
             white-space: nowrap;
         }
 
-        .block{
+      .block{
           position: absolute;
           right: 50px;
           top: 70px;
           left: 250px;
           z-index: -2;
-        }
+      }
         
-        .item{
+      .item{
           position: relative;
           cursor: pointer;
           padding:70px 40px;
@@ -113,7 +168,6 @@
           overflow: hidden;
           border-radius: 10px;
           box-shadow: 0.5rem 0.5rem black, -0.5rem -0.5rem #ccc;
-          font-family: cursive;
           font-weight: bold;
       }
 
@@ -133,26 +187,33 @@
       }
 
     .simple-search {
-      width: 100%;
+      margin: auto;
+      width: 140%;
       display: flex;
+      border: 1px solid black;
+      border-radius: 5px;
+      margin-left: 50px;
     }
 
     .simple-search button {
-      padding: 15px;
-      color: white;
+      height: 50%;
+      padding: 5px 10px;
+      color: black;
       flex-shrink: 0;
       border-radius: 8px;
-      background-color: #fc8383;
-      margin-left: 15px;
+      background-color: #e1eff9;
+
     }
     .simple-search input {
       width: 100%;
-      padding: 15px;
-      background-color: #fafafa;
+      height: 50%;
+      padding: 5px;
+      background-color: #e1eff9;
       border-radius: 8px;
       -webkit-appearance: none;
       font-size: 14px;
       font-weight: 500;
+      
     }
 
     .input-lg{
@@ -180,7 +241,63 @@
       opacity: 0;
     }
 
+    .nav-item{
+      font-weight: bold;
+      color: black;
+      margin: 5px 10px;
+      text-align: center;
+    }
+
+    #sign-up-btn{
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 10px;
+      color: white;
+      background-color: #005bc9;
+      text-align: center;
+    }
+
+    #sign-up-btn a{
+        color:white;
+        transition: color 0.5s linear;
+    }
+    #sign-up-btn a:hover  {
+        color: black;
+        text-decoration: none;
+    }
+
+    .dropdown-menu{
+      border-radius: 15px;
+      font-size: 1em;
+      width: 200px;
+    }
+
+    .dropdown-menu div{
+      padding: 0 20px;
+    }
+    .dropdown-item{
+      padding: 5px 10px;
+      border-radius: 12px;
+    }
+    #navbarDropdown{
+      display: flex;
+      align-items: center;
+    }
+    #user-name{
+      display: inline-block;
+      margin: 0 5px;
+      overflow: hidden;
+      width: 100px;
+    }
+
 @media only screen and (max-width: 767px){
+  .simple-search {
+    width: 100%;
+    display: flex;
+    border: 1px solid black;
+    margin: 10px 0;
+  }
+
     .sidebar-menu {
         display: none;
     }
@@ -201,5 +318,26 @@
     width: 250px;
     border-right: 2px solid rgb(197, 193, 193);
     border-bottom: 2px solid rgb(197, 193, 193);
+  }
+  .dropdown-menu{
+    margin: auto;
+    border-radius: 15px;
+    font-size: 1em;
+    width: 50%;
+  }
+  .dropdown-menu div{
+    padding: 0 40px;
+  }
+
+  #navbarDropdown{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  #user-name{
+    display: inline-block;
+    margin: 0 5px;
+    overflow: hidden;
+    width: 100%;
   }
 }

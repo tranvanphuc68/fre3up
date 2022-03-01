@@ -20,79 +20,22 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous"/>
     <link href="{{ asset("css/sidebar.css") }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset("css/timeline1.css") }}">
-
     <style>
-        /* width */
-        ::-webkit-scrollbar {
-        width: 5px;
-        }
-
-        /* Track */
-        ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        }
-
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-        background: #888;
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-        }
-        .gradient{
-          background-color: rgb(255, 255, 255);
-          border-right: 1px solid rgba(69, 77, 69, 0.067);
-          font-size: 1.6rem;
-          cursor: pointer;
-          outline: none;
-          padding: 13px 0;
-          transition: background-color 0.5s linear;
-        }
-
-        .gradient:hover{
-            background-color: rgb(185, 174, 196);
-        }
-        .content{
-            margin: 0 2rem;
-            padding:0 20px;
-            text-align: center;
-            text-transform: uppercase;
-            text-decoration: none;
-        }
-
-        a{
-            color:black;
-            transition: color 0.5s linear;
-        }
-        a:hover  {
-            color: white;
-            text-decoration: none;
-        }
-        .w-5{
-            display: inline;
-            width: 20px;
-            height: 10px;
-        }
-        p.text-sm.text-gray-700.leading-5, div.flex.justify-between.flex-1{
-            display: none;
-        }
+        
 
     </style>
 </head>
 <body>
 <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="position: fixed; width: 100%; z-index: 100;">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="position: fixed; width: 100%; z-index: 100; background-color: #e1eff9;">
             <div class="container">
                 @if (Auth::check())
                     <button class="navbar-toggler sidebar-toggler" type="button">
                     <span class="navbar-toggler-icon"></span>
                     </button>
                 @endif
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Fre3Up
+                <a class="navbar-brand" style="color: #005bc9; text-align:center;" href="{{ url('/') }}">
+                    <span style="color: rgba(211, 17, 17, 0.863)">I</span>QUIZ
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -101,31 +44,27 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                            <form action="{{ url('/search') }}" method="get">
+                                <div class="simple-search">
+                                    <button><i class="fa fa-search"></i></button>
+                                    <input type="text" placeholder="What quiz do you wanna do?" name="search" value="<?php if (isset($_GET['search'])) { echo $_GET['search'];} ?>"/>
+                                </div>
+                            </form>
                     </ul>
-                    <a href="{{ url("/home") }}">
-                        <div class="gradient">
-                            <div class="content">Home</div>
-                        </div>
-                    </a>
-                    <a href="{{ url("/") }}">
-                        <div class="gradient">
-                            <div class="content">Quiz</div>
-                        </div>
-                    </a>
+                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a href="{{ route('login') }}"><div>Sign In</div> </a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <li id="sign-up-btn">
+                                    <a href="{{ route('register') }}"><div>Sign </div></a>
                                 </li>
                             @endif
                         @else
@@ -135,24 +74,49 @@
                                     @if (Auth::check() && Auth::user()->provider != null )
                                         <img src="{{ Auth::user()->avatar }}" alt="" style="height: 40px; width: 40px; border-radius: 50%; display:inline-block;">
                                     @else
-                                        <img src="{{ asset("/uploads/avatars/".Auth::user()->avatar) }}" style="height: 40px; width: 40px; border-radius: 50%; display:inline-block;">
+                                        <img src="{{ asset("/uploads/avatars/".Auth::user()->avatar) }}" style="height: 30px; width: 30px; border-radius: 50%; display:inline-block;">
                                     @endif
                                     </span>
-                                    <span> {{ Auth::user()->name }}</span>
+                                    <div id="user-name">{{ Auth::user()->name }}</div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url("/auth/user/profile") }}">
-                                        {{ __('Profile') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                    <div>
+                                        <a class="dropdown-item" href="{{ url("/auth/user/profile") }}">
+                                            <div>View profile</div>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="dropdown-item" href="{{ url("/quiz") }}">
+                                            <div>My quiz</div>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="dropdown-item" href="{{ url("/process") }}">
+                                            <div>My work list</div>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a class="dropdown-item" href="{{ url("/users") }}">
+                                            <div>Users</div>
+                                        </a>
+                                    </div>
+                            @if (Auth::user()->role == 'admin')
+                                    <div>
+                                         <a class="dropdown-item" href="{{ url('/censorship') }}">
+                                              <div>Censorship</div>
+                                         </a>
+                                    </div>
+                            @endif
+                                    <div>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            <div>{{ __('Logout') }}</div>
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
                                 </div>
                             </li>
                         @endguest
