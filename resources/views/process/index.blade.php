@@ -1,39 +1,31 @@
 @extends('layouts.app')
 @section('content')
+<link rel="stylesheet" href="{{asset('css/styles.css')}}">
+<link rel="stylesheet" href="{{asset('css/timeline1.css')}}">
 <div class="block">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">{{ __('Your Process') }}</div>
-
-                      <div class="card-body">
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModal">
-                            CREATE
-                        </button>
-                        <div class="row">
-                          @foreach ($data as $process)
-                                <div class="col-lg-3">
-                                  <a href="{{ url("/detail_process/{$process->id}") }}">
-                                    <div class="item" style="background-image: linear-gradient(to right,#ce4ece,#e2e6ab); padding:20px;">
-                                        <div style="text-align: center;">{{ $process->name }}</div>
-                                    </div>
-                                  </a>
-                                  <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $process->id }}').submit()">
-                                      <i class="fal fa-trash-alt sidebar-icon"></i>
-                                  </a>
-                                <form method="POST" id="delete-{{ $process->id }}" action="{{ url("/process/{$process->id}") }}" >
-                                  @method('DELETE')
-                                  @csrf
-                                </form>
-                                </div>
-                          @endforeach
-                        </div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="container my-work-list">
+          <h1 class="fw-bolder mb-4 mt-5">My Work List</h1>
+          <div>
+              <div class="btn btn-primary mt-4 mb-4" data-toggle="modal" data-target="#exampleModal">Create</div>
+          </div>
+          <div class="row">
+            @foreach ($data as $process)
+              <div class="col-md-3 mt-4">
+                <a href="{{ url("/detail_process/{$process->id}") }}">
+                  <div class="work-list">
+                      <div class="work-list-name">{{ $process->name }}</div>
+                  </div>
+                </a>
+                  <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $process->id }}').submit()"><i class="fa-regular fa-circle-xmark mt-2"></i></a>
+              
+              <form method="POST" id="delete-{{ $process->id }}" action="{{ url("/process/{$process->id}") }}" >
+                @method('DELETE')
+                @csrf
+              </form>
+              </div>
+            @endforeach
+          </div>
+      </div>
     </div>
 </div>
 

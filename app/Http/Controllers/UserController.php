@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DetailProcess;
 use App\Models\Process;
 use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,8 +29,14 @@ class UserController extends Controller
 
     public function profile(){
         $user = User::find(Auth::id());
+        $all_process = Process::where("id_user", Auth::id())->get();
+        $data = Quiz::where("id_user", Auth::id())->where("check","1")->get();
+        $details = DetailProcess::orderBy('date')->get();
         return view('user.profile', [
-            'user' => $user
+            'user' => $user,
+            'data' => $data,
+            'all_process' => $all_process,
+            'details' => $details
         ]);
     }
 
@@ -45,13 +52,14 @@ class UserController extends Controller
 
     public function show(User $id){
         $user = User::find($id->id);
-        //Pham Nhu Hoa => here
-        $all_process = Process::where("id_user", $id->id)->get();
-        $data = DetailProcess::orderBy('date')->get();
+        $all_process = Process::where("id_user", Auth::id())->get();
+        $data = Quiz::where("id_user", $id->id)->where("check","1")->get();
+        $details = DetailProcess::orderBy('date')->get();
         return view('user.show', [
             'user' => $user,
             'data' => $data,
-            'all_process' => $all_process
+            'all_process' => $all_process,
+            'details' => $details
         ]);
     }
 

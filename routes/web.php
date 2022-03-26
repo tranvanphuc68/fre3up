@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/detail_quiz/{id}', [DetailQuizController::class, 'store']);
     Route::get('/detail_quiz/edit/{id}', [DetailQuizController::class, 'edit']);
     Route::put('/detail_quiz/edit/{id}', [DetailQuizController::class, 'update']);
+    Route::get('/review_quiz/{id}', [QuizController::class, 'review_quiz']);
     Route::get('/do_quiz/{id}', [DetailQuizController::class, 'do_quiz']);
 
     Route::get('/result/{id}', [ResultController::class, 'show_result']);

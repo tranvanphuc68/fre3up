@@ -27,16 +27,15 @@ class ResultController extends Controller
             'id_quiz' => $id->id,
             'result' => $count
          ]);
-        ///////
         $_answers = $request->input();
         return redirect("/result/{$id->id}")->with(["_answers" => $_answers]);
     }
 
     public function show_result(Quiz $id){
         $_answers = Session::get('_answers');
-        if($_answers == null){
-            return redirect('/');
-        }
+        // if($_answers == null){
+        //     return redirect('/');
+        // }
         $data = DetailQuiz::where('id_quiz', $id->id)->get();
         $result = Result::where('id_user', Auth::id())->where('id_quiz', $id->id)->orderBy('created_at', 'desc')->get();
         $count = $result[0]->result;

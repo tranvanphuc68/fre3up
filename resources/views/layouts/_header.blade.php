@@ -17,19 +17,13 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous"/>
     <link href="{{ asset("css/sidebar.css") }}" rel="stylesheet">
 
-    <style>
-        
-
-    </style>
 </head>
 <body>
 <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="position: fixed; width: 100%; z-index: 100; background-color: #e1eff9;">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="position: fixed; top: 0; width: 100%; z-index: 100; background-color: #e1eff9;">
             <div class="container">
                 @if (Auth::check())
-                    <button class="navbar-toggler sidebar-toggler" type="button">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
+                    <span class="blank_logo"></span>
                 @endif
                 <a class="navbar-brand" style="color: #005bc9; text-align:center;" href="{{ url('/') }}">
                     <span style="color: rgba(211, 17, 17, 0.863)">I</span>QUIZ
@@ -43,7 +37,7 @@
                     <ul class="navbar-nav mr-auto">
                             <form action="{{ url('/search') }}" method="get">
                                 <div class="simple-search">
-                                    <button><i class="fa fa-search"></i></button>
+                                    <button></button>
                                     <input type="text" placeholder="What quiz do you wanna do?" name="search" value="<?php if (isset($_GET['search'])) { echo $_GET['search'];} ?>"/>
                                 </div>
                             </form>

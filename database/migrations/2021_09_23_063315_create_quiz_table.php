@@ -17,12 +17,12 @@ class CreateQuizTable extends Migration
             $table->id();
             $table->bigInteger('id_user')->unsigned();
             $table->string('quiz_name');
-            $table->string('subject');
+            $table->text('about');
             $table->tinyInteger('number_questions')->unsigned();
             $table->integer('time')->unsigned();
             $table->boolean('check');
             $table->timestamps();
-
+            
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -33,7 +33,7 @@ class CreateQuizTable extends Migration
      * @return void
      */
     public function down()
-    {
+    {   
         Schema::dropIfExists('quiz');
     }
 }

@@ -5,8 +5,6 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Your Quiz To People') }}</div>
-    
                     <div class="card-body">
                         <form id="form" action="{{ url("/result/quiz/{$data[0]->id_quiz}") }}" method="post">
                             @csrf
@@ -23,25 +21,25 @@
                                 </div>
                                 <div class="mt-3" style="display: flex;" id="ques_{{$i}}ans_1">
                                     <div class="input-group-append" onclick="checkCorrect(ques_{{$i}}ans_1)">
-                                        <div class="btn btn-outline-secondary"><i class="fal fa-check sidebar-icon"></i></div>
+                                        <div class="btn btn-outline-secondary"></div>
                                     </div>
                                     <div class="m-2 border-bottom">{{ $item->ans_1 }}</div>     
                                 </div>
                                 <div class="mt-3" style="display: flex;" id="ques_{{$i}}ans_2">
                                     <div class="input-group-append" onclick="checkCorrect(ques_{{$i}}ans_2)">
-                                        <div class="btn btn-outline-secondary"><i class="fal fa-check sidebar-icon"></i></div>
+                                        <div class="btn btn-outline-secondary"></div>
                                     </div>
                                     <div class="m-2 border-bottom">{{ $item->ans_2 }}</div>  
                                 </div>
                                 <div class="mt-3" style="display: flex;" id="ques_{{$i}}ans_3">
                                     <div class="input-group-append" onclick="checkCorrect(ques_{{$i}}ans_3)">
-                                        <div class="btn btn-outline-secondary"><i class="fal fa-check sidebar-icon"></i></div>
+                                        <div class="btn btn-outline-secondary"></div>
                                     </div>
                                     <div class="m-2 border-bottom">{{ $item->ans_3 }}</div>  
                                 </div>
                                 <div class="mt-3" style="display: flex;" id="ques_{{$i}}ans_4">
                                     <div class="input-group-append" onclick="checkCorrect(ques_{{$i}}ans_4)">
-                                        <div class="btn btn-outline-secondary"><i class="fal fa-check sidebar-icon"></i></div>
+                                        <div class="btn btn-outline-secondary"></div>
                                     </div>
                                     <div class="m-2 border-bottom">{{ $item->ans_4 }}</div>  
                                 </div>

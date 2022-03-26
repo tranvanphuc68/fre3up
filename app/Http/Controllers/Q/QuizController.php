@@ -46,8 +46,17 @@ class QuizController extends Controller
         ]);
     }
 
+    public function review_quiz(Quiz $id){
+        $quiz = Quiz::join("users",'quiz.id_user','=','users.id')->where('quiz.id',"$id->id")
+        ->select("quiz.*","users.name as user_name",'users.provider','users.avatar')->get();
+        // dd($quiz);
+        return view('quiz.review', [
+            'quiz' => $quiz[0]
+        ]);
+    }
+
     public function censorship(){
-        $data = Quiz::where('check', '0')->paginate(10)->withQueryString();
+        $data = Quiz::join('users','quiz.id_user','=','users.id')->where('check', '0')->select('quiz.*', 'users.name as user_name', 'users.id as id_user')->paginate(10)->withQueryString();
         return view('quiz.censorship', [
             'data' => $data
         ]);

@@ -1,15 +1,15 @@
 INSERT INTO `users`(`id`, `name`, `dob`, `gender`, `description`, `email`, `provider`, `provider_id`, `email_verified_at`, `password`, `avatar`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES 
-(10,'Nguyễn Ngọc Minh',null,'Nam','Student','ngocminh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(11,'Nguyễn Thanh Hà',null,'Nữ','Student','thanhha@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(12,'Trần Bảo Ngọc',null,'Nữ','Student','baongoc@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(13,'Nguyễn Quốc Cường',null,'Nam','Student','quoccuong@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(14,'Đinh Quang Minh',null,'Nam','Student','quangminh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(15,'Phùng Vũ',null,'Nam','Student','phungvu@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(16,'Nguyễn Quang Tiến',null,'Nam','Student','quangtien@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(17,'Hà Văn Quảng',null,'Nam','Student','vanquang@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(18,'Nguyễn Thục Anh',null,'Nữ','Student','thucanh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(19,'Đào Mỹ Linh',null,'Nữ','Student','mylinh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
-(20,'Phan Chiến Thắng',null,'Nam','Student','chienthang@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06');
+(10,'Nguyễn Ngọc Minh',null,'Male','Student','ngocminh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(11,'Nguyễn Thanh Hà',null,'Female','Student','thanhha@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(12,'Trần Bảo Ngọc',null,'Female','Student','baongoc@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(13,'Nguyễn Quốc Cường',null,'Male','Student','quoccuong@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(14,'Đinh Quang Minh',null,'Male','Student','quangminh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(15,'Phùng Vũ',null,'Male','Student','phungvu@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(16,'Nguyễn Quang Tiến',null,'Male','Student','quangtien@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(17,'Hà Văn Quảng',null,'Male','Student','vanquang@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(18,'Nguyễn Thục Anh',null,'Female','Student','thucanh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(19,'Đào Mỹ Linh',null,'Female','Student','mylinh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(20,'Phan Chiến Thắng',null,'Male','Student','chienthang@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06');
 
 INSERT INTO `quiz`(`id`, `id_user`, `quiz_name`, `number_questions`, `check`, `created_at`, `updated_at`) VALUES 
 (1,4,'Lịch Sử Đảng 01','10',1,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
