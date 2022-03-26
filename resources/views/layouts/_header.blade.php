@@ -26,7 +26,7 @@
                     <span class="blank_logo"></span>
                 @endif
                 <a class="navbar-brand" style="color: #005bc9; text-align:center;" href="{{ url('/') }}">
-                    <span style="color: rgba(211, 17, 17, 0.863)">I</span>QUIZ
+                    <span style="color: rgba(211, 20, 30, 0.863)">I</span>QUIZ
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
