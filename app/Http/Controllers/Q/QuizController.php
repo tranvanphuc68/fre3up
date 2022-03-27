@@ -20,7 +20,9 @@ class QuizController extends Controller
         $data = Quiz::create([
             'id_user' => Auth::id(),
             'quiz_name' => $request->input('quiz_name'),
+            'about' => $request->input('about'),
             'number_questions' => $request->input('number_questions'),
+            'time' => $request->input('time'),
             'check' => '0'
         ]);
         return redirect("/detail_quiz/{$data->id}");
@@ -49,7 +51,6 @@ class QuizController extends Controller
     public function review_quiz(Quiz $id){
         $quiz = Quiz::join("users",'quiz.id_user','=','users.id')->where('quiz.id',"$id->id")
         ->select("quiz.*","users.name as user_name",'users.provider','users.avatar')->get();
-        // dd($quiz);
         return view('quiz.review', [
             'quiz' => $quiz[0]
         ]);

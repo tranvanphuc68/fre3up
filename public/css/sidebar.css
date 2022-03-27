@@ -292,6 +292,18 @@
       overflow: hidden;
       width: 100px;
     }
+    .quiz-name-title {
+      font-weight: bold;
+      border-bottom: 3px solid #e1eff9;
+      background-color:  #2ab7ca;
+      color: white;
+      font-size: 30px;
+      padding: 8px 15px; 
+      margin: 0; 
+      border-radius: 7px;
+      box-shadow: 0 2px 5px #e1eff9;
+      margin-bottom: 15px;
+  }
 
 @media only screen and (max-width: 767px){
   .simple-search {

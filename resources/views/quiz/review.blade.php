@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/review_v_result.css') }}">
 <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+<link rel="stylesheet" href="{{ asset('css/review_v_result.css') }}">
 <div class="block" style="padding-top: 60px;">
 <div class="banner">
     <img src="{{ asset("/uploads/review/quiz_photo.jpg") }}" alt="" width="100%" height="auto">
@@ -118,8 +118,7 @@
                             <div class="col-md-3 ">
                                 <div class="comment-users">
                                     @if ($quiz->provider != null)
-                                        <img src="{{ $quiz->avatar }}" alt="">
-                                        {{-- style="height: 90px; width: 90px; border-radius: 50%; display:inline-block;" --}}
+                                        <img src="{{ $cmt->avatar }}" alt="">
                                     @else
                                         <img src="{{ asset("/uploads/avatars/$quiz->avatar") }}" alt="">
                                     @endif

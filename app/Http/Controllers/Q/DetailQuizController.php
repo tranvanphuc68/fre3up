@@ -45,11 +45,12 @@ class DetailQuizController extends Controller
         } else {
             $count = $data->count();
             $id_user = Quiz::where('id',$id->id)->get();
-        
+        $quiz = Quiz::where('id', $id->id)->get();
         return view('detail_quiz.edit', [
             'data' => $data,
             'count' => $count,
-            'id_user' => $id_user[0]->id_user
+            'id_user' => $id_user[0]->id_user,
+            'quiz' => $quiz[0]
         ]);
         }
     }
@@ -65,15 +66,22 @@ class DetailQuizController extends Controller
                 'true_ans' => $request->input("ques_$i"."true_ans")
             ]);
         } 
+        $quiz = Quiz::where('id', $id->id)->update([
+            'quiz_name' => $request->input('quiz_name'),
+            'about' => $request->input('about'),
+            'time' => $request->input('time')
+        ]);
         return redirect('/quiz');
     }
 
     public function do_quiz(Request $request, Quiz $id){
         $data = DetailQuiz::where('id_quiz', $id->id)->get();
         $count = $data->count();
+        $quiz = Quiz::where('id', $id->id)->get();
         return view('quiz.do', [
             'data' => $data,
-            'count' => $count
+            'count' => $count,
+            'quiz' => $quiz[0] 
         ]);
     }
 }

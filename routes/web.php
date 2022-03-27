@@ -70,6 +70,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/duplicate/{id_process}', [UserController::class, 'duplicate']);
 
     Route::get('/search', [QuizController::class, 'get_CheckedQuiz']);
+    
+    //Comment
+    Route::get('/search', [QuizController::class, 'get_CheckedQuiz']);
+
 });
 
 

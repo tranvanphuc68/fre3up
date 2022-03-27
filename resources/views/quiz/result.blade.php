@@ -5,7 +5,7 @@
 .box::-webkit-scrollbar {
     width: 2px;
 } 
-.box{
+.box {
     padding: 1rem;
     max-height: 220px;
     overflow-y: auto;
@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ $quiz->quiz_name }}</div>
+                    <div class="quiz-name-title">{{ $quiz->quiz_name }}</div>
 
                     <div class="card-body">
                         <!-- result & rank -->
@@ -94,7 +94,7 @@
     </div> --}}
 
     <div class="quiz-finish">
-        <span>{{ $quiz->quiz_name }}</span>
+        <div class="quiz-name-title">{{ $quiz->quiz_name }}</div>
         <div class="finish-card">
             <div class="finish-card-container">
                 <p>Bạn đã đạt: {{ $result }} / {{ $quiz->number_questions }} câu.</p>

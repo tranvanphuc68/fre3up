@@ -41,6 +41,18 @@ class UserController extends Controller
     }
 
     public function update_profile(Request $request){
+        if(Auth::user()->provider == null){
+            if($request->input('gender') == "Male"){
+                $user = User::find(Auth::id())->update([
+                    "avatar" => "defaultMale.jpg"
+                ]);
+            } else {
+                $user = User::find(Auth::id())->update([
+                    "avatar" => "defaultFemale.jpg"
+                ]);
+            }
+            
+        }
         $user = User::find(Auth::id())->update([
             "dob" => $request->input('dob'),
             "gender" => $request->input('gender'),
