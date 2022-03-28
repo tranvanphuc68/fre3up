@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Q;
 
 use App\Http\Controllers\Controller;
 use App\Models\Quiz;
+use App\Models\SavedQuiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,8 +12,12 @@ class QuizController extends Controller
 {
     public function index(){
         $data = Quiz::where("id_user", Auth::id())->paginate(10)->withQueryString();
+        $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
+        //dd($saved_quiz);
         return view('quiz.index', [
-            'data' => $data
+            'data' => $data,
+            'saved_quiz' => $saved_quiz
+
         ]);
     }
 
@@ -75,5 +80,14 @@ class QuizController extends Controller
             'check' => '0'
         ]);
         return redirect('/censorship');
+    }
+
+    public function saved_quiz(Quiz $id){
+
+        $data = SavedQuiz::create([
+            'id_user' => Auth::id(),
+            'id_quiz' => $id->id
+        ]);
+        return redirect('/quiz');
     }
 }

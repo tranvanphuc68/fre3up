@@ -29,6 +29,7 @@
     <div class="form-text text-danger" style="font-size: 17px; font-weight: bold;">{{ $message }}</div>
     @enderror
     <div class="row">
+    <?php $count = count($data); ?>
       @foreach ($data as $quiz)
       <div class="col-md-3 mt-3">
         <div class="quiz @if ($quiz->check == 0) quiz-uncensored @endif ">
@@ -41,8 +42,14 @@
               <h4>{{ $quiz->quiz_name }}</h4>
             </div>
           </a>
+
           <div class="quiz-info">
-            <div id="{{ $quiz->id }}" class="quiz-bookmark" onclick="toggleSave({{ $quiz->id }}, 1)"> </div>
+        <?php $status = 0;
+                foreach ( $saved_quiz as $saved){
+                    if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)
+                       { $status = 1;}
+                } ?>
+            <div id="{{ $quiz->id }}" class="quiz-bookmark" value="{{ $status}}" onclick="toggleSave({{ $quiz->id }}, {{$status}})"> </div>
           </div>
         </div>
         <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()"><i class="fa-regular fa-circle-xmark mt-2"></i></a>
@@ -56,30 +63,7 @@
     {{ $data->links('') }}
   </div>
 </div>
-<script>
-  var quiz_list = document.getElementsByClassName("quiz-list")
 
-  function active(n) {
-    quiz_list[n].classList.add('active')
-    if (n == 0) {
-      quiz_list[1].classList.remove("active")
-      quiz_list[2].classList.remove("active")
-    } else if (n == 1) {
-      quiz_list[0].classList.remove("active")
-      quiz_list[2].classList.remove("active")
-    } else {
-      quiz_list[1].classList.remove("active")
-      quiz_list[0].classList.remove("active")
-    }
-  }
-
-  function toggleSave(id, saved_status) {
-    var icon = document.getElementById(id)
-    console.log(icon)
-    icon.classList.toggle('bold')
-    if (saved_status == 0) {}
-  }
-</script>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -124,4 +108,51 @@
     </form>
   </div>
 </div>
+<script>
+    var quiz_list = document.getElementsByClassName("quiz-list")
+
+    function active(n) {
+      quiz_list[n].classList.add('active')
+      if (n == 0) {
+        quiz_list[1].classList.remove("active")
+        quiz_list[2].classList.remove("active")
+      } else if (n == 1) {
+        quiz_list[0].classList.remove("active")
+        quiz_list[2].classList.remove("active")
+      } else {
+        quiz_list[1].classList.remove("active")
+        quiz_list[0].classList.remove("active")
+      }
+    }
+
+    function toggleSave(id, saved_status) {
+      var icon = document.getElementById(id)
+      icon.classList.toggle('bold')
+
+      $.ajax({
+        url: "{{ url('/saved_quiz/') }}"+"/"+id,
+        method: 'GET',
+        success: function(res) {
+            $("#main").text(res)
+        },
+        error: function(err) {
+            console.error(err)
+        }
+        })
+
+    }
+
+    //load saved quiz
+
+    var count = {{ $count }}
+    for (var i=0; i < count; i++){
+        var bookmark = document.getElementsByClassName('quiz-bookmark')[i];
+        if(bookmark.getAttribute('value') == 1){
+            bookmark.classList.add('bold')
+        }
+    }
+    //
+
+  </script>
+
 @endsection

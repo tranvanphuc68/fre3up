@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/quiz', [QuizController::class, 'index']);
     Route::post('/quiz', [QuizController::class, 'store']);
     Route::delete('/quiz/{id}', [QuizController::class, 'delete']);
+    Route::get('/saved_quiz/{id}', [QuizController::class, 'saved_quiz']);
 
 
     Route::get('/detail_quiz/{id}', [DetailQuizController::class, 'create']);
@@ -70,7 +71,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/duplicate/{id_process}', [UserController::class, 'duplicate']);
 
     Route::get('/search', [QuizController::class, 'get_CheckedQuiz']);
-    
+
     //Comment
     Route::get('/search', [QuizController::class, 'get_CheckedQuiz']);
 
