@@ -19,7 +19,7 @@
                                     </div>
                                     <div class="mt-3">
                                         <label for="about" class="fw-bold">Description: </label>
-                                        <textarea type="text" name="about" style="resize: none;" class="form-control input-lg" rows="3" id="about" placeholder="Enter the quiz's description" value="{{ $quiz->about }}"></textarea>
+                                        <textarea type="text" name="about" style="resize: none;" class="form-control input-lg" rows="3" id="about" placeholder="Enter the quiz's description">{{ $quiz->about }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
