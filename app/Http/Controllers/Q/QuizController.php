@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class QuizController extends Controller
 {
     public function index(){
+        
         $data = Quiz::where("id_user", Auth::id())
                     ->paginate(10)->withQueryString();
         $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
@@ -19,6 +20,13 @@ class QuizController extends Controller
         $views = Result::select('id_quiz', Result::raw('count(*) as total'))
                         ->groupBy('id_quiz')
                         ->get();
+        if(  isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0) {
+            return view('quiz.data_index', [
+                'data' => $data,
+                'saved_quiz' => $saved_quiz,
+                'views' => $views
+            ]);
+        }
         return view('quiz.index', [
             'data' => $data,
             'saved_quiz' => $saved_quiz,
@@ -109,12 +117,13 @@ class QuizController extends Controller
 
     public function all_saved_quiz(){
 
-        $quiz_saved = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')
+        $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')
                     ->where("saved_quizzes.id_user", Auth::id())
+                    //->select()
                     ->get();
-        //dd($quiz_saved);
-        // return require('./views/quiz/data.php');
-        return response()->json(["quiz_saved" => $quiz_saved], 200);
+        return view('quiz.data', [
+            "saved_quiz" => $saved_quiz
+        ]);
     }
 
     public function history_quiz(){
@@ -125,10 +134,9 @@ class QuizController extends Controller
                     ->select('quiz.id','quiz.id_user','quiz.quiz_name','quiz.number_questions', 'users.name')
                     ->groupByRaw('id, id_user, quiz_name, number_questions, name')
                     ->get();
-
-        // return redirect('/quiz');
-        dd($history_quiz);
-        // return require('./views/quiz/data.php');
-        return response()->json(["history_quiz" => $history_quiz], 200);
+        return view('quiz.data_history', [
+            "history_quiz" => $history_quiz
+        ]);
+        
     }
 }

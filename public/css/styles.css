@@ -107,6 +107,9 @@ body {
     height: 20px;
     width: 25px;
 }
+.slick-track{
+    margin-left: 0;
+}
 .quiz-uncensored{
     background-color: #ffbbbb !important;
 }

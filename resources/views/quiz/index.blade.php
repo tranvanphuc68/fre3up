@@ -28,6 +28,7 @@
     @error('offset0')
     <div class="form-text text-danger" style="font-size: 17px; font-weight: bold;">{{ $message }}</div>
     @enderror
+    <div id="res">
     <div class="row result">
     <?php $count = count($data); ?>
       @foreach ($data as $quiz)
@@ -71,6 +72,7 @@
       @endforeach
     </div>
     {{ $data->links('') }}
+  </div>
   </div>
 </div>
 
@@ -118,25 +120,36 @@
     </form>
   </div>
 </div>
-<script>
-    var quiz_list = document.getElementsByClassName("quiz-list")
 
+<script>
+  window.onload = load_saved_quiz()
+    var quiz_list = document.getElementsByClassName("quiz-list")
     function active(n) {
       quiz_list[n].classList.add('active')
       if (n == 0) {
+        $.ajax({
+              url: "{{ url('/quiz/') }}",
+              method: 'GET',
+              success: function(data) {
+                  $(".result").remove()
+                  $('#res').html(data)
+                  load_saved_quiz()
+              },
+              error: function(err) {
+                  console.error(err)
+              }
+              })
         quiz_list[1].classList.remove("active")
         quiz_list[2].classList.remove("active")
       } else if (n == 1) {
         quiz_list[0].classList.remove("active")
         quiz_list[2].classList.remove("active")
-
         $.ajax({
               url: "{{ url('/all_saved_quiz/') }}",
               method: 'GET',
               success: function(data) {
-                  console.log(res)
-                    $(".result").append(data)
-
+                  $(".result").remove()
+                  $('#res').html(data)
               },
               error: function(err) {
                   console.error(err)
@@ -145,6 +158,17 @@
       } else {
         quiz_list[1].classList.remove("active")
         quiz_list[0].classList.remove("active")
+        $.ajax({
+              url: "{{ url('/history_quiz/') }}",
+              method: 'GET',
+              success: function(data) {
+                  $(".result").remove()
+                  $('#res').html(data)
+              },
+              error: function(err) {
+                  console.error(err)
+              }
+              })
       }
     }
 
@@ -183,16 +207,16 @@
     }
 
     //load saved quiz
-
-    var count = {{ $count }}
-    for (var i=0; i < count; i++){
-        var bookmark = document.getElementsByClassName('quiz-bookmark')[i];
-        if(bookmark.getAttribute('value') == 1){
-            bookmark.classList.add('bold')
-        }
+    function load_saved_quiz(){
+        var count = {{ $count }}
+          for (var i=0; i < count; i++){
+          var bookmark = document.getElementsByClassName('quiz-bookmark')[i];
+            if(bookmark.getAttribute('value') == 1){
+              bookmark.classList.add('bold')
+          }
+      }
     }
-    //
-
+    
   </script>
 
 @endsection
