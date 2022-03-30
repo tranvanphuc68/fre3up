@@ -65,11 +65,11 @@
     var quiz_menu = document.getElementsByClassName("quiz-menu")
     function active(n) {
         quiz_menu[n].classList.add('active')
+        let id = {{ $quiz->id }}
         if (n == 0) {
             quiz_menu[1].classList.remove("active")
-            let id = {{ $quiz->id }}
             $.ajax({
-              url: `{{ url('/review_quiz/${id}') }}`,
+              url: `{{ url('/about_quiz/${id}') }}`,
               method: 'GET',
               success: function(data) {
                 $(".review").remove()
@@ -81,7 +81,6 @@
               })
         } else {
             quiz_menu[0].classList.remove("active")
-            let id = {{ $quiz->id }}
             $.ajax({
               url: `{{ url('/review/${id}') }}`,
               method: 'GET',

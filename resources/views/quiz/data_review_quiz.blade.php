@@ -15,7 +15,7 @@
                             <img src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
                         </span>
                         <p>(500 ratings)</p>
-                    </div>
+                    </div>   
                 </div>
             </div>
             <div class="col-md-4 mb-2 mt-2 ">

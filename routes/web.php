@@ -49,9 +49,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/detail_quiz/{id}', [DetailQuizController::class, 'store']);
     Route::get('/detail_quiz/edit/{id}', [DetailQuizController::class, 'edit']);
     Route::put('/detail_quiz/edit/{id}', [DetailQuizController::class, 'update']);
-    Route::get('/review_quiz/{id}', [QuizController::class, 'about_quiz']);
     Route::get('/do_quiz/{id}', [DetailQuizController::class, 'do_quiz']);
 
+    //review
+    Route::get('/review/{id}', [ReviewController::class, 'review']);
+    Route::get('/review_quiz/{id}', [ReviewController::class, 'review_quiz']);
+    Route::get('/about_quiz/{id}', [ReviewController::class, 'about_quiz']);
+
+    //result
     Route::get('/result/{id}', [ResultController::class, 'show_result']);
     Route::post('/result/quiz/{id}', [ResultController::class, 'check']);
 
@@ -85,8 +90,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/comment/edit/{id}', [CommentController::class, 'update']);
     Route::delete('/comment/{id}', [CommentController::class, 'delete']);
 
-    //review\
-    Route::get('/review/{id}', [ReviewController::class, 'review']);
+
 });
 
 
