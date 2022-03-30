@@ -57,13 +57,13 @@
                         <div class="review-card">
                             <div class="review-card-overall">
                                 <p>4.5 out to 5 stars</p>
-                                <span>
-                                    <img src="{{ asset("/uploads/review/yellow-star.png") }}" alt="" srcset="">
-                                    <img src="{{ asset("/uploads/review/yellow-star.png") }}" alt="" srcset="">
-                                    <img src="{{ asset("/uploads/review/yellow-star.png") }}" alt="" srcset="">
-                                    <img src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
-                                    <img src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
-                                </span>
+                                <div class="d-flex voted-bar">
+                                    <div class="star"></div>
+                                    <div class="star"></div>
+                                    <div class="star"></div>
+                                    <div class="star"></div>
+                                    <div class="star"></div>
+                                </div>
                                 <p>(500 ratings)</p>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="comment-scrip">
-                                    <span  class="d-flex">
+                                    <span class="d-flex">
                                         <img src="{{ asset("/uploads/review/yellow-star.png") }}" alt="" srcset="">
                                         <img src="{{ asset("/uploads/review/yellow-star.png") }}" alt="" srcset="">
                                         <img src="{{ asset("/uploads/review/yellow-star.png") }}" alt="" srcset="">

@@ -175,7 +175,6 @@
     function toggleSave(id) {
       var icon = document.getElementById(id)
       icon.classList.toggle('bold')
-      console.log(icon.getAttribute('value'))
       saved_status = icon.getAttribute('value')
         if (saved_status == 0) {
             $('#'+id).attr("value", "1")

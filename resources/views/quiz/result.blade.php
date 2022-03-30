@@ -177,42 +177,13 @@
                     <div class="rank-review">Review</div>
                     <!-- vote-->
                     <div class="vote-rate">
-                        <div id="1">
-                            <img class="star-input" onclick="voted(1)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
-                            <div class="vote-output">
-                                <img class="star-output d-none" onclick="un_voted(1)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
-                                    srcset="">
-                            </div>
+                        <div class="d-flex voted-bar">
+                            <div class="star" onclick="vote(1)" id="star-1"></div>
+                            <div class="star" onclick="vote(2)" id="star-2"></div>
+                            <div class="star" onclick="vote(3)" id="star-3"></div>
+                            <div class="star" onclick="vote(4)" id="star-4"></div>
+                            <div class="star" onclick="vote(5)" id="star-5"></div>
                         </div>
-                        <div id="2">
-                            <img class="star-input" onclick="voted(2)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
-                            <div class="vote-output">
-                                <img class="star-output d-none" onclick="un_voted(2)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
-                                    srcset="">
-                            </div>
-                        </div>
-                        <div id="3">
-                            <img class="star-input" onclick="voted(3)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
-                            <div class="vote-output">
-                                <img class="star-output d-none" onclick="un_voted(3)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
-                                    srcset="">
-                            </div>
-                        </div>
-                        <div id="4">
-                            <img class="star-input" onclick="voted(4)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
-                            <div class="vote-output">
-                                <img class="star-output d-none" onclick="un_voted(4)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
-                                    srcset="">
-                            </div>
-                        </div>
-                        <div id="5">
-                            <img class="star-input" onclick="voted(5)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
-                            <div class="vote-output">
-                                <img class="star-output d-none" onclick="un_voted(5)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
-                                    srcset="">
-                            </div>
-                        </div>
-
                     </div>
                     <!-- cmt-review -->
                     <div class="cmt-review">
@@ -232,22 +203,17 @@
 
 
         <script>
-            var quiz_menu = document.getElementsByClassName("quiz-menu")
-            var scrip = document.getElementsByClassName("scrip")
-            var star_input = document.getElementsByClassName("star-input")
-            var star_output = document.getElementsByClassName("star-output")
-
-            function voted(n) {
-                for (let i = 0; i < n; i++) {
-                    star_output[i].classList.remove("d-none");
+            function vote(n){
+                var i = 0
+                var star = document.getElementsByClassName("star")
+                for(i = 0; i<n; i++){
+                    star[i].classList.add("voted-star")
+                }
+                for(i = n; i<5; i++){
+                    star[i].classList.remove("voted-star")
                 }
             }
-
-            function un_voted(n) {
-                for (let i = n; i < 6; i++) {
-                    star_output[i].classList.add("d-none");
-                }
-            }
+            
 
 
             function active(n) {
