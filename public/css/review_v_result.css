@@ -177,7 +177,18 @@ a:hover {
     font-size: 24px;
     font-weight: 700;
 }
-
+.star{
+    background-image: url("../uploads/review/grey-star.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+}
+.voted-star{
+    background-image: url("../uploads/review/yellow-star.png");
+}
 .rated-bar {
     position: relative;
     width: 100%;
@@ -340,7 +351,6 @@ a:hover {
     display: flex;
     justify-content: center;
     margin: 10px 0px 0px 0px;
-    height: 30px;
 }
 .vote-rated-star { 
     padding: 0;
