@@ -28,14 +28,23 @@
     @error('offset0')
     <div class="form-text text-danger" style="font-size: 17px; font-weight: bold;">{{ $message }}</div>
     @enderror
-    <div class="row">
+    <div class="row result">
     <?php $count = count($data); ?>
       @foreach ($data as $quiz)
       <div class="col-md-3 mt-3">
         <div class="quiz @if ($quiz->check == 0) quiz-uncensored @endif ">
           <a href="{{ url("/detail_quiz/edit/{$quiz->id}") }}">
             <div class="quiz-info">
-              <div>500 views</div>
+                <!--views -->
+                <?php $total = 0; ?>
+                @foreach ( $views as $item)
+                    @if ( $item->id_quiz == $quiz->id)
+                        <?php  $total = $item->total; ?>
+                        @break
+                    @endif
+                @endforeach
+                <div> {{ $total }} views</div>
+                <!-- end views -->
               <div>{{ $quiz->number_questions }} questions</div>
             </div>
             <div class="quiz-info">
@@ -49,9 +58,10 @@
                     if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)
                        { $status = 1;}
                 } ?>
-            <div id="{{ $quiz->id }}" class="quiz-bookmark" value="{{ $status}}" onclick="toggleSave({{ $quiz->id }}, {{$status}})"> </div>
+            <div id="{{ $quiz->id }}" class="quiz-bookmark" value="{{ $status}}" onclick="toggleSave({{ $quiz->id }})"> </div>
           </div>
         </div>
+        <div id='none' class="d-none"></div>
         <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()"><i class="fa-regular fa-circle-xmark mt-2"></i></a>
         <form method="POST" id="delete-{{ $quiz->id }}" action="{{ url("/quiz/{$quiz->id}") }}">
           @method('DELETE')
@@ -119,26 +129,56 @@
       } else if (n == 1) {
         quiz_list[0].classList.remove("active")
         quiz_list[2].classList.remove("active")
+
+        $.ajax({
+              url: "{{ url('/all_saved_quiz/') }}",
+              method: 'GET',
+              success: function(data) {
+                  console.log(res)
+                    $(".result").append(data)
+
+              },
+              error: function(err) {
+                  console.error(err)
+              }
+              })
       } else {
         quiz_list[1].classList.remove("active")
         quiz_list[0].classList.remove("active")
       }
     }
 
-    function toggleSave(id, saved_status) {
+    function toggleSave(id) {
       var icon = document.getElementById(id)
       icon.classList.toggle('bold')
-
-      $.ajax({
-        url: "{{ url('/saved_quiz/') }}"+"/"+id,
-        method: 'GET',
-        success: function(res) {
-            $("#main").text(res)
-        },
-        error: function(err) {
-            console.error(err)
+      console.log(icon.getAttribute('value'))
+      saved_status = icon.getAttribute('value')
+        if (saved_status == 0) {
+            $('#'+id).attr("value", "1")
+            $.ajax({
+              url: "{{ url('/saved_quiz/') }}"+"/"+id,
+              method: 'GET',
+              success: function(res) {
+                $('#none').text(res)
+              },
+              error: function(err) {
+                  console.error(err)
+              }
+              })
         }
-        })
+        else {
+            $('#'+id).attr("value", "0")
+            $.ajax({
+              url: "{{ url('/unsaved_quiz/') }}"+"/"+id,
+              method: 'GET',
+              success: function(res) {
+                $('#none').text(res)
+              },
+              error: function(err) {
+                  console.error(err)
+              }
+              })
+        }
 
     }
 

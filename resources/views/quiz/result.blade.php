@@ -4,7 +4,7 @@
 <style>
 .box::-webkit-scrollbar {
     width: 2px;
-} 
+}
 .box {
     padding: 1rem;
     max-height: 220px;
@@ -13,7 +13,7 @@
 }
 </style>
 <div class="block">
-    
+
     {{-- <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -28,9 +28,9 @@
                                 <div>
                                     <div class="btn btn-outline-info" onclick="oke()">Show Answers</div>
                                     <div class="btn btn-outline-info" onclick="document.getElementById('all_result').classList.toggle('d-none')">All Results</div>
-                                </div>     
+                                </div>
                             </div>
-                            <div class="d-flex mt-5 justify-content-center">   
+                            <div class="d-flex mt-5 justify-content-center">
                                 <div class="col-md-6 p-2" style="border-radius: 10%; background-image: linear-gradient(to right, #ffcde5, #ffffff );">
                                     <h3 class="text-center font-weight-bold">Rank</h3>
                                     <div class="box">
@@ -38,7 +38,7 @@
                                         <div class="d-flex justify-content-between "><span class="col-md-6">{{ $item->name }}</span>  <span class="col-md-6 text-right">{{ $item->result }}/{{ $quiz->number_questions }}</span></div>
                                     @endforeach
                                     </div>
-                                </div>       
+                                </div>
                             </div>
                         </div>
                         <!-- all result -->
@@ -57,34 +57,34 @@
                             <div>
                                 <?php $i++; $count = $quiz->number_questions; $_answers = $_answers;?>
                                 <div class="m-4">
-                                    <span class="p-3 rounded-pill alert-info font-weight-bold">Question: {{ $i }} / {{ $quiz->number_questions }}</span> 
+                                    <span class="p-3 rounded-pill alert-info font-weight-bold">Question: {{ $i }} / {{ $quiz->number_questions }}</span>
                                 </div>
                                 <input type="hidden" name="id_{{$i}}" value={{ $item->id }}>
                                 <div class="p-4 rounded alert-primary">
                                     {{ $item->question }}
                                 </div>
                                 <div class="mt-3" style="display: flex;" id="ques_{{$i}}ans_1">
-                                    <div class="m-2 border-bottom" value="{{ $item->ans_1 }}" >{{ $item->ans_1 }}</div>     
+                                    <div class="m-2 border-bottom" value="{{ $item->ans_1 }}" >{{ $item->ans_1 }}</div>
                                 </div>
                                 <div class="mt-3" style="display: flex;" id="ques_{{$i}}ans_2">
-                                    <div class="m-2 border-bottom" value="{{ $item->ans_2 }}">{{ $item->ans_2 }}</div>  
+                                    <div class="m-2 border-bottom" value="{{ $item->ans_2 }}">{{ $item->ans_2 }}</div>
                                 </div>
                                 <div class="mt-3" style="display: flex;" id="ques_{{$i}}ans_3">
-                                    <div class="m-2 border-bottom" value="{{ $item->ans_3 }}">{{ $item->ans_3 }}</div>  
+                                    <div class="m-2 border-bottom" value="{{ $item->ans_3 }}">{{ $item->ans_3 }}</div>
                                 </div>
                                 <div class="mt-3" style="display: flex;" id="ques_{{$i}}ans_4">
-                                    <div class="m-2 border-bottom" value="{{ $item->ans_4 }}">{{ $item->ans_4 }}</div>  
+                                    <div class="m-2 border-bottom" value="{{ $item->ans_4 }}">{{ $item->ans_4 }}</div>
                                 </div>
                                 <input type="hidden" name="ques_{{$i}}true_ans" id="ques_{{$i}}true_ans" value="{{ $item->true_ans }}">
-                                
+
                             </div>
                             @endforeach
-                   
+
                                 @for ($i = 1; $i <= $count; $i++)
                                     <input type="hidden" name="ques_{{$i}}ans" id="ques_{{$i}}ans" value="<?php echo ($_answers["ques_".$i."ans"] != null) ? $_answers["ques_".$i."ans"] : 0 ?>">
                                 @endfor
- 
-                            
+
+
                         </div>
                         <a href="{{ url("/review_quiz/{$quiz->id}") }}"><div class="btn btn-info" style="font-size: 15px;">Do Again</div></a>
                     </div>
@@ -123,7 +123,7 @@
                                     <td>{{ $item->id_user }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->result }}/{{ $quiz->number_questions }}</td>
-                                </tr>        
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -171,48 +171,48 @@
                         @for ($i = 1; $i <= $count; $i++)
                             <input type="hidden" name="ques_{{$i}}ans" id="ques_{{$i}}ans" value="<?php echo ($_answers["ques_".$i."ans"] != null) ? $_answers["ques_".$i."ans"] : 0 ?>">
                         @endfor
-                </div> 
+                </div>
                 <div id="finish-review">
                     <!-- review-->
                     <div class="rank-review">Review</div>
                     <!-- vote-->
                     <div class="vote-rate">
-                        <div class="">
+                        <div id="1">
                             <img class="star-input" onclick="voted(1)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
                             <div class="vote-output">
                                 <img class="star-output d-none" onclick="un_voted(1)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
                                     srcset="">
                             </div>
                         </div>
-                        <div>
+                        <div id="2">
                             <img class="star-input" onclick="voted(2)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
                             <div class="vote-output">
                                 <img class="star-output d-none" onclick="un_voted(2)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
                                     srcset="">
                             </div>
                         </div>
-                        <div>
+                        <div id="3">
                             <img class="star-input" onclick="voted(3)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
                             <div class="vote-output">
                                 <img class="star-output d-none" onclick="un_voted(3)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
                                     srcset="">
                             </div>
                         </div>
-                        <div>
+                        <div id="4">
                             <img class="star-input" onclick="voted(4)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
                             <div class="vote-output">
                                 <img class="star-output d-none" onclick="un_voted(4)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
                                     srcset="">
                             </div>
                         </div>
-                        <div>
+                        <div id="5">
                             <img class="star-input" onclick="voted(5)" src="{{ asset("/uploads/review/grey-star.png") }}" alt="" srcset="">
                             <div class="vote-output">
                                 <img class="star-output d-none" onclick="un_voted(5)" src="{{ asset("/uploads/review/yellow-star.png") }}" alt=""
                                     srcset="">
                             </div>
                         </div>
-    
+
                     </div>
                     <!-- cmt-review -->
                     <div class="cmt-review">
@@ -236,6 +236,7 @@
             var scrip = document.getElementsByClassName("scrip")
             var star_input = document.getElementsByClassName("star-input")
             var star_output = document.getElementsByClassName("star-output")
+
             function voted(n) {
                 for (let i = 0; i < n; i++) {
                     star_output[i].classList.remove("d-none");
@@ -248,6 +249,7 @@
                 }
             }
 
+
             function active(n) {
                 quiz_menu[n].classList.add('active')
                 scrip[n].classList.add('scrip-active')
@@ -259,6 +261,7 @@
                     scrip[0].classList.remove("scrip-active")
                 }
             }
+
 
             function oke() {
                 setTimeout(function () {

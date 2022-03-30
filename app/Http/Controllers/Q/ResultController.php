@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DetailQuiz;
 use App\Models\Quiz;
 use App\Models\Result;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,7 +44,7 @@ class ResultController extends Controller
         $wrank = DB::table('result')->where('id_quiz',$id->id)
         ->selectRaw(' max(`result`.`result`) as `result`, `id_user`')
         ->groupBy('id_user');
-        //select MAX(`result`.`result`) as `result`, `users`.`name`, `users`.`id` from `result` inner join `users` 
+        //select MAX(`result`.`result`) as `result`, `users`.`name`, `users`.`id` from `result` inner join `users`
         //on `users`.`id` = `result`.`id_user` where `id_quiz` = 2 group by `id` ORDER by MAX(`result`.`result`) desc;
         $rank = DB::table($wrank, $as ='table')->join('users', 'users.id', '=','table.id_user')
         ->select("table.*", 'users.name')
@@ -58,4 +59,14 @@ class ResultController extends Controller
             'rank' => $rank
         ]);
     }
+
+    public function vote(Quiz $id){
+        //$point
+        // $vote = Review::updateOrCreate([
+        //     'id_user' => Auth::user()->id,
+        //     'id_quiz' => $id->id,
+        //     'point' => $point
+        // ]);
+    }
+
 }

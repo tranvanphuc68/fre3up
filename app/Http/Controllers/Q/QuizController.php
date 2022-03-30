@@ -5,18 +5,24 @@ namespace App\Http\Controllers\Q;
 use App\Http\Controllers\Controller;
 use App\Models\Quiz;
 use App\Models\SavedQuiz;
+use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
 {
     public function index(){
-        $data = Quiz::where("id_user", Auth::id())->paginate(10)->withQueryString();
+        $data = Quiz::where("id_user", Auth::id())
+                    ->paginate(10)->withQueryString();
         $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
         //dd($saved_quiz);
+        $views = Result::select('id_quiz', Result::raw('count(*) as total'))
+                        ->groupBy('id_quiz')
+                        ->get();
         return view('quiz.index', [
             'data' => $data,
-            'saved_quiz' => $saved_quiz
+            'saved_quiz' => $saved_quiz,
+            'views' => $views
 
         ]);
     }
@@ -88,6 +94,41 @@ class QuizController extends Controller
             'id_user' => Auth::id(),
             'id_quiz' => $id->id
         ]);
-        return redirect('/quiz');
+        // return redirect('/quiz');
+        return response()->json("Successful", 200);
+    }
+
+    public function unsaved_quiz(Quiz $id){
+
+        $data = SavedQuiz::where('id_quiz', $id->id)->where('id_user',Auth::id())->get();
+        $data[0]->delete();
+
+        //return redirect('/quiz');
+        return response()->json("Successful", 200);
+    }
+
+    public function all_saved_quiz(){
+
+        $quiz_saved = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')
+                    ->where("saved_quizzes.id_user", Auth::id())
+                    ->get();
+        //dd($quiz_saved);
+        // return require('./views/quiz/data.php');
+        return response()->json(["quiz_saved" => $quiz_saved], 200);
+    }
+
+    public function history_quiz(){
+
+        $history_quiz = Quiz::join("result",'quiz.id','=','result.id_quiz')
+                    ->join("users",'quiz.id_user','=','users.id')
+                    ->where("result.id_user", Auth::id())
+                    ->select('quiz.id','quiz.id_user','quiz.quiz_name','quiz.number_questions', 'users.name')
+                    ->groupByRaw('id, id_user, quiz_name, number_questions, name')
+                    ->get();
+
+        // return redirect('/quiz');
+        dd($history_quiz);
+        // return require('./views/quiz/data.php');
+        return response()->json(["history_quiz" => $history_quiz], 200);
     }
 }

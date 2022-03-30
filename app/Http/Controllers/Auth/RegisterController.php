@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = "/auth/user/profile";
 
     /**
      * Create a new controller instance.
@@ -64,12 +64,12 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {   
+    {
         if($data['gender'] == 'Male')
         {
             $avatar = 'defaultMale.jpg';
         }
-        else 
+        else
         {
             $avatar = 'defaultFemale.jpg';
         };

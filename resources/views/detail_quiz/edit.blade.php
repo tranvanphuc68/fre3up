@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @if(Auth::id() == $id_user || Auth::user()->role == 'admin')
-<div class="block"> 
+<div class="block">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -92,11 +92,7 @@
     </div>
 </div>
 <script>
-    for (i = 1; i <= {
-            {
-                $count
-            }
-        }; i++) {
+    for (i = 1; i <= {{$count}}; i++) {
         ans = document.getElementById("ques_" + i + "true_ans").value
         document.getElementsByName(ans)[0].classList.add('alert-success')
     }
