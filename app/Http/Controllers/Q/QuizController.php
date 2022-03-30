@@ -67,7 +67,7 @@ class QuizController extends Controller
         ]);
     }
 
-    public function review_quiz(Quiz $id){
+    public function about_quiz(Quiz $id){
         $quiz = Quiz::join("users",'quiz.id_user','=','users.id')->where('quiz.id',"$id->id")
         ->select("quiz.*","users.name as user_name",'users.provider','users.avatar')->get();
         return view('quiz.review', [

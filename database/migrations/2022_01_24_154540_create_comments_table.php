@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_quiz')->unsigned();
-            $table->tinyInteger('content')->unsigned();
+            $table->text('content')->unsigned();
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

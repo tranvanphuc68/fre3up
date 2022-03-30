@@ -215,12 +215,15 @@
 
                     </div>
                     <!-- cmt-review -->
-                    <div class="cmt-review">
-                        <textarea type="text" rows="3" placeholder="Hãy chia sẻ cảm nhận của bạn về bài quiz"></textarea>
-                    </div>
-                    <div class="end">
-                        <button name="" class="btn btn-primary end">Hoàn thành</button>
-                    </div>
+                    <form method="POST" action="{{ url("/comment/{$quiz->id}") }}">
+                    @csrf
+                        <div class="cmt-review">
+                            <textarea type="text" name="content" rows="3" placeholder="Hãy chia sẻ cảm nhận của bạn về bài quiz"></textarea>
+                        </div>
+                        <div class="end">
+                            <button type="submit" class="btn btn-primary end">Hoàn thành</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

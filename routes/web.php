@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Q\DetailQuizController;
 use App\Http\Controllers\Q\QuizController;
 use App\Http\Controllers\Q\ResultController;
@@ -9,6 +10,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewController;
+use App\Models\Comment;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -45,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/detail_quiz/{id}', [DetailQuizController::class, 'store']);
     Route::get('/detail_quiz/edit/{id}', [DetailQuizController::class, 'edit']);
     Route::put('/detail_quiz/edit/{id}', [DetailQuizController::class, 'update']);
-    Route::get('/review_quiz/{id}', [QuizController::class, 'review_quiz']);
+    Route::get('/review_quiz/{id}', [QuizController::class, 'about_quiz']);
     Route::get('/do_quiz/{id}', [DetailQuizController::class, 'do_quiz']);
 
     Route::get('/result/{id}', [ResultController::class, 'show_result']);
@@ -74,10 +78,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/duplicate/{id_process}', [UserController::class, 'duplicate']);
 
     Route::get('/search', [QuizController::class, 'get_CheckedQuiz']);
-
+    
     //Comment
-    Route::get('/search', [QuizController::class, 'get_CheckedQuiz']);
+    Route::post('/comment/{id}', [CommentController::class, 'store']);
+    Route::get('/comment/edit/{id}', [CommentController::class, 'edit']);
+    Route::put('/comment/edit/{id}', [CommentController::class, 'update']);
+    Route::delete('/comment/{id}', [CommentController::class, 'delete']);
 
+    //review\
+    Route::get('/review/{id}', [ReviewController::class, 'review']);
 });
 
 

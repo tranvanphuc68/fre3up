@@ -52,22 +52,17 @@ a:hover {
 .active{
     border-bottom: 3px solid #005bc9;
 }
-.scrip {
-    display: none;
-}
-.scrip h1{
+
+.about h1{
     font-size: 32px;
     font-weight: bold;
     padding-left:2px;
     padding-top: 20px;
 }
-.scrip p{
+.about p{
     font-size: 18px;
     padding-left:2px;
     padding-top: 10px;
-}
-.scrip-active {
-    display: block;
 }
 .d-flex{
     font-size: 25px;
@@ -181,7 +176,6 @@ a:hover {
 .rated span { 
     font-size: 24px;
     font-weight: 700;
-
 }
 
 .rated-bar {
@@ -229,21 +223,21 @@ a:hover {
     font-size: 25px;
     margin-left: 15px;
 }
-.comment-scrip {
+.comment {
     display: flex;
     flex-direction: column;
     padding: 25px;
 }
-.comment-scrip span {
+.comment span {
     padding-bottom: 15px;
     width: 95%;
     border-bottom: 3px solid rgb(182, 173, 173) ;
 }
-.comment-scrip span img {
+.comment span img {
     width: 20px;
     height: 20px;
 }
-.comment-scrip p {
+.comment p {
     padding: 15px 0px 5px 0px;
     margin: 0;
     width: 95%;
