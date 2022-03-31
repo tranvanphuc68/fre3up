@@ -62,10 +62,13 @@ class DetailProcessController extends Controller
         $data = DetailProcess::where("id", $id_detail)->get("id_process");
         //dd($data);
         $data = $data[0]->id_process;
+
+        $status = json_decode(json_encode($request->status),TRUE);
         DetailProcess::where('id',$id_detail)->update([
-            'status' => $request->input("$id_detail")
+            'status' => $status
         ]);
-        return redirect("/detail_process/{$data}");
+        //return redirect("/detail_process/{$data}");
+        return response()->json("Successful", 200);
     }
 
     public function delete(DetailProcess $id){
