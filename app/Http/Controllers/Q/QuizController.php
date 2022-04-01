@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class QuizController extends Controller
 {
     public function index(){
-        
+
         $data = Quiz::where("id_user", Auth::id())
                     ->paginate(10)->withQueryString();
         $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
@@ -57,13 +57,24 @@ class QuizController extends Controller
             $hint = $_GET['search'];
             $data = Quiz::where('check','1')
             ->where('quiz_name','LIKE',"%".$hint."%")->paginate(10)->withQueryString();
-            return view('welcome', [
-                'data' => $data
-            ]);
+        } else {
+            $data = Quiz::join("users",'quiz.id_user','=','users.id')
+                    ->where('check', '1')
+                    ->select('quiz.*', 'users.name')
+                    ->paginate(10);
         }
-        $data = Quiz::where('check', '1')->paginate(10);
+
+        $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')
+                            ->where("saved_quizzes.id_user", Auth::id())
+                            ->get();
+        //dd($saved_quiz);
+        $views = Result::select('id_quiz', Result::raw('count(*) as total'))
+                        ->groupBy('id_quiz')
+                        ->get();
         return view('welcome', [
-            'data' => $data
+            'data' => $data,
+            'saved_quiz' => $saved_quiz,
+            'views' => $views
         ]);
     }
 
@@ -129,6 +140,6 @@ class QuizController extends Controller
         return view('quiz.data_history', [
             "history_quiz" => $history_quiz
         ]);
-        
+
     }
 }

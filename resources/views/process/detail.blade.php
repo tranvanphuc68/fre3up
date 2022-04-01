@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <?php $count = count($data); ?>
+
                     <div class="card-header">{{ $process->name}}
                             <button type="button" data-toggle="modal" data-target="#edit"> <i class="fas fa-edit"></i></button>
                     </div>
@@ -137,18 +137,7 @@
                 document.getElementById("style"+id).classList.add("--is-completed")
             }
         }
-        //load
-        var count = {{ $count }}
 
-        for (var i=0; i < count; i++){
-        var check = document.getElementsByClassName('status')[i]
-        //console.log(check)
-        console.log(check.getAttribute('value'))
-        // if(check.getAttribute('value') == 1){
-        //     check.setAttribute('value') = 0
-        // }
-
-    }
 
     </script>
 @endsection

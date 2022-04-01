@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class ReviewController extends Controller
 {
-    
+
     public function review(Quiz $id) {
         $data = DB::table('comments')
         ->join("users",'users.id','=','comments.id_user')
@@ -29,7 +29,7 @@ class ReviewController extends Controller
         return view('quiz.review', [
             'quiz' => $quiz[0]
         ]);
-    
+
     }
     public function about_quiz(Quiz $id){
         $quiz = Quiz::join("users",'quiz.id_user','=','users.id')->where('quiz.id',"$id->id")
