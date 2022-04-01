@@ -189,6 +189,9 @@ a:hover {
 .voted-star{
     background-image: url("../uploads/review/yellow-star.png");
 }
+.half-star{
+    background-image: url("../uploads/review/half-star.png");
+}
 
   .range-wrap {
     display: inline-block;
@@ -248,9 +251,9 @@ a:hover {
     width: 95%;
     border-bottom: 3px solid rgb(182, 173, 173) ;
 }
-.comment span img {
-    width: 20px;
-    height: 20px;
+.users-voted-rate {
+    width: 20px !important;
+    height: 20px !important;
 }
 .comment p {
     padding: 15px 0px 5px 0px;

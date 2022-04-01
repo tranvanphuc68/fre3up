@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/review/{id}', [ReviewController::class, 'review']);
     Route::get('/review_quiz/{id}', [ReviewController::class, 'review_quiz']);
     Route::get('/about_quiz/{id}', [ReviewController::class, 'about_quiz']);
-    Route::post('/vote/{id}', [ReviewController::class, 'vote']);
+    Route::get('/vote/{id}', [ReviewController::class, 'vote']);
 
     //result
     Route::get('/result/{id}', [ResultController::class, 'show_result']);

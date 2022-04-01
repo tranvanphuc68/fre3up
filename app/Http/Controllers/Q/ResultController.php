@@ -50,13 +50,18 @@ class ResultController extends Controller
         ->select("table.*", 'users.name')
         ->orderby('result', 'desc')
         ->get();
+        $point = DB::table('reviews')
+        ->where('id_user', Auth::user()->id )
+        ->Where('reviews.id_quiz', "$id->id")
+        ->get('point');
         return view('quiz.result', [
             'data' => $data,
             '_answers' => $_answers,
             'result' => $count,
             'quiz' => $id,
             'all_result' => $result,
-            'rank' => $rank
+            'rank' => $rank,
+            'point' => $point[0]->point
         ]);
     }
 }

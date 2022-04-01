@@ -126,6 +126,10 @@
 
 
         <script>
+            window.onload = function() {
+                const point = {{ $point }}
+                load_voted(point)
+            }
             function vote(n){
                 let id = {{ $quiz->id }}
                 let point = n
@@ -139,7 +143,7 @@
                 }
                 $.ajax({
                     url: `{{ url('/vote/${id}') }}`,
-                    method: 'POST',
+                    method: 'GET',
                     data: { 
                         _token: "{{ csrf_token() }}",
                         point: `${point}` 
@@ -153,7 +157,13 @@
                 })
             }
             
-
+            function load_voted(n) {
+                var i = 0
+                var star = document.getElementsByClassName("star")
+                for(i = 0; i<n; i++){
+                    star[i].classList.add("voted-star")
+                }
+            }
 
             function active(n) {
                 quiz_menu[n].classList.add('active')

@@ -52,14 +52,26 @@ class ReviewController extends Controller
     }
     
     public function vote(Request $request, Quiz $id){
-        $point = json_decode(json_encode($request->point), TRUE);
-        dd($point);
-        $vote = Review::Create([
-            'id_user' => Auth::user()->id,
-            'id_quiz' => $id->id,
-            'point' => $point
-        ]);
-        return response()->json("Successful", 200);
+        $point = $request->point;
+        $data = DB::table('reviews')
+            ->where('id_user', Auth::user()->id )
+            ->Where('reviews.id_quiz', "$id->id")
+            ->get();
+        if (count($data) == 0) {
+            $vote = Review::Create([    
+                'id_user' => Auth::user()->id,
+                'id_quiz' => $id->id,
+                'point' => $point
+            ]);
+        }
+        else {
+            $vote = DB::table('reviews')
+            ->where('id_user', Auth::user()->id )
+            ->Where('reviews.id_quiz', "$id->id")->Update([
+                'point' => $point
+            ]);
+        }
+        return redirect("/");
     }
 
 

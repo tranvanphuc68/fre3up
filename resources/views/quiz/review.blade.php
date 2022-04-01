@@ -61,8 +61,10 @@
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
 <script>
-    window.onload = load_saved_quiz()
-    window.onload = load_voted()
+    window.onload = function() {
+        load_saved_quiz()
+        load_voted()
+    }
     var quiz_menu = document.getElementsByClassName("quiz-menu")
     function active(n) {
         quiz_menu[n].classList.add('active')
