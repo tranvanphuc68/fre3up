@@ -22,7 +22,7 @@ a:hover {
 .quiz-container {
     width: 90%;
     margin: auto;
-    
+
 }
 .quiz-name span{
     font-size: 45px;
@@ -99,7 +99,7 @@ a:hover {
     position: relative;
     width: 100%;
     right: 0;
-    padding-left: 30px; 
+    padding-left: 30px;
 }
 .avatar {
     text-align: center;
@@ -108,15 +108,15 @@ a:hover {
 }
 .avatar img{
     border-radius: 50%;
-    height: 150px; 
+    height: 150px;
     width: 150px;
 }
 .image-ava{
     display:inline-block;
     text-align: center;
-    height: 100px; 
-    width: 100px; 
-    border-radius: 50%; 
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
     margin-top: 40px;
 }
 .user-quiz-name {
@@ -133,7 +133,7 @@ a:hover {
     height: 100%;
     padding: 60px 20px;
     border-radius: 20px;
-    
+
 }
 .review-card-overall {
     display: flex;
@@ -170,10 +170,10 @@ a:hover {
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-between;  
+    justify-content: flex-start;
     padding: 10px;
 }
-.rated span { 
+.rated span {
     font-size: 24px;
     font-weight: 700;
 }
@@ -189,22 +189,27 @@ a:hover {
 .voted-star{
     background-image: url("../uploads/review/yellow-star.png");
 }
-.rated-bar {
-    position: relative;
-    width: 100%;
-    padding: 15px;
+
+  .range-wrap {
+    display: inline-block;
+    width: 50%;
+    border-radius: 10px;
+    margin-left: 10px;
+  }
+  .range-slider {
+    display: block;
+    width: 150%;
+    height: 30px;
     background-color: rgb(215, 216, 211);
     border-radius: 10px;
-}
-.star-rate{
-    position: absolute;
-    width: 50%;
-    transform: translate(-50%, -50%);
-    left: 25%;
-    padding: 15px;
+  }
+  .range-thumb {
+    display: block;
+
+    height: 100%;
     background-color: #ffc107;
     border-radius: 10px;
-}
+  }
 .comment {
     margin-top: 50px;
 }
@@ -352,7 +357,7 @@ a:hover {
     justify-content: center;
     margin: 10px 0px 0px 0px;
 }
-.vote-rated-star { 
+.vote-rated-star {
     padding: 0;
     margin: 0;
 }
@@ -397,16 +402,16 @@ a:hover {
     .take-quiz span{
         left: 50%;
         margin-top: 20px;
-        transform: translateX(-50%);  
+        transform: translateX(-50%);
     }
-    .save-view-block {  
+    .save-view-block {
         margin-top: 100px;
         text-align: center;
     }
     .save-view-block span {
         right: 0;
         left: 0%;
-        padding: 0px 20px; 
+        padding: 0px 20px;
     }
     .avatar {
         text-align: center;

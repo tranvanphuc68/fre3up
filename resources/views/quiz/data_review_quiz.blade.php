@@ -6,39 +6,41 @@
             <div class="col-md-4 mb-2 mt-2">
                 <div class="review-card">
                     <div class="review-card-overall">
-                        <?php 
+                        <?php
                             $total = 0; $vote_num = count($vote);
                             foreach ($vote as $item) $total = $total + $item->point;
                             $average = $total / $vote_num;
                         ?>
                         <p><?php echo $average ?> out to 5 stars</p>
                         <span>
-                            <?php 
+                            <?php
                                 for ($i = 1; $i < 6; $i++) { ?>
                                     <div class="star <?php if ($i <= $average)  echo "voted-star"; else null; ?>" id="star-<?php echo $i?>"></div>
                             <?php } ?>
                         </span>
                         <p>(<?php echo $vote_num ?> ratings)</p>
-                    </div>   
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 mb-2 mt-2 ">
                 <div class="review-card">
                     <div class="review-card-detail">
-                        <?php 
-                            for ($i = 5; $i > 0; $i--) { 
+                        <?php
+                            for ($i = 5; $i > 0; $i--) {
                                 $vote_star[$i] = 0; $star[$i] = 0;
                                 foreach ($vote as $item) {
                                     if ($item->point ==  $i) {$vote_star[$i] ++;}
                                 }
-                                $star[$i] = $vote_star[$i] / $vote_num * 100; echo $star[$i];
+                                $star[$i] = $vote_star[$i] / $vote_num * 100;
                             ?>
                                 <div class="rated">
                                     <span><?php echo $i ?></span>
                                     <img src="{{ asset("/uploads/review/yellow-star.png") }}" alt="" srcset="">
-                                    <div class="rated-bar">
-                                        <div class="star-rate" style="width: <?php echo $star[$i]; ?>% " id="star-rate-<?php echo $i; ?>"></div>
-                                    </div>        
+                                    <div class="range-wrap">
+                                        <div class="range-slider">
+                                          <span class="range-thumb" style="width: <?php echo $star[$i]; ?>% "></span>
+                                        </div>
+                                      </div>
                                 </div>
                         <?php } ?>
                     </div>
@@ -73,7 +75,7 @@
                             </span>
                             <p> {{ $comment->content }}</p>
                             <div class="comment-time">
-                                Posted at <span>{{ $comment->updated_at }}</span> 
+                                Posted at <span>{{ $comment->updated_at }}</span>
                             </div>
                         </div>
                     </div>
