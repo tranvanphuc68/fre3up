@@ -21,6 +21,8 @@ class CreateReviewTable extends Migration
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_quiz')->references('id')->on('quiz')->onDelete('cascade');
+            $table->primary(['id_user','id_quiz']);
+
         });
     }
 
