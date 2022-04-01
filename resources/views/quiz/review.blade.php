@@ -61,7 +61,8 @@
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
 <script>
-      window.onload = load_saved_quiz()
+    window.onload = load_saved_quiz()
+    window.onload = load_voted()
     var quiz_menu = document.getElementsByClassName("quiz-menu")
     function active(n) {
         quiz_menu[n].classList.add('active')
@@ -127,13 +128,21 @@
         }
 
     }
+    //load vote
+    function load_voted() {
+        var star_rate_1 = document.getElementById('star-rate-1');
+        var star_rate_2 = document.getElementById('star-rate-2');
+        var star_rate_3 = document.getElementById('star-rate-3');
+        var star_rate_4 = document.getElementById('star-rate-4');
+        var star_rate_5 = document.getElementById('star-rate-5');
+    }
 
     //load saved quiz
-    function load_saved_quiz(){
-          var bookmark = document.getElementsByClassName('quiz-bookmark')[0];
-            if(bookmark.getAttribute('value') == 1){
-              bookmark.classList.add('bold')
-          }
+    function load_saved_quiz() {
+        var bookmark = document.getElementsByClassName('quiz-bookmark')[0];
+        if(bookmark.getAttribute('value') == 1){
+            bookmark.classList.add('bold')
+        }
     }
     
     

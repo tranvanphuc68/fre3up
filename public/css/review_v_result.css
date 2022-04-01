@@ -196,7 +196,7 @@ a:hover {
     background-color: rgb(215, 216, 211);
     border-radius: 10px;
 }
-.star-5{
+.star-rate{
     position: absolute;
     width: 50%;
     transform: translate(-50%, -50%);
