@@ -54,12 +54,12 @@
           </a>
 
           <div class="quiz-info">
-            <?php $status = 0;
+        <?php $status = 0;
                 foreach ( $saved_quiz as $saved){
                     if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)
                        { $status = 1;}
                 } ?>
-            <div id="{{ $quiz->id }}" class="quiz-bookmark <?php echo ($status == 1) ? "bold" :" "?>" value="{{ $status}}" onclick="toggleSave({{ $quiz->id }})"> </div>
+            <div id="{{ $quiz->id }}" class="quiz-bookmark" value="{{ $status}}" onclick="toggleSave({{ $quiz->id }})"> </div>
           </div>
         </div>
         <div id='none' class="d-none"></div>
@@ -206,15 +206,15 @@
     }
 
     //load saved quiz
-    // function load_saved_quiz(){
-    //     var count = {{ $count }}
-    //       for (var i=0; i < count; i++){
-    //       var bookmark = document.getElementsByClassName('quiz-bookmark')[i];
-    //         if(bookmark.getAttribute('value') == 1){
-    //           bookmark.classList.add('bold')
-    //       }
-    //   }
-    // }
+    function load_saved_quiz(){
+        var count = {{ $count }}
+          for (var i=0; i < count; i++){
+          var bookmark = document.getElementsByClassName('quiz-bookmark')[i];
+            if(bookmark.getAttribute('value') == 1){
+              bookmark.classList.add('bold')
+          }
+      }
+    }
 
   </script>
 
