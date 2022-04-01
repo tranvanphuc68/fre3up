@@ -20,11 +20,8 @@ class ReviewController extends Controller
         ->select("users.name as user_name",'users.provider','users.avatar', "comments.content", "reviews.point", "comments.updated_at")
         ->where('comments.id_quiz',"$id->id")
         ->orWhere('reviews.id_quiz', "$id->id")
+        ->orderByDesc("comments.updated_at")
         ->paginate(10)->withQueryString();
-        foreach($data as $item)
-            {
-                $item->updated_at = Controller::formatDate($item->updated_at);
-            }
         // dd($data);   
         $vote = Review::where('id_quiz', $id->id)->get();
         // dd($vote);

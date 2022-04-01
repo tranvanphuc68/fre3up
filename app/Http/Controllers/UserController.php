@@ -12,22 +12,25 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index() {
         if(isset($_GET['search'])){
-            $data = User::where('name','LIKE','%'.$_GET['search'].'%')->orWhere('email','LIKE','%'.$_GET['search'].'%')->paginate(10)->withQueryString();
+            $data = User::where('name','LIKE','%'.$_GET['search'].'%')->orWhere('email','LIKE','%'.$_GET['search'].'%')
+            ->orderByDesc("role")
+            ->orderByDesc("created_at")
+            ->paginate(10)->withQueryString();
             return view('user.index', [
                 'data' => $data
             ]);
         }
         else{
-        $data = User::paginate(10);
-        return view('user.index', [
-            'data' => $data
-        ]);
+            $data = User::orderBy("role")->orderByDesc("created_at")->paginate(10);
+            return view('user.index', [
+                'data' => $data
+            ]);
         }
     }
 
-    public function profile(){
+    public function profile() {
         $user = User::find(Auth::id());
         $all_process = Process::where("id_user", Auth::id())->get();
         $data = Quiz::where("id_user", Auth::id())->where("check","1")->get();
@@ -40,9 +43,9 @@ class UserController extends Controller
         ]);
     }
 
-    public function update_profile(Request $request){
-        if(Auth::user()->provider == null){
-            if($request->input('gender') == "Male"){
+    public function update_profile(Request $request) {
+        if(Auth::user()->provider == null) {
+            if($request->input('gender') == "Male") {
                 $user = User::find(Auth::id())->update([
                     "avatar" => "defaultMale.jpg"
                 ]);
@@ -62,7 +65,7 @@ class UserController extends Controller
         return redirect('/auth/user/profile');
     }
 
-    public function show(User $id){
+    public function show(User $id) {
         $user = User::find($id->id);
         $all_process = Process::where("id_user", Auth::id())->get();
         $data = Quiz::where("id_user", $id->id)->where("check","1")->get();
@@ -75,15 +78,14 @@ class UserController extends Controller
         ]);
     }
 
-    public function duplicate($id_process){
+    public function duplicate($id_process) {
         $detail = DetailProcess::where('id_process', $id_process)->get();
-
         $data = Process::where('id',$id_process)->get();
         $process = Process::create([
             'id_user' => Auth::id(),
             'name' => $data[0]->name
         ]);
-        foreach ($detail as $item){
+        foreach ($detail as $item) {
             $detailProcess= DetailProcess::create([
                 'content' => $item->content,
                 'date' => $item->date,

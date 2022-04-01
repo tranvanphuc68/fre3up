@@ -12,8 +12,4 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function formatDate($date)
-    {
-        return Carbon::parse($date)->format('d-m-Y');
-    }
 }
