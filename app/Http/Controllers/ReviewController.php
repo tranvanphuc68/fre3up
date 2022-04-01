@@ -50,5 +50,17 @@ class ReviewController extends Controller
             'quiz' => $quiz[0]
         ]);
     }
+    
+    public function vote(Request $request, Quiz $id){
+        $point = json_decode(json_encode($request->point), TRUE);
+        dd($point);
+        $vote = Review::Create([
+            'id_user' => Auth::user()->id,
+            'id_quiz' => $id->id,
+            'point' => $point
+        ]);
+        return response()->json("Successful", 200);
+    }
+
 
 }

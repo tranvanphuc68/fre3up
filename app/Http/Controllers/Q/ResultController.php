@@ -59,14 +59,4 @@ class ResultController extends Controller
             'rank' => $rank
         ]);
     }
-
-    public function vote(Quiz $id){
-        //$point
-        // $vote = Review::updateOrCreate([
-        //     'id_user' => Auth::user()->id,
-        //     'id_quiz' => $id->id,
-        //     'point' => $point
-        // ]);
-    }
-
 }
