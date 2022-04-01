@@ -26,12 +26,22 @@
                 Best This Month
             @endif </b></h1>
         <div class="row slider">
+            <?php $count = count($data); ?>
             @foreach ($data as $item)
             <div class="col-md-12">
                     <div class="quiz">
                         <a href="{{ url("/review_quiz/{$item->id}") }}">
                             <div class="quiz-info">
-                                <div>500 views</div>
+                                 <!--views -->
+                                    <?php $total = 0; ?>
+                                    @foreach ( $views as $view)
+                                        @if ( $view->id_quiz == $item->id)
+                                            <?php  $total = $view->total; ?>
+                                            @break
+                                        @endif
+                                    @endforeach
+                                    <div> {{ $total }} views</div>
+                                    <!-- end views -->
                                 <div>{{ $item->number_questions }} questions</div>
                             </div>
                             <div class="quiz-info">
@@ -39,9 +49,14 @@
                             </div>
                         </a>
                         <div class="quiz-info">
-                            <div>Long Do</div>
+                            <div>{{ $item->name }}</div>
+                            <?php $status = 0;
+                                foreach ( $saved_quiz as $saved){
+                                    if($saved->id_user == Auth::user()->id && $saved->id_quiz == $item->id)
+                                    { $status = 1;}
+                                } ?>
                             @auth
-                                <div id="{{ $item->id }}" class="quiz-bookmark" onclick="toggleSave({{ $item->id }}, 1)">
+                                <div id="{{ $item->id }}" class="quiz-bookmark <?php echo ($status == 1) ? "bold" :" "?>" value="{{ $status }}" onclick="toggleSave({{ $item->id }})">
                                 </div>
                             @endauth
                         </div>
@@ -53,7 +68,7 @@
 </div>
 
 
-        {{-- <div class="container">        
+        {{-- <div class="container">
             <div class="row">
                 @foreach ($data as $item)
                     <div>
@@ -66,7 +81,7 @@
                         </div>
                     </a>
                 </div>
-                @endforeach  
+                @endforeach
                 {{ $data->links('') }}
         </div>
     </div> --}}
@@ -86,15 +101,51 @@
         crossorigin="anonymous"></script>
 
         <script>
-            function toggleSave(id, saved_status) {
+            function toggleSave(id) {
                 var icon = document.getElementById(id)
-                console.log(icon)
                 icon.classList.toggle('bold')
-                if (saved_status == 0) { 
-    
+                saved_status = icon.getAttribute('value')
+                    if (saved_status == 0) {
+                        $('#'+id).attr("value", "1")
+                        $.ajax({
+                        url: "{{ url('/saved_quiz/') }}"+"/"+id,
+                        method: 'GET',
+                        success: function(res) {
+                           console.log(res)
+
+                        },
+                        error: function(err) {
+                            console.error(err)
+                        }
+                        })
+                    }
+                    else {
+                        $('#'+id).attr("value", "0")
+                        $.ajax({
+                        url: "{{ url('/unsaved_quiz/') }}"+"/"+id,
+                        method: 'GET',
+                        success: function(res) {
+                            console.log(res)
+                        },
+                        error: function(err) {
+                            console.error(err)
+                        }
+                        })
+                    }
+
                 }
-            }
-            
+
+                //load saved quiz
+                // function load_saved_quiz(){
+                //     var count = {{ $count }}
+                //     for (var i=0; i < count; i++){
+                //     var bookmark = document.getElementsByClassName('quiz-bookmark')[i];
+                //         if(bookmark.getAttribute('value') == 1){
+                //         bookmark.classList.add('bold')
+                //         }
+                //     }
+                // }
+
             $('.slider').slick({
                 dots: true,
                 infinite: true,

@@ -12,7 +12,7 @@ use Laravel\Ui\Presets\React;
 
 class ReviewController extends Controller
 {
-    
+
     public function review(Quiz $id) {
         $data = DB::table('users')
         ->join("comments",'comments.id_user','=','users.id', 'left outer' )
@@ -41,7 +41,7 @@ class ReviewController extends Controller
         return view('quiz.review', [
             'quiz' => $quiz[0]
         ]);
-    
+
     }
     public function about_quiz(Quiz $id){
         $quiz = Quiz::join("users",'quiz.id_user','=','users.id')->where('quiz.id',"$id->id")
