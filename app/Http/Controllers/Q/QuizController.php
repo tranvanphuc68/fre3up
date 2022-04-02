@@ -55,12 +55,14 @@ class QuizController extends Controller
     public function get_CheckedQuiz(){
         if(isset($_GET['search'])){
             $hint = $_GET['search'];
-            $data = Quiz::where('check','1')
-            ->where('quiz_name','LIKE',"%".$hint."%")->paginate(10)->withQueryString();
+            $data = Quiz::join("users",'quiz.id_user','=','users.id')
+            ->where('check','1')->where('quiz_name','LIKE',"%".$hint."%")
+            ->select('quiz.*', 'users.name', "users.id as id_user")
+            ->paginate(10)->withQueryString();
         } else {
             $data = Quiz::join("users",'quiz.id_user','=','users.id')
                     ->where('check', '1')
-                    ->select('quiz.*', 'users.name')
+                    ->select('quiz.*', 'users.name', "users.id as id_user")
                     ->paginate(10);
         }
 

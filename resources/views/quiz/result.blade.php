@@ -109,7 +109,7 @@
                     <form method="POST" action="{{ url("/comment/{$quiz->id}") }}">
                     @csrf
                         <div class="cmt-review">
-                            <textarea type="text" name="content" rows="3" placeholder="Hãy chia sẻ cảm nhận của bạn về bài quiz"></textarea>
+                            <textarea type="text" name="content" style="resize: none;" required rows="3" placeholder="Hãy chia sẻ cảm nhận của bạn về bài quiz"></textarea>
                         </div>
                         <div class="end">
                             <button type="submit" class="btn btn-primary end">Hoàn thành</button>

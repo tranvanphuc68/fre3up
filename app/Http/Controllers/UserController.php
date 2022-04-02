@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function index() {
-        if(isset($_GET['search'])){
+        if (isset($_GET['search'])) {
             $data = User::where('name','LIKE','%'.$_GET['search'].'%')->orWhere('email','LIKE','%'.$_GET['search'].'%')
             ->orderByDesc("role")
             ->orderByDesc("created_at")
@@ -22,7 +22,7 @@ class UserController extends Controller
                 'data' => $data
             ]);
         }
-        else{
+        else {
             $data = User::orderBy("role")->orderByDesc("created_at")->paginate(10);
             return view('user.index', [
                 'data' => $data
@@ -44,8 +44,8 @@ class UserController extends Controller
     }
 
     public function update_profile(Request $request) {
-        if(Auth::user()->provider == null) {
-            if($request->input('gender') == "Male") {
+        if (Auth::user()->provider == null) {
+            if ($request->input('gender') == "Male") {
                 $user = User::find(Auth::id())->update([
                     "avatar" => "defaultMale.jpg"
                 ]);

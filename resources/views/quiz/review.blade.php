@@ -2,22 +2,22 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 <link rel="stylesheet" href="{{ asset('css/review_v_result.css') }}">
-<div class="block" style="padding-top: 60px;">
-<div class="banner">
-    <img src="{{ asset("/uploads/review/quiz_photo.jpg") }}" alt="" width="100%" height="auto">
-    <span>Quiz</span>
+<div class="block">
+<div class="">
+    <img src="{{ asset("/uploads/review/quiz_photo.jpg") }}" alt="" width="100%">
+    <span class="quiz-item">Quiz</span>
 </div>
 <div class="quiz-container">
     <div class="row">
         <div class="col-md-6">
             <div class="quiz-name d-flex align-items-center">
                 <span>{{ $quiz->quiz_name }}</span>
-                <div id="{{ $quiz->id }}" class="quiz-bookmark" style="background-size: 25px;height: 40px;width: 30px;" onclick="toggleSave({{ $quiz->id }},1)">
-                    </div>
+                @if (Auth::check())
+                    <div id="{{ $quiz->id }}" class="quiz-bookmark" style="background-size: 25px;height: 40px;width: 30px;" onclick="toggleSave({{ $quiz->id }},1)"></div>
+                @endif
             </div>
             <div class="d-flex">
                 <div class="quiz-menu quiz-menu-about active" onclick="active(0) "><span>About</span></div>
-
                 <div class="quiz-menu quiz-menu-review" onclick="active(1)"><span>Reviews</span></div>
             </div>
         </div>
@@ -26,8 +26,8 @@
                 <a href="{{ url("/do_quiz/{$quiz->id}") }}"><span>Take quiz</span></a>
             </div>
             <div class="save-view-block">
-                <span class="quiz-views">1000 Views</span>
-                <span class="quiz-saved">300 Saves</span>
+                <span class="quiz-views"><?php echo count($views) > 1 ? count($views)." Views" : count($views)." View" ?></span>
+                <span class="quiz-saved"><?php echo count($saves) > 1 ? count($saves)." Saves" : count($saves)." Save" ?></span>
             </div>
         </div>
 
@@ -147,6 +147,21 @@
         }
     }
     
+    //delete comment 
+    function detele_comemnt(id) {
+        if (confirm('Bạn có chắc muốn xóa không?')) {
+            $.ajax({
+                url: `{{ url('/comment/delete/${id}') }}`,
+                method: 'GET',
+                success: function(res) {
+                    $(`#comment-${id}`).remove()
+                },
+                error: function(err) {
+                    console.error(err)
+                }
+            })
+        }
+    }
     
 </script>
 @endsection

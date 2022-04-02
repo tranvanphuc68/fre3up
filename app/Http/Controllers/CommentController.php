@@ -19,15 +19,22 @@ class CommentController extends Controller
         return redirect("/");
     }
 
-    public function self_edit(Comment $comment) {
-        if ($comment->id_user == Auth::user()->id) {
-            return view('comments.edit', [
-                'comment' => $comment,
-            ]);
+    public function delete(Comment $id) {
+        if (Auth::user()->id == $id->id_user || Auth::user()->role == 'admin') {
+            $id->delete();
+            return response()->json("Successful", 200);
         } else {
             abort(401);
         }
     }
+    // public function delete(Quiz $id) {
+
+    //     $data = Comment::where('id_quiz', $id->id)->where('id_user',Auth::id())->get();
+    //     $data[0]->delete();
+
+    //     //return redirect('/quiz');
+    //     return response()->json("Successful", 200);
+    // }
 
     // public function update(Request $request, Comment $comment)
     // {

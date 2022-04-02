@@ -11,5 +11,5 @@ class Quiz extends Model
 
     protected $guarded = [];
 
-    protected $table = "quiz";
+    protected $table = "quiz";git 
 }

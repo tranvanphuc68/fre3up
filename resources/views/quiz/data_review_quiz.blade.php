@@ -3,16 +3,16 @@
         <h1>How student rated this quiz</h1>
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-4 mb-2 mt-2">
+            <div class="col-md-4">
                 <div class="review-card">
                     <div class="review-card-overall">
                         <?php
                             $total = 0; $vote_num = count($vote);
                             foreach ($vote as $item) $total = $total + $item->point;
-                            $average = $total / $vote_num;
+                            $vote_num != 0 ? $average = $total / $vote_num : $average = 0;
                             $point = round($average, 2);
                         ?>
-                        <p><?php echo $point ?> out to 5 stars</p>
+                        <p><?php echo isset($point) ? $point : 0 ?> out to 5 stars</p>
                         <span>
                             <?php
                                 for ($i = 1; $i < 6; $i++) { 
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-2 mt-2 ">
+            <div class="col-md-4">
                 <div class="review-card">
                     <div class="review-card-detail">
                         <?php
@@ -37,7 +37,7 @@
                                 foreach ($vote as $item) {
                                     if ($item->point ==  $i) {$vote_star[$i] ++;}
                                 }
-                                $star[$i] = $vote_star[$i] / $vote_num * 100;
+                                $vote_num != 0  ? $star[$i] = $vote_star[$i] / $vote_num * 100 : $star[$i] = 0;
                             ?>
                                 <div class="rated">
                                     <span><?php echo $i ?></span>
@@ -59,7 +59,7 @@
             <h1>Comment</h1>
             @foreach ($data as $comment)
             @if ($comment->content != null)
-            <div class="comment-card">
+            <div class="comment-card" id="comment-{{ $comment->id }}">
                 <div class="row">
                     <div class="col-md-3 ">
                         <div class="comment-users">
@@ -85,7 +85,15 @@
                             </span>
                             <p> {{ $comment->content }}</p>
                             <div class="comment-time">
-                                Posted at <span>{{ $comment->updated_at }}</span>
+                                @if (Auth::check())
+                                @if (Auth::user()->id == $comment->id_user || Auth::user()->role == 'admin')
+                                    <div class="float-left delete-comment-btn" onclick="detele_comemnt({{ $comment->id }})"><i class="far fa-trash-alt sidebar-icon"></i></div>
+                                @endif
+                                @endif
+                                <div class="float-right">
+                                    Posted at {{ $comment->updated_at }}
+                                </div>
+                                <div class="float-clear"></div>
                             </div>
                         </div>
                     </div>

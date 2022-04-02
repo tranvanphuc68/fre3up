@@ -40,7 +40,7 @@
                                             @break
                                         @endif
                                     @endforeach
-                                    <div> {{ $total }} views</div>
+                                    <div>  <?php echo $total > 1 ? $total." views" :  $total." view" ?></div>
                                     <!-- end views -->
                                 <div>{{ $item->number_questions }} questions</div>
                             </div>
@@ -49,7 +49,7 @@
                             </div>
                         </a>
                         <div class="quiz-info">
-                            <div>{{ $item->name }}</div>
+                            <a href="{{ url("/users/{$item->id_user}") }}"><div>{{ $item->name }}</div></a>
                             <?php $status = 0;
                                 foreach ( $saved_quiz as $saved){
                                     if($saved->id_user == Auth::user()->id && $saved->id_quiz == $item->id)
@@ -66,25 +66,6 @@
         </div>
     </div>
 </div>
-
-
-        {{-- <div class="container">
-            <div class="row">
-                @foreach ($data as $item)
-                    <div>
-                    <a href="{{ url("/review_quiz/{$item->id}") }}">
-                        <div>
-                        <div class="item" style="background-image: linear-gradient(to right,#1ABCF4,#5DEFB8);">
-                            <div class="e-flex-content">{{ $item->quiz_name }}</div>
-                            <div class="">{{ $item->number_questions }} questions</div>
-                        </div>
-                        </div>
-                    </a>
-                </div>
-                @endforeach
-                {{ $data->links('') }}
-        </div>
-    </div> --}}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"

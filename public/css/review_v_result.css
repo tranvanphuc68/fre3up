@@ -1,12 +1,15 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif !important;
     background-color: white !important;
 }
 
 a:hover {
     text-decoration: none;
 }
-.banner span {
+.banner {
+    
+}
+.quiz-item {
     display: inline-block;
     position: relative;
     padding:6px 15px;
@@ -22,12 +25,15 @@ a:hover {
 .quiz-container {
     width: 90%;
     margin: auto;
+}
+.quiz-name {
+    margin-top: 0 !important;
 
 }
 .quiz-name span{
     font-size: 45px;
-    font-weight: bolder;
-    margin-right: 10px;
+    font-weight: bold;
+    margin-right: 15px;
 }
 
 .quiz-bookmark {
@@ -57,7 +63,7 @@ a:hover {
     font-size: 32px;
     font-weight: bold;
     padding-left:2px;
-    padding-top: 20px;
+    padding-top: 0px;
 }
 .about p{
     font-size: 18px;
@@ -80,11 +86,9 @@ a:hover {
     font-size: 24px;
     font-weight: bold;
     padding: 10px 20px;
+    margin-right: 15px;
     right: 0%;
     text-align: center;
-    /* display: flex;
-    flex-direction: row-reverse;
-    justify-content: center; */
 }
 .save-view-block{
     position: relative;
@@ -125,13 +129,19 @@ a:hover {
     margin-top: 20px;
 }
 .review {
-    margin-top: 50px;
+}
+.review h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 32px;
+    font-weight: bold;
 }
 .review-card {
     background-color: #ededed;
     width: 95%;
     height: 100%;
-    padding: 60px 20px;
+    padding: 40px 30px 25px 35px;
+    margin-top: 20px;
     border-radius: 20px;
 
 }
@@ -158,6 +168,8 @@ a:hover {
 }
 .review-card-overall p:last-child {
     font-size: 20px;
+    padding-bottom: 25px;
+    margin: 0;
 }
 .review-card-detail {
 
@@ -171,7 +183,7 @@ a:hover {
     width: 100%;
     align-items: center;
     justify-content: flex-start;
-    padding: 10px;
+    padding: 3px;
 }
 .rated span {
     font-size: 24px;
@@ -201,7 +213,7 @@ a:hover {
   .range-slider {
     display: block;
     width: 150%;
-    height: 30px;
+    height: 25px;
     background-color: rgb(215, 216, 211);
     border-radius: 10px;
   }
@@ -213,22 +225,24 @@ a:hover {
     border-radius: 10px;
   }
 .comment {
-    margin-top: 50px;
+    margin-top: 20px;
 }
 .comment h1 {
     margin: 0;
     padding: 0;
+    font-size: 32px;
+    font-weight: bold;
 }
 .comment-card{
     background-color: #ededed;
     width: 95%;
     height: 100%;
     border-radius: 20px;
-    margin: 40px 0px;
-    padding-bottom: 30px;
+    margin-top: 20px;
+    padding-bottom: 15px;
 }
 .comment-users {
-    padding: 25px 25px 0px 25px;
+    padding: 15px 15px 0px 15px;
     display: flex;
 }
 .comment-users img {
@@ -240,6 +254,7 @@ a:hover {
     font-weight: bold;
     font-size: 25px;
     margin-left: 15px;
+    margin-bottom: 0 !important;
 }
 .comment {
     display: flex;
@@ -247,26 +262,39 @@ a:hover {
     padding: 25px;
 }
 .comment span {
-    padding-bottom: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 0px !important;
     width: 95%;
-    border-bottom: 3px solid rgb(182, 173, 173) ;
+    border-bottom: 2px solid rgb(182, 173, 173) ;
 }
 .users-voted-rate {
     width: 20px !important;
     height: 20px !important;
 }
 .comment p {
-    padding: 15px 0px 5px 0px;
+    padding: 10px 0px 5px 0px;
     margin: 0;
     width: 95%;
 }
+.delete-comment-btn {
+    cursor: pointer;
+    font-size: 15px;
+}
+.delete-comment-btn:hover {
+    font-size: 20px;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.float-clear {
+    clear: both;
+}
 .comment-time {
     width: 95%;
-    text-align: end;
-    margin-top: 20px;
-}
-.comment-time span {
-    border: none;
+    margin-top: 5px;
 }
 
 /*-------------------------------- QUIZ FINISH ------------------*/
@@ -274,7 +302,6 @@ a:hover {
 .quiz-finish {
     width: 85%;
     margin: auto;
-    margin-top: 10px;
 }
 .quiz-finish span {
     font-size: 25px;

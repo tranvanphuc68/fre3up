@@ -36,6 +36,7 @@ Route::get('/auth/redirect/{provider}', [SocialController::class, 'redirect']);
 Route::get('/callback/{provider}', [SocialController::class, 'callback']);
 
 Route::middleware(['auth'])->group(function () {
+    //quiz
     Route::get('/quiz', [QuizController::class, 'index']);
     Route::post('/quiz', [QuizController::class, 'store']);
     Route::delete('/quiz/{id}', [QuizController::class, 'delete']);
@@ -44,17 +45,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/all_saved_quiz', [QuizController::class, 'all_saved_quiz']);
     Route::get('/history_quiz', [QuizController::class, 'history_quiz']);
 
-
+    //detail_quiz
     Route::get('/detail_quiz/{id}', [DetailQuizController::class, 'create']);
     Route::post('/detail_quiz/{id}', [DetailQuizController::class, 'store']);
     Route::get('/detail_quiz/edit/{id}', [DetailQuizController::class, 'edit']);
     Route::put('/detail_quiz/edit/{id}', [DetailQuizController::class, 'update']);
     Route::get('/do_quiz/{id}', [DetailQuizController::class, 'do_quiz']);
 
-    //review
-    Route::get('/review/{id}', [ReviewController::class, 'review']);
-    Route::get('/review_quiz/{id}', [ReviewController::class, 'review_quiz']);
-    Route::get('/about_quiz/{id}', [ReviewController::class, 'about_quiz']);
+    //vote
     Route::get('/vote/{id}', [ReviewController::class, 'vote']);
 
     //result
@@ -76,26 +74,28 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update/detail_process/{id_detail}',[DetailProcessController::class, 'updateStatus']);
     Route::delete('/delete/detail_process/{id}', [DetailProcessController::class, 'delete']);
 
-
+    //user
     Route::get('/users', [UserController::class, 'index']);
-    Route::get('/users/{id}', [UserController::class, 'show']);
     Route::get('/auth/user/profile', [UserController::class, 'profile']);
     Route::post('/update/profile', [UserController::class, 'update_profile']);
     Route::get('/duplicate/{id_process}', [UserController::class, 'duplicate']);
-
-    Route::get('/search', [QuizController::class, 'get_CheckedQuiz']);
     
     //Comment
     Route::post('/comment/{id}', [CommentController::class, 'store']);
-    Route::get('/comment/edit/{id}', [CommentController::class, 'edit']);
-    Route::put('/comment/edit/{id}', [CommentController::class, 'update']);
-    Route::delete('/comment/{id}', [CommentController::class, 'delete']);
-
+    Route::get('/comment/delete/{id}', [CommentController::class, 'delete']);
 
 });
 
+Route::get('/search', [QuizController::class, 'get_CheckedQuiz']);
 
+Route::get('/users/{id}', [UserController::class, 'show']);
 
+//review
+Route::get('/review/{id}', [ReviewController::class, 'review']);
+Route::get('/review_quiz/{id}', [ReviewController::class, 'review_quiz']);
+Route::get('/about_quiz/{id}', [ReviewController::class, 'about_quiz']);
+
+//admin
 Route::middleware('admin')->group(function(){
     Route::get('/censorship', [QuizController::class, 'censorship']);
     Route::get('/censorship/{id}', [QuizController::class, 'censorship_ed']);
