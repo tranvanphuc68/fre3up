@@ -44,21 +44,21 @@
                         @break
                     @endif
                 @endforeach
-                <div> {{ $total }} views</div>
+                <div><?php echo $total > 1 ? $total." views" :  $total." view" ?></div>
                 <!-- end views -->
-              <div>{{ $quiz->number_questions }} questions</div>
+              <div><?php echo $quiz->number_questions > 1 ? $quiz->number_questions." questions" :  $quiz->number_questions." question" ?></div>
             </div>
             <div class="quiz-info">
               <h4>{{ $quiz->quiz_name }}</h4>
             </div>
           </a>
-
           <div class="quiz-info">
-        <?php $status = 0;
-                foreach ( $saved_quiz as $saved){
-                    if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)
-                       { $status = 1;}
-                } ?>
+            <a href="{{ url("/users/{$quiz->id_user}") }}"><div>{{ $quiz->name }}</div></a>
+            <?php $status = 0;
+              foreach ( $saved_quiz as $saved){
+                if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)
+                  { $status = 1;}
+              } ?>
             <div id="{{ $quiz->id }}" class="quiz-bookmark" value="{{ $status}}" onclick="toggleSave({{ $quiz->id }})"> </div>
           </div>
         </div>

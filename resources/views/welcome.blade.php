@@ -40,9 +40,9 @@
                                             @break
                                         @endif
                                     @endforeach
-                                    <div>  <?php echo $total > 1 ? $total." views" :  $total." view" ?></div>
+                                    <div><?php echo $total > 1 ? $total." views" :  $total." view" ?></div>
                                     <!-- end views -->
-                                <div>{{ $item->number_questions }} questions</div>
+                                <div><?php echo $item->number_questions > 1 ? $item->number_questions." questions" :  $item->number_questions." question" ?></div>
                             </div>
                             <div class="quiz-info">
                                 <h4>{{ $item->quiz_name }}</h4>
@@ -115,17 +115,6 @@
                     }
 
                 }
-
-                //load saved quiz
-                // function load_saved_quiz(){
-                //     var count = {{ $count }}
-                //     for (var i=0; i < count; i++){
-                //     var bookmark = document.getElementsByClassName('quiz-bookmark')[i];
-                //         if(bookmark.getAttribute('value') == 1){
-                //         bookmark.classList.add('bold')
-                //         }
-                //     }
-                // }
 
             $('.slider').slick({
                 dots: true,
