@@ -24,11 +24,7 @@
           </a>
 
           <div class="quiz-info">
-
-                {{-- foreach ( $saved_quiz as $saved){
-                    if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)
-                       { $status = 1;}
-                }  --}}
+            <a href="{{ url("/users/{$quiz->id_user}") }}"><div>{{ $quiz->name }}</div></a>
             <div id="{{ $quiz->id_quiz }}" class="quiz-bookmark bold" value="1" onclick="toggleSave({{ $quiz->id_quiz }})"> </div>
           </div>
         </div>

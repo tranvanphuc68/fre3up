@@ -24,6 +24,7 @@
           </a>
 
           <div class="quiz-info">
+            <a href="{{ url("/users/{$quiz->id_user}") }}"><div>{{ $quiz->name }}</div></a>
         <?php $status = 0;
                 foreach ( $saved_quiz as $saved){
                     if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)

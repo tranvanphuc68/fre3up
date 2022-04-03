@@ -29,8 +29,7 @@ class ReviewController extends Controller
         $vote = Review::where('id_quiz', $id->id)->get();
         return view('quiz.data_review_quiz', [
             'data' => $data,
-            'vote' => $vote,
-            'saved_quiz' => $saved_quiz
+            'vote' => $vote
 
         ]);
     }
