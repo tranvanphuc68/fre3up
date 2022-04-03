@@ -6,7 +6,15 @@
         <div class="quiz">
           <a href="{{ url("/review_quiz/{$quiz->id}") }}">
             <div class="quiz-info">
-                <div> 500 views</div>
+                <!--views -->
+                <?php $total = 0; ?>
+                @foreach ( $views as $item)
+                    @if ( $item->id_quiz == $quiz->id)
+                        <?php  $total = $item->total; ?>
+                        @break
+                    @endif
+                @endforeach
+                <div> {{ $total }} views</div>
                 <!-- end views -->
               <div>{{ $quiz->number_questions }} questions</div>
             </div>
@@ -17,6 +25,12 @@
 
           <div class="quiz-info">
                 <div>{{ $quiz->name }}</div>
+                <?php $status = 0;
+                foreach ( $saved_quiz as $saved){
+                    if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)
+                       { $status = 1;}
+                } ?>
+            <div id="{{ $quiz->id }}" class="quiz-bookmark <?php echo ($status == 1) ? "bold" :" "?>" value="{{ $status}}" onclick="toggleSave({{ $quiz->id }})"> </div>
           </div>
         </div>
         <div id='none' class="d-none"></div>

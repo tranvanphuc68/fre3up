@@ -126,8 +126,12 @@ class QuizController extends Controller
                     ->where("saved_quizzes.id_user", Auth::id())
                     //->select()
                     ->get();
+        $views = Result::select('id_quiz', Result::raw('count(*) as total'))
+                    ->groupBy('id_quiz')
+                    ->get();
         return view('quiz.data', [
-            "saved_quiz" => $saved_quiz
+            "saved_quiz" => $saved_quiz,
+            "views" => $views
         ]);
     }
 
@@ -139,8 +143,14 @@ class QuizController extends Controller
                     ->select('quiz.id','quiz.id_user','quiz.quiz_name','quiz.number_questions', 'users.name')
                     ->groupByRaw('id, id_user, quiz_name, number_questions, name')
                     ->get();
+         $views = Result::select('id_quiz', Result::raw('count(*) as total'))
+                        ->groupBy('id_quiz')
+                        ->get();
+        $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
         return view('quiz.data_history', [
-            "history_quiz" => $history_quiz
+            "history_quiz" => $history_quiz,
+            "views" => $views,
+            "saved_quiz" => $saved_quiz,
         ]);
 
     }

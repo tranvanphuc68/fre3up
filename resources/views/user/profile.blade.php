@@ -40,12 +40,22 @@
                     </div>
                     @if ($data->count() != 0)
                     <div class="row slider">
+                        <?php $count = count($data); ?>
                         @foreach ($data as $item)
                         <div>
                             <div class="quiz">
                                 <a href="{{ url("/review_quiz/{$item->id}") }}">
                                     <div class="quiz-info">
-                                        <div>500 views</div>
+                                        <!--views -->
+                                        <?php $total = 0; ?>
+                                        @foreach ( $views as $view)
+                                            @if ( $view->id_quiz == $item->id)
+                                                <?php  $total = $view->total; ?>
+                                                @break
+                                            @endif
+                                        @endforeach
+                                        <div> {{ $total }} views</div>
+                                        <!-- end views -->
                                         <div>{{ $item->number_questions }} questions</div>
                                     </div>
                                     <div class="quiz-info">
@@ -53,7 +63,12 @@
                                     </div>
                                 </a>
                                 <div class="quiz-info">
-                                    <div id="{{ $item->id }}" class="quiz-bookmark" onclick="toggleSave({{ $item->id }}, 1)">
+                                    <?php $status = 0;
+                                        foreach ( $saved_quiz as $saved){
+                                            if($saved->id_user == Auth::user()->id && $saved->id_quiz == $item->id)
+                                            { $status = 1;}
+                                        } ?>
+                                    <div id="{{ $item->id }}" value="{{ $status}}" class="quiz-bookmark <?php echo ($status == 1) ? "bold" :" "?>" onclick="toggleSave({{ $item->id }})">
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +170,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a href="{{ url("/duplicate/{$process->id}") }}"><button type="button" class="btn btn-secondary">Copy</button></a>
+                <a href="{{ url("/detail_process/{$process->id}") }}"><button type="button" class="btn btn-secondary">Show</button></a>
             </div>
         </div>
     </div>
@@ -226,14 +241,39 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/73fec26af2.js" crossorigin="anonymous"></script>
     <script>
-        function toggleSave(id, saved_status) {
+        function toggleSave(id) {
             var icon = document.getElementById(id)
-            console.log(icon)
             icon.classList.toggle('bold')
-            if (saved_status == 0) {
+            saved_status = icon.getAttribute('value')
+                if (saved_status == 0) {
+                    $('#'+id).attr("value", "1")
+                    $.ajax({
+                    url: "{{ url('/saved_quiz/') }}"+"/"+id,
+                    method: 'GET',
+                    success: function(res) {
+                        $('#none').text(res)
+                    },
+                    error: function(err) {
+                        console.error(err)
+                    }
+                    })
+                }
+                else {
+                    $('#'+id).attr("value", "0")
+                    $.ajax({
+                    url: "{{ url('/unsaved_quiz/') }}"+"/"+id,
+                    method: 'GET',
+                    success: function(res) {
+                        $('#none').text(res)
+                    },
+                    error: function(err) {
+                        console.error(err)
+                    }
+                    })
+                }
 
             }
-        }
+
 
         $('.slider').slick({
             dots: true,

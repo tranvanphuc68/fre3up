@@ -13,7 +13,12 @@
             <div class="quiz-name d-flex align-items-center">
                 <span>{{ $quiz->quiz_name }}</span>
                 @if (Auth::check())
-                    <div id="{{ $quiz->id }}" class="quiz-bookmark" style="background-size: 25px;height: 40px;width: 30px;" onclick="toggleSave({{ $quiz->id }},1)"></div>
+                <?php $status = 0;
+                foreach ( $saved_quiz as $saved){
+                    if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)
+                       { $status = 1;}
+                } ?>
+                    <div id="{{ $quiz->id }}" class="quiz-bookmark" value="{{ $status}}" onclick="toggleSave({{ $quiz->id }})" style="background-size: 25px;height: 40px;width: 30px;"> </div>
                 @endif
             </div>
             <div class="d-flex">
@@ -146,8 +151,8 @@
             bookmark.classList.add('bold')
         }
     }
-    
-    //delete comment 
+
+    //delete comment
     function detele_comemnt(id) {
         if (confirm('Bạn có chắc muốn xóa không?')) {
             $.ajax({
@@ -162,6 +167,6 @@
             })
         }
     }
-    
+
 </script>
 @endsection

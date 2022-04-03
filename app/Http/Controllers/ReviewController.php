@@ -25,10 +25,13 @@ class ReviewController extends Controller
         ->orderByDesc("comments.updated_at")
         ->paginate(10)->withQueryString();
         // dd($data);
+
         $vote = Review::where('id_quiz', $id->id)->get();
         return view('quiz.data_review_quiz', [
             'data' => $data,
             'vote' => $vote,
+            'saved_quiz' => $saved_quiz
+
         ]);
     }
 
@@ -37,10 +40,13 @@ class ReviewController extends Controller
             ->select("quiz.*","users.name as user_name",'users.provider','users.avatar')->get();
         $views = Result::where("id_quiz", "$id->id")->get();
         $saves = SavedQuiz::where("id_quiz", "$id->id")->get();
+        $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
+        //dd($saved_quiz);
         return view('quiz.review', [
             'quiz' => $quiz[0],
             'views' => $views,
-            'saves' => $saves
+            'saves' => $saves,
+            'saved_quiz' => $saved_quiz
         ]);
 
     }
@@ -51,7 +57,7 @@ class ReviewController extends Controller
             'quiz' => $quiz[0],
         ]);
     }
-    
+
     public function vote(Request $request, Quiz $id) {
         $point = $request->point;
         $data = DB::table('reviews')
@@ -59,7 +65,7 @@ class ReviewController extends Controller
             ->Where('reviews.id_quiz', "$id->id")
             ->get();
         if (count($data) == 0) {
-            $vote = Review::Create([    
+            $vote = Review::Create([
                 'id_user' => Auth::user()->id,
                 'id_quiz' => $id->id,
                 'point' => $point

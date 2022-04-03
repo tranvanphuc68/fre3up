@@ -36,7 +36,7 @@
                 <div class="container">
                 <div class="row mb-4">
                     <h1 class="fw-bolder">Quiz</h1>
-                </div> 
+                </div>
                 @if ($data->count() != 0)
                 <div class="row slider">
                         @foreach ($data as $item)
@@ -44,7 +44,16 @@
                             <div class="quiz">
                                 <a href="{{ url("/review_quiz/{$item->id}") }}">
                                     <div class="quiz-info">
-                                        <div>500 views</div>
+                                        <!--views -->
+                                        <?php $total = 0; ?>
+                                        @foreach ( $views as $view)
+                                            @if ( $view->id_quiz == $item->id)
+                                                <?php  $total = $view->total; ?>
+                                                @break
+                                            @endif
+                                        @endforeach
+                                        <div> {{ $total }} views</div>
+                                        <!-- end views -->
                                         <div>{{ $item->number_questions }} questions</div>
                                     </div>
                                     <div class="quiz-info">
@@ -52,8 +61,13 @@
                                     </div>
                                 </a>
                                     <div class="quiz-info">
-                                        <div id="{{ $item->id }}" class="quiz-bookmark" onclick="toggleSave({{ $item->id }}, 1)">
-                                            </div>
+                                        <?php $status = 0;
+                                        foreach ( $saved_quiz as $saved){
+                                            if($saved->id_user == Auth::user()->id && $saved->id_quiz == $item->id)
+                                            { $status = 1;}
+                                        } ?>
+                                    <div id="{{ $item->id }}" value="{{ $status}}" class="quiz-bookmark <?php echo ($status == 1) ? "bold" :" "?>" onclick="toggleSave({{ $item->id }})">
+                                    </div>
                                     </div>
                             </div>
                         </div>
@@ -68,7 +82,8 @@
                     @if ($data->count() != 0)
                     <div class="row slider">
                         @foreach ($all_process as $process)
-                        <div class="col-md-12">
+                        @if ($process->id_user == $user->id)
+                            <div class="col-md-12">
                             <div data-toggle="modal" data-target="#exampleModal{{$process->id}}">
                                 <div class="work-list">
                                     <div class="work-list-name">
@@ -77,6 +92,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                         @endforeach
                     </div>
                     @else
@@ -91,7 +107,7 @@
 @foreach ( $all_process as $process )
     <div class="modal fade" id="exampleModal{{$process->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-    
+
           <div class="modal-content form-group">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">{{ $process->name }}</h5>
@@ -247,15 +263,39 @@
             crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/73fec26af2.js" crossorigin="anonymous"></script>
         <script>
-            function toggleSave(id, saved_status) {
+            function toggleSave(id) {
                 var icon = document.getElementById(id)
-                console.log(icon)
                 icon.classList.toggle('bold')
-                if (saved_status == 0) { 
-    
+                saved_status = icon.getAttribute('value')
+                    if (saved_status == 0) {
+                        $('#'+id).attr("value", "1")
+                        $.ajax({
+                        url: "{{ url('/saved_quiz/') }}"+"/"+id,
+                        method: 'GET',
+                        success: function(res) {
+                            $('#none').text(res)
+                        },
+                        error: function(err) {
+                            console.error(err)
+                        }
+                        })
+                    }
+                    else {
+                        $('#'+id).attr("value", "0")
+                        $.ajax({
+                        url: "{{ url('/unsaved_quiz/') }}"+"/"+id,
+                        method: 'GET',
+                        success: function(res) {
+                            $('#none').text(res)
+                        },
+                        error: function(err) {
+                            console.error(err)
+                        }
+                        })
+                    }
+
                 }
-            }
-            
+
             $('.slider').slick({
                 dots: true,
                 infinite: true,

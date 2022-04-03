@@ -6,6 +6,8 @@ use App\Models\DetailProcess;
 use App\Models\Process;
 use App\Models\User;
 use App\Models\Quiz;
+use App\Models\SavedQuiz;
+use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -35,11 +37,18 @@ class UserController extends Controller
         $all_process = Process::where("id_user", Auth::id())->get();
         $data = Quiz::where("id_user", Auth::id())->where("check","1")->get();
         $details = DetailProcess::orderBy('date')->get();
+        $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
+        //dd($saved_quiz);
+        $views = Result::select('id_quiz', Result::raw('count(*) as total'))
+                        ->groupBy('id_quiz')
+                        ->get();
         return view('user.profile', [
             'user' => $user,
             'data' => $data,
             'all_process' => $all_process,
-            'details' => $details
+            'details' => $details,
+            'saved_quiz' => $saved_quiz,
+            'views' => $views
         ]);
     }
 
@@ -54,7 +63,7 @@ class UserController extends Controller
                     "avatar" => "defaultFemale.jpg"
                 ]);
             }
-            
+
         }
         $user = User::find(Auth::id())->update([
             "dob" => $request->input('dob'),
@@ -67,14 +76,21 @@ class UserController extends Controller
 
     public function show(User $id) {
         $user = User::find($id->id);
-        $all_process = Process::where("id_user", Auth::id())->get();
+        $all_process = Process::get();
         $data = Quiz::where("id_user", $id->id)->where("check","1")->get();
         $details = DetailProcess::orderBy('date')->get();
+        $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
+        //dd($saved_quiz);
+        $views = Result::select('id_quiz', Result::raw('count(*) as total'))
+                        ->groupBy('id_quiz')
+                        ->get();
         return view('user.show', [
             'user' => $user,
             'data' => $data,
             'all_process' => $all_process,
-            'details' => $details
+            'details' => $details,
+            'saved_quiz' => $saved_quiz,
+            'views' => $views
         ]);
     }
 
