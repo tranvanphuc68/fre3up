@@ -44,9 +44,9 @@
                         @break
                     @endif
                 @endforeach
-                <div> {{ $total }} views</div>
+                <div> {{ $total }} <?php echo ($total < 2) ? "view" : "views" ?></div>
                 <!-- end views -->
-              <div>{{ $quiz->number_questions }} questions</div>
+              <div>{{ $quiz->number_questions }} <?php echo ($quiz->number_questions < 2) ? "question" : "questions" ?></div>
             </div>
             <div class="quiz-info">
               <h4>{{ $quiz->quiz_name }}</h4>
@@ -54,6 +54,8 @@
           </a>
 
           <div class="quiz-info">
+            <a href="{{ url("/users/{$quiz->id_user}") }}"><div>{{ $quiz->name }}</div></a>
+
         <?php $status = 0;
                 foreach ( $saved_quiz as $saved){
                     if($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)

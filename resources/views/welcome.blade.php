@@ -42,7 +42,7 @@
                                     @endforeach
                                     <div>  <?php echo $total > 1 ? $total." views" :  $total." view" ?></div>
                                     <!-- end views -->
-                                <div>{{ $item->number_questions }} questions</div>
+                                <div>{{ $item->number_questions }} <?php echo ($item->number_questions < 2) ? "question" : "questions" ?></div>
                             </div>
                             <div class="quiz-info">
                                 <h4>{{ $item->quiz_name }}</h4>

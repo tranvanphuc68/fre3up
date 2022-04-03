@@ -123,6 +123,7 @@ class QuizController extends Controller
     public function all_saved_quiz(){
 
         $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')
+                    ->join("users",'quiz.id_user','=','users.id')
                     ->where("saved_quizzes.id_user", Auth::id())
                     //->select()
                     ->get();

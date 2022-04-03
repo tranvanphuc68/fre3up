@@ -14,9 +14,9 @@
                         @break
                     @endif
                 @endforeach
-                <div> {{ $total }} views</div>
+                <div> {{ $total }} <?php echo ($total == 0) ? "view" : "views" ?></div>
                 <!-- end views -->
-              <div>{{ $quiz->number_questions }} questions</div>
+              <div>{{ $quiz->number_questions }} <?php echo ($quiz->number_questions < 2) ? "question" : "questions" ?></div>
             </div>
             <div class="quiz-info">
               <h4>{{ $quiz->quiz_name }}</h4>
