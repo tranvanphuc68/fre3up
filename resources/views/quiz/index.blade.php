@@ -33,7 +33,7 @@
     <?php $count = count($data); ?>
       @foreach ($data as $quiz)
       <div class="col-md-3 mt-3">
-        <div class="quiz @if ($quiz->check == 0) quiz-uncensored @endif ">
+        <div class="quiz @if ($quiz->check == 0) quiz-uncensored @endif" id="quiz-{{ $quiz->id }}">
           <a href="{{ url("/detail_quiz/edit/{$quiz->id}") }}">
             <div class="quiz-info">
                 <!--views -->
@@ -63,11 +63,7 @@
           </div>
         </div>
         <div id='none' class="d-none"></div>
-        <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()"><i class="fa-regular fa-circle-xmark mt-2"></i></a>
-        <form method="POST" id="delete-{{ $quiz->id }}" action="{{ url("/quiz/{$quiz->id}") }}">
-          @method('DELETE')
-          @csrf
-        </form>
+        <a href="javascript:void(0)" onclick="delete_quiz({{ $quiz->id }})"><i class="fa-regular fa-circle-xmark mt-2"></i></a>
       </div>
       @endforeach
     </div>
@@ -216,6 +212,21 @@
       }
     }
 
+    //delete quiz
+    function delete_quiz(id) {
+      if (confirm('Bạn có chắc muốn xóa không?')) {
+        $.ajax({
+          url: `{{ url('/quiz/delete/${id}') }}`,
+          method: 'GET',
+          success: function(res) {
+            $(`#quiz-${id}`).parent().remove()
+          },
+          error: function(err) {
+            console.error(err)
+          }
+        })
+      }
+    }
   </script>
 
 @endsection

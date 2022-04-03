@@ -127,6 +127,7 @@
 
         <script>
             window.onload = function() {
+                
                 const point = {{ $point }}
                 load_voted(point)
             }

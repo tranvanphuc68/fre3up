@@ -21,7 +21,7 @@ class ReviewController extends Controller
         ->join("reviews",'reviews.id_user','=','users.id', 'left outer')
         ->select("comments.*", "users.name as user_name",'users.provider','users.avatar', "reviews.point")
         ->where('comments.id_quiz',"$id->id")
-        ->orWhere('reviews.id_quiz', "$id->id")
+        ->Where('reviews.id_quiz', "$id->id")
         ->orderByDesc("comments.updated_at")
         ->paginate(10)->withQueryString();
         // dd($data);

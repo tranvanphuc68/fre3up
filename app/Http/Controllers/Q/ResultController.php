@@ -54,6 +54,11 @@ class ResultController extends Controller
         ->where('id_user', Auth::user()->id )
         ->Where('reviews.id_quiz', "$id->id")
         ->get('point');
+        if (count($point) == 0) {
+            $point = 0;
+        } else {
+            $point = $point[0]->point;
+        }
         return view('quiz.result', [
             'data' => $data,
             '_answers' => $_answers,
@@ -61,7 +66,7 @@ class ResultController extends Controller
             'quiz' => $id,
             'all_result' => $result,
             'rank' => $rank,
-            'point' => $point[0]->point
+            'point' => $point
         ]);
     }
 }

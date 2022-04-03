@@ -25,11 +25,7 @@
 
           <div class="quiz-info">
             <a href="{{ url("/users/{$quiz->id_user}") }}"><div>{{ $quiz->name }}</div></a>
-<<<<<<< HEAD
               <?php $status = 0;
-=======
-                <?php $status = 0;
->>>>>>> 9b6a4479ff166e2075e513f8402277ace21aacd0
                 foreach ( $saved_quiz as $saved){
                   if ($saved->id_user == Auth::user()->id && $saved->id_quiz == $quiz->id)
                     { $status = 1;}
@@ -38,11 +34,6 @@
           </div>
         </div>
         <div id='none' class="d-none"></div>
-        <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()"><i class="fa-regular fa-circle-xmark mt-2"></i></a>
-        <form method="POST" id="delete-{{ $quiz->id }}" action="{{ url("/quiz/{$quiz->id}") }}">
-          @method('DELETE')
-          @csrf
-        </form>
       </div>
       @endforeach
     </div>

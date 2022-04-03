@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
 {
-    public function index(){
+    public function index() {
 
         $data = Quiz::where("id_user", Auth::id())
                     ->paginate(10)->withQueryString();
@@ -20,7 +20,7 @@ class QuizController extends Controller
         $views = Result::select('id_quiz', Result::raw('count(*) as total'))
                         ->groupBy('id_quiz')
                         ->get();
-        if(  isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0) {
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0) {
             return view('quiz.data_index', [
                 'data' => $data,
                 'saved_quiz' => $saved_quiz,
@@ -35,7 +35,7 @@ class QuizController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request) {
         $data = Quiz::create([
             'id_user' => Auth::id(),
             'quiz_name' => $request->input('quiz_name'),
@@ -47,12 +47,16 @@ class QuizController extends Controller
         return redirect("/detail_quiz/{$data->id}");
     }
 
-    public function delete(Quiz $id){
-        $id->delete();
-        return redirect('/quiz');
+    public function delete(Quiz $id) {
+        if (Auth::user()->id == $id->id_user) {
+            $id->delete();
+            return response()->json("Successful", 200);
+        } else {
+            abort(401);
+        }
     }
 
-    public function get_CheckedQuiz(){
+    public function get_CheckedQuiz() {
         if(isset($_GET['search'])){
             $hint = $_GET['search'];
             $data = Quiz::join("users",'quiz.id_user','=','users.id')
@@ -80,28 +84,28 @@ class QuizController extends Controller
         ]);
     }
 
-    public function censorship(){
+    public function censorship() {
         $data = Quiz::join('users','quiz.id_user','=','users.id')->where('check', '0')->select('quiz.*', 'users.name as user_name', 'users.id as id_user')->paginate(10)->withQueryString();
         return view('quiz.censorship', [
             'data' => $data
         ]);
     }
 
-    public function censorship_ed(Quiz $id){
+    public function censorship_ed(Quiz $id) {
         $data = Quiz::where('id',$id->id)->update([
             'check' => '1'
         ]);
         return redirect('/censorship');
     }
 
-    public function eviction(Quiz $id){
+    public function eviction(Quiz $id) {
         $data = Quiz::where('id',$id->id)->update([
             'check' => '0'
         ]);
         return redirect('/censorship');
     }
 
-    public function saved_quiz(Quiz $id){
+    public function saved_quiz(Quiz $id) {
 
         $data = SavedQuiz::create([
             'id_user' => Auth::id(),
@@ -111,7 +115,7 @@ class QuizController extends Controller
         return response()->json("Successful", 200);
     }
 
-    public function unsaved_quiz(Quiz $id){
+    public function unsaved_quiz(Quiz $id) {
 
         $data = SavedQuiz::where('id_quiz', $id->id)->where('id_user',Auth::id())->get();
         $data[0]->delete();
@@ -120,7 +124,7 @@ class QuizController extends Controller
         return response()->json("Successful", 200);
     }
 
-    public function all_saved_quiz(){
+    public function all_saved_quiz() {
 
         $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')
                     ->join("users",'quiz.id_user','=','users.id')
@@ -136,7 +140,7 @@ class QuizController extends Controller
         ]);
     }
 
-    public function history_quiz(){
+    public function history_quiz() {
 
         $history_quiz = Quiz::join("result",'quiz.id','=','result.id_quiz')
                     ->join("users",'quiz.id_user','=','users.id')
@@ -144,7 +148,7 @@ class QuizController extends Controller
                     ->select('quiz.id','quiz.id_user','quiz.quiz_name','quiz.number_questions', 'users.name')
                     ->groupByRaw('id, id_user, quiz_name, number_questions, name')
                     ->get();
-         $views = Result::select('id_quiz', Result::raw('count(*) as total'))
+        $views = Result::select('id_quiz', Result::raw('count(*) as total'))
                         ->groupBy('id_quiz')
                         ->get();
         $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
