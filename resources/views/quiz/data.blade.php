@@ -9,14 +9,14 @@
                <!--views -->
                <?php $total = 0; ?>
                @foreach ( $views as $item)
-                   @if ( $item->id_quiz == $quiz->id)
+                   @if ( $item->id_quiz == $quiz->id_quiz)
                        <?php  $total = $item->total; ?>
                        @break
                    @endif
                @endforeach
-               <div><?php echo $total > 1 ? $total." views" :  $total." view" ?></div>
+               <div> {{ $total }} <?php echo ($total < 2) ? "view" : "views" ?></div>
                <!-- end views -->
-              <div><?php echo $quiz->number_questions > 1 ? $quiz->number_questions." questions" :  $quiz->number_questions." question" ?></div>
+              <div>{{ $quiz->number_questions }} <?php echo ($quiz->number_questions < 2) ? "question" : "questions" ?></div>
             </div>
             <div class="quiz-info">
               <h4>{{ $quiz->quiz_name }}</h4>
