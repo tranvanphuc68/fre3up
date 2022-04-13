@@ -1,5 +1,5 @@
 INSERT INTO `users`(`id`, `name`, `dob`, `gender`, `description`, `email`, `provider`, `provider_id`, `email_verified_at`, `password`, `avatar`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES 
-(10,'Nguyễn Ngọc Minh',null,'Male','Student','ngocminh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
+(4,'Nguyễn Ngọc Minh',null,'Male','Student','ngocminh@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
 (11,'Nguyễn Thanh Hà',null,'Female','Student','thanhha@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
 (12,'Trần Bảo Ngọc',null,'Female','Student','baongoc@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultFemale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
 (13,'Nguyễn Quốc Cường',null,'Male','Student','quoccuong@gmail.com',null,null,null,'$2y$10$8VDacefg/oTL5Cg4CaWAAe0RyWkVth182YfAWsGq6p7jA2Rjt9QTS','defaultMale.jpg','user',null,'2021-10-21 07:37:06','2021-10-21 07:37:06'),
