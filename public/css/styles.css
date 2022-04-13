@@ -1,7 +1,5 @@
 /*------------------------- css users -------------------------*/
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
+
 .search-users {
     width: 50%;
     display: inline-block;
@@ -87,6 +85,11 @@ body {
     box-shadow: 8px 8px #004291;
     margin-bottom: 8px;
     border-radius: 20px;
+    transition: transform 0.5s;
+}
+
+.quiz:hover{
+    transform: scale(0.95);
 }
 
 .quiz-info{
@@ -130,6 +133,10 @@ body {
     border-radius: 10px;
     margin-bottom: 10px;
     cursor: pointer;
+    transition: transform 0.5s;
+}
+.work-list:hover{
+    transform: scale(0.95);
 }
 .work-list-name {
     color: white;
@@ -211,3 +218,19 @@ body {
 
 /* --------------------- */
 
+.nothing{
+    border: 3px dashed #005bc9;
+    width: 50%;
+    margin: 5%;
+    padding: 5%;
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 600;
+    transition: linear 0.1s;
+    transition-delay: 0.1s;
+    cursor: pointer;
+}
+.nothing:hover{
+    font-weight: 100;
+    border-width: 1px;
+}

@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-12">
-            <h1 class="fw-bolder mb-4">Users</h1>
+            <h1 class="fw-bold fs-1 mb-4">Users</h1>
             <form action="{{ url('/users') }}" method="get">
                 <div class="d-flex">
                     <input class="search-users" type="text" placeholder="Type name or email" name="search" value="<?php if (isset($_GET['search'])) { echo $_GET['search'];} ?>">
@@ -43,4 +43,8 @@
 </div>
 
 </div>
+<script>
+    document.getElementsByClassName("dropdown-item")[3].classList.add("active-menu")
+</script>
+
 @endsection

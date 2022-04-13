@@ -19,7 +19,7 @@
         $getInfo = Socialite::driver($provider)->user(); 
         $user = $this->createUser($getInfo,$provider); 
         Auth::login($user); 
-        return redirect()->to('/home');
+        return redirect()->to("/auth/user/profile");
     }
 
     function createUser($getInfo,$provider){

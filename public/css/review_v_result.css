@@ -42,6 +42,7 @@ a:hover {
     position: relative;
     transform: translateY(-10%);
     background-color: white;
+    margin-top: 15px;
 }
 .quiz-bookmark:focus {
     outline: none;

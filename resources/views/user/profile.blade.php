@@ -34,7 +34,7 @@
                 <div class="container">
                     <div class="row mb-4">
                         <div class="d-flex flex-row justify-content-between">
-                            <h1 class="fw-bolder">Quiz</h1>
+                            <h1 class="fw-bold">Quiz</h1>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#editProfile" class="btn btn-primary pl-4 pr-4 fs-4">Edit profile</button>
                         </div>
                     </div>
@@ -76,12 +76,12 @@
                         @endforeach
                     </div>
                     @else
-                    <div class="mb-4">Nothing.</div>
+                        <div class="nothing-message">Nothing is here</div>
                     @endif
 
                     <!-- work list -->
                     <div class="row mb-4 mt-5">
-                        <h1 class="fw-bolder">Work list</h1>
+                        <h1 class="fw-bold">Work list</h1>
                     </div>
                     @if ($data->count() != 0)
                     <div class="row slider">
@@ -97,8 +97,8 @@
                         </div>
                         @endforeach
                     </div>
-                    @else
-                    <div class="mb-4">Nothing.</div>
+                    @else 
+                        <div class="nothing-message">Nothing is here</div>
                     @endif
                 </div>
             </div>
@@ -180,10 +180,10 @@
 <!-- Edit profile -->
 <!-- Modal -->
 <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="max-width: 700px;">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="fw-bolder" id="exampleModalLabel">Edit your profile</h2>
+                <h2 class="fw-bold" id="exampleModalLabel">Edit your profile</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -207,8 +207,8 @@
                                 </div>
                                 <div class="mt-2">
                                     <div>
-                                        <input type="radio" name="gender" value="Male" <?php if ($user->gender == 'Male') echo 'checked' ?>>Male
-                                        <input type="radio" name="gender" value="Female" <?php if ($user->gender == 'Female') echo 'checked' ?>>Female
+                                        <input type="radio" name="gender" id="male" value="Male" <?php if ($user->gender == 'Male') echo 'checked' ?>><label for="male">Male</label> 
+                                        <input type="radio" name="gender" id="female" value="Female" class="ml-3" <?php if ($user->gender == 'Female') echo 'checked' ?>><label for="female"> Female</label>
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +220,7 @@
                                 <div class="pt-4 pb-3">
                                     <span class="font-weight-bold font-italic">Description</span>
                                     <div>
-                                        <textarea class="form-control" style="resize: none;" name="description" rows="4" required>{{ $user->description }} </textarea>
+                                        <textarea class="form-control fs-5" style="resize: none;" name="description" rows="4" required>{{ $user->description }} </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -239,40 +239,41 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/73fec26af2.js" crossorigin="anonymous"></script>
     <script>
+        document.getElementsByClassName("dropdown-item")[0].classList.add("active-menu")
         function toggleSave(id) {
             var icon = document.getElementById(id)
             icon.classList.toggle('bold')
             saved_status = icon.getAttribute('value')
-                if (saved_status == 0) {
-                    $('#'+id).attr("value", "1")
-                    $.ajax({
-                    url: "{{ url('/saved_quiz/') }}"+"/"+id,
-                    method: 'GET',
-                    success: function(res) {
-                        $('#none').text(res)
-                    },
-                    error: function(err) {
-                        console.error(err)
-                    }
-                    })
+            if (saved_status == 0) {
+                $('#'+id).attr("value", "1")
+                $.ajax({
+                url: "{{ url('/saved_quiz/') }}"+"/"+id,
+                method: 'GET',
+                success: function(res) {
+                    $('#none').text(res)
+                },
+                error: function(err) {
+                    console.error(err)
                 }
-                else {
-                    $('#'+id).attr("value", "0")
-                    $.ajax({
-                    url: "{{ url('/unsaved_quiz/') }}"+"/"+id,
-                    method: 'GET',
-                    success: function(res) {
-                        $('#none').text(res)
-                    },
-                    error: function(err) {
-                        console.error(err)
-                    }
-                    })
-                }
-
+                })
             }
+            else {
+                $('#'+id).attr("value", "0")
+                $.ajax({
+                url: "{{ url('/unsaved_quiz/') }}"+"/"+id,
+                method: 'GET',
+                success: function(res) {
+                    $('#none').text(res)
+                },
+                error: function(err) {
+                    console.error(err)
+                }
+                })
+            }
+
+        }
+        
 
 
         $('.slider').slick({

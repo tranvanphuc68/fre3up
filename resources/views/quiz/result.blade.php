@@ -19,7 +19,7 @@
             <div class="finish-card-container">
                 <p>Bạn đã đạt: {{ $result }} / {{ $quiz->number_questions }} câu.</p>
                 <div class="finish-menu">
-                    <div class="btn btn-outline-info mr-2 ml-2 mb-2" onclick="oke()">Show Answers</div>
+                    <div class="btn btn-outline-info mr-2 ml-2 mb-2" onclick="showAns()">Show Answers</div>
                     <div class="btn btn-outline-info mb-2"
                         onclick="document.getElementById('all_result').classList.toggle('d-none')">All Results</div>
                 </div>
@@ -112,7 +112,7 @@
                             <textarea type="text" name="content" style="resize: none;" required rows="3" placeholder="Hãy chia sẻ cảm nhận của bạn về bài quiz"></textarea>
                         </div>
                         <div class="end">
-                            <button type="submit" class="btn btn-primary end">Hoàn thành</button>
+                            <button type="submit" class="button end">Hoàn thành</button>
                         </div>
                     </form>
                 </div>
@@ -121,13 +121,8 @@
 
 
 </div>
-
-
-
-
         <script>
             window.onload = function() {
-                
                 const point = {{ $point }}
                 load_voted(point)
             }
@@ -179,7 +174,7 @@
             }
 
 
-            function oke() {
+            function showAns() {
                 setTimeout(function () {
                     document.getElementById('all_ans').classList.toggle('faded');
                 }, 200);

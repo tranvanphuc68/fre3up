@@ -10,7 +10,8 @@
 <div class="quiz-container">
     <div class="row">
         <div class="col-md-6">
-            <div class="quiz-name d-flex align-items-center">
+            <?php $id_quiz = $quiz->id ;?>
+            <div class="quiz-name d-flex align-items-start">
                 <span>{{ $quiz->quiz_name }}</span>
                 @if (Auth::check())
                 <?php $status = 0;
@@ -27,7 +28,7 @@
             </div>
         </div>
         <div class="col-md-6 ">
-            <div class="take-quiz">
+            <div class="take-quiz" onclick="setClock()">
                 <a href="{{ url("/do_quiz/{$quiz->id}") }}"><span>Take quiz</span></a>
             </div>
             <div class="save-view-block">
@@ -166,6 +167,11 @@
                 }
             })
         }
+    }
+    //set clock
+    function setClock(){
+        var time = new Date().getTime(); 
+        localStorage.setItem("now-{{$id_quiz}}", time);
     }
 
 </script>

@@ -96,7 +96,7 @@
   margin: 20px 0 60px 60px;
   position: relative;
   padding: 20px;
-  background: linear-gradient(to right,#00aeef,rgb(49, 49, 49));
+  background-color: #004291;
   color: #fff;
   border-radius: 5px;
   line-height: 20px;
@@ -121,7 +121,7 @@
   border-color: transparent;
   position: absolute;
   border-width: 15px 20px 15px 0;
-  border-right-color: #00aeef;
+  border-right-color: #004291;
   left: -15px;
   top: 10px;
   z-index: 0;

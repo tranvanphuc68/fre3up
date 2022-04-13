@@ -4,11 +4,14 @@
 <link rel="stylesheet" href="{{asset('css/timeline1.css')}}">
 <div class="block">
         <div class="container my-work-list">
-          <h1 class="fw-bolder mb-4 mt-5">My Work List</h1>
+          <h1 class="fw-bold mb-5 mt-5">My Work List</h1>
           <div>
-              <div class="btn btn-primary mt-4 mb-4" data-toggle="modal" data-target="#exampleModal">Create</div>
+              <div class="button mt-4 mb-4" data-toggle="modal" data-target="#exampleModal">Create</div>
           </div>
           <div class="row">
+            @if (count($data) == 0)
+              <div class="nothing">Nothing is here</div>
+            @endif
             @foreach ($data as $process)
               <div class="col-md-3 mt-4">
                 <a href="{{ url("/detail_process/{$process->id}") }}">
@@ -55,5 +58,5 @@
     </form>
   </div>
 </div>
-
+<script src="{{ asset('/js/process.js') }}"></script>
 @endsection

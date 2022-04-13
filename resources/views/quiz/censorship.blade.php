@@ -3,44 +3,18 @@
 <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 <div class="block">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-5">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">{{ __('All Quiz in Queue') }}</div>
-    
-                      <div class="card-body">
-                        
+                
+                      <h1 class="fw-bold mb-5">Censorship</h1>
+                      <div>
+                        @if (count($data) == 0)
+                            <div class="nothing">Nothing is here</div>
+                        @endif
                         @error('offset0')
                           <div class="form-text text-danger" style="font-size: 17px; font-weight: bold;">{{ $message }}</div>
                         @enderror
-                      <div class="row">
-                        {{-- @foreach ($data as $quiz)
-
-                          <div class="col-lg-3">
-                            <a href="{{ url("/detail_quiz/edit/{$quiz->id}") }}">
-                              
-                                @if ($quiz->check == 1)
-                                    <div class="item" style="background-image: linear-gradient(to right,#1ABCF4,#5DEFB8);">
-                                      <div class="e-flex-content">{{ $quiz->quiz_name }}</div>
-                                      <span>{{ $quiz->number_questions }} questions</span>
-                                    </div>
-                                @else
-                                    <div class="item" style="background-image: linear-gradient(to right,#ff0852,#df9090);">
-                                      <div class="e-flex-content">{{ $quiz->quiz_name }}</div>
-                                      <span>{{ $quiz->number_questions }} questions</span>
-                                    </div>
-                                @endif
-                              </a>
-                              <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()">
-                                  <i class="fa-regular fa-circle-xmark mt-2"></i>
-                              </a>
-                              <form method="POST" id="delete-{{ $quiz->id }}" action="{{ url("/quiz/{$quiz->id}") }}" >
-                                  @method('DELETE')
-                                  @csrf
-                              </form>
-                          </div>                     
-                            
-                        @endforeach --}}
+                      <div class="row mt-3">
 
                         @foreach ($data as $quiz)
                         <div class="col-lg-3">
@@ -60,8 +34,8 @@
                             <a href="javascript:void(0)" onclick="if (confirm('Bạn có chắc muốn xóa không?')) document.getElementById('delete-{{ $quiz->id }}').submit()">
                               <i class="fa-regular fa-circle-xmark mt-2"></i>
                             </a>
-                            <form method="POST" id="delete-{{ $quiz->id }}" action="{{ url("/quiz/{$quiz->id}") }}" >
-                                @method('DELETE')
+                            <form method="GET" id="delete-{{ $quiz->id }}" action="{{ url("/quiz/delete/{$quiz->id}") }}" >
+                              
                                 @csrf
                           </form>
                         </div>
@@ -70,10 +44,13 @@
                       </div>
                       {{ $data->links('') }}
                       </div>
-                </div>
+                
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.getElementsByClassName("dropdown-item")[4].classList.add("active-menu")
+</script>
 
 @endsection

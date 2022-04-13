@@ -13,10 +13,8 @@ class QuizController extends Controller
 {
     public function index() {
 
-        $data = Quiz::where("id_user", Auth::id())
-                    ->paginate(10)->withQueryString();
+        $data = Quiz::where("id_user", Auth::id())->paginate(8)->withQueryString();
         $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')->where("saved_quizzes.id_user", Auth::id())->get();
-        //dd($saved_quiz);
         $views = Result::select('id_quiz', Result::raw('count(*) as total'))
                         ->groupBy('id_quiz')
                         ->get();
@@ -48,8 +46,9 @@ class QuizController extends Controller
     }
 
     public function delete(Quiz $id) {
-        if (Auth::user()->id == $id->id_user) {
+        if (Auth::user()->id == $id->id_user || Auth::user()->role == 'admin') {
             $id->delete();
+            if(Auth::user()->role == 'admin') return redirect("/censorship");
             return response()->json("Successful", 200);
         } else {
             abort(401);
@@ -129,7 +128,6 @@ class QuizController extends Controller
         $saved_quiz = Quiz::join("saved_quizzes",'quiz.id','=','saved_quizzes.id_quiz')
                     ->join("users",'quiz.id_user','=','users.id')
                     ->where("saved_quizzes.id_user", Auth::id())
-                    //->select()
                     ->get();
         $views = Result::select('id_quiz', Result::raw('count(*) as total'))
                     ->groupBy('id_quiz')

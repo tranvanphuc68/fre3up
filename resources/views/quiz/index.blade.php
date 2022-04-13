@@ -3,9 +3,9 @@
 <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 <div class="block">
   <div class="container myquiz">
-    <div class="row mt-5">
+    <div class="row mt-5 mb-5">
       <div class="col-md-10">
-        <h1 class="fw-bolder mb-4">My Quiz</h1>
+        <h1 class="fw-bold mb-5">My Quiz</h1>
         <div class="d-flex">
           <div class="quiz-list quiz-list-own active" onclick="active(0)">
             <h3>My Quiz</h3>
@@ -21,15 +21,19 @@
       </div>
     </div>
     <div>
-      <button type="button" class="btn btn-primary mt-4 mb-4" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="button mt-4 mb-4" data-toggle="modal" data-target="#exampleModal">
         CREATE
       </button>
     </div>
-    @error('offset0')
-    <div class="form-text text-danger" style="font-size: 17px; font-weight: bold;">{{ $message }}</div>
-    @enderror
+    
     <div id="res">
     <div class="row result">
+      @error('offset0')
+          <div class="form-text text-danger" style="font-size: 17px; font-weight: bold;">{{ $message }}</div>
+      @enderror
+      @if (count($data) == 0)
+          <div class="nothing">Nothing is here</div>
+      @endif
     <?php $count = count($data); ?>
       @foreach ($data as $quiz)
       <div class="col-md-3 mt-3">
@@ -66,6 +70,7 @@
         <a href="javascript:void(0)" onclick="delete_quiz({{ $quiz->id }})"><i class="fa-regular fa-circle-xmark mt-2"></i></a>
       </div>
       @endforeach
+
     </div>
     {{ $data->links('') }}
   </div>
@@ -79,7 +84,7 @@
       @csrf
       <div class="modal-content form-group">
         <div class="modal-header">
-          <h1 class="fw-bolder" id="exampleModalLabel">ABOUT YOUR QUIZ</h1>
+          <h1 class="fw-bold" id="exampleModalLabel">ABOUT YOUR QUIZ</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -228,5 +233,5 @@
       }
     }
   </script>
-
+<script src="{{ asset('js/quiz.js') }}"></script>
 @endsection

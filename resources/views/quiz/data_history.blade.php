@@ -1,5 +1,8 @@
 <div id="res">
     <div class="row result">
+      @if (count($history_quiz) == 0)
+          <div class="nothing">Nothing is here</div>
+      @endif
     <?php $count = count($history_quiz); ?>
       @foreach ($history_quiz as $quiz)
       <div class="col-md-3 mt-3">

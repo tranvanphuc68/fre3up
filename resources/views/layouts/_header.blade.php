@@ -22,9 +22,7 @@
 <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="position: fixed; top: 0; width: 100%; z-index: 100; background-color: #e1eff9;">
             <div class="container">
-                @if (Auth::check())
-                    <span class="blank_logo"></span>
-                @endif
+                <span class="blank_logo"></span>
                 <a class="navbar-brand" style="color: #005bc9; text-align:center;" href="{{ url('/') }}">
                     <span style="color: rgba(211, 20, 30, 0.863)">I</span>QUIZ
                 </a>
@@ -60,7 +58,8 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" onclick="event.preventDefault();
+                                document.getElementsByClassName('dropdown-menu')[0].classList.toggle('show');" class="nav-link dropdown-toggle" href="#">
                                     <span>
                                     @if (Auth::check() && Auth::user()->provider != null )
                                         <img src="{{ Auth::user()->avatar }}" alt="" style="height: 40px; width: 40px; border-radius: 50%; display:inline-block;">
@@ -70,7 +69,7 @@
                                     </span>
                                     <div id="user-name">{{ Auth::user()->name }}</div>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right">
                                     <div>
                                         <a class="dropdown-item" href="{{ url("/auth/user/profile") }}">
                                             <div>View profile</div>

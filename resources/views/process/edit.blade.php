@@ -68,6 +68,6 @@
         </div>
     </div>
 </div>
-
+<script src="{{ asset('/js/process.js') }}"></script>
 @endsection
 

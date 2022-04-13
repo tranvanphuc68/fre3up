@@ -35,7 +35,7 @@
             <div class="col-md-9">
                 <div class="container">
                 <div class="row mb-4">
-                    <h1 class="fw-bolder">Quiz</h1>
+                    <h1 class="fw-bold">Quiz</h1>
                 </div>
                 @if ($data->count() != 0)
                 <div class="row slider">
@@ -74,10 +74,10 @@
                         @endforeach
                 </div>
                 @else
-                    <div class="mb-4">Nothing.</div>
+                    <div class="nothing-message">Nothing is here</div>
                 @endif
                 <div class="row mb-4 mt-5">
-                    <h1 class="fw-bolder">Work list</h1>
+                    <h1 class="fw-bold">Work list</h1>
                 </div>
                     @if ($data->count() != 0)
                     <div class="row slider">
@@ -96,7 +96,7 @@
                         @endforeach
                     </div>
                     @else
-                        <div class="mb-4">Nothing.</div>
+                        <div class="nothing-message">Nothing is here</div>
                     @endif
                 </div>
                 </div>
@@ -261,8 +261,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
             integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
             crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/73fec26af2.js" crossorigin="anonymous"></script>
         <script>
+            document.getElementsByClassName("dropdown-item")[3].classList.add("active-menu")
             function toggleSave(id) {
                 var icon = document.getElementById(id)
                 icon.classList.toggle('bold')

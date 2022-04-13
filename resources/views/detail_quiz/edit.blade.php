@@ -70,17 +70,16 @@
                                     </div>
                                     <input type="text" class="form-control input-lg" name="ques_{{$i}}ans_4" placeholder="Answer 4" value="{{ $item->ans_4 }}">
                                 </div>
-                                <div class="m-3 font-italic d-none"> ==> Answer:
-                                    <input type="text" value name="ques_{{$i}}choice">
+                                <div class="m-3 font-italic">
                                 </div>
                                 <input type="hidden" name="ques_{{$i}}true_ans" id="ques_{{$i}}true_ans" value="{{ $item->true_ans }}">
                             </div>
                             @endforeach
                             <div class="text-center mt-5">
-                                <button class="btn btn-primary" type="submit">SAVE</button>
-                                @if (Auth::user()->role == 'admin')
+                                <button class="button" type="button" onclick="beforePost()">SAVE</button>
+                                @if (Auth::user()->role == 'admin' && $quiz->check == 0)
                                 <a href="{{ url("/censorship/{$data[0]->id_quiz}") }}">
-                                    <div class="btn btn-primary m-3">Agree to Release</div>
+                                    <div class="button-2nd m-3">Agree to Release</div>
                                 </a>
                                 @endif
                             </div>
@@ -91,11 +90,39 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('js/quiz.js') }}"></script>
 <script>
+    @if (Auth::user()->role == 'admin' && $quiz->check == 0)
+        document.getElementsByClassName("dropdown-item")[4].classList.add("active-menu")
+        document.getElementsByClassName("dropdown-item")[1].classList.remove("active-menu")
+    @endif
     for (i = 1; i <= {{$count}}; i++) {
         ans = document.getElementById("ques_" + i + "true_ans").value
         document.getElementsByName(ans)[0].classList.add('alert-success')
     }
+    function beforePost(){
+          var questions = {{ $quiz->number_questions }}
+          var answers = 0
+          for(let i = 1; i <= questions; i++){
+                var ques = $(`input[name='ques_${i}']`).val()
+                var true_ans = $(`input[name='ques_${i}true_ans']`)
+                var ans_1 = $(`input[name='ques_${i}ans_1']`).val()
+                var ans_2 = $(`input[name='ques_${i}ans_2']`).val()
+                var ans_3 = $(`input[name='ques_${i}ans_3']`).val()
+                var ans_4 = $(`input[name='ques_${i}ans_4']`).val()
+                if(true_ans.val() == ''){
+                    true_ans.prev().html("<div style='color:red;'>Please choose the true one</div>")
+                } else if(ans_1 == '' || ans_2 == '' || ans_3 == '' || ans_4 == '' || ques == '') {
+                    true_ans.prev().html("<div style='color:red;'>Please fill all input</div>")
+                }
+                else{
+                    true_ans.prev().html("")
+                    answers++;
+                }
+          }
+          if(questions == answers ) $("form").submit()
+    }
 </script>
+
 @endif
 @endsection

@@ -1,5 +1,8 @@
 
 <div class="row result">
+  @if (count($saved_quiz) == 0)
+    <div class="nothing">Nothing is here</div>
+  @endif
     <?php $count = count($saved_quiz); ?>
       @foreach ($saved_quiz as $quiz)
       <div class="col-md-3 mt-3">

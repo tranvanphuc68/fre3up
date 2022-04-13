@@ -1,27 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
   :root {
-    --primary: #08aeea;
-    --secondary: #13D2B8;
-    --purple: #bd93f9;
-    --pink: #ff6bcb;
-    --blue: #8be9fd;
-    --gray: #333;
     --font: "Poppins", sans-serif;
-    --gradient: linear-gradient(40deg, #ff6ec4, #7873f5);
-    --shadow: 0 0 15px 0 rgba(0,0,0,0.05);
   }
   *,
   *:before,
   *:after {
     box-sizing: border-box;
   }
+  .button{
+    display: inline-block;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: #005bc9;
+    cursor: pointer;
+  }
+  .button-2nd{
+    display: inline-block;
+    color: #005bc9;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: #ffbbbb;
+    cursor: pointer;
+  }
+  .nothing-message{
+    font-size: 2em;
+    text-align: center;
+  }
+  
   html {
     font-size: 62.5%;
   }
 
   body {
-    font-family: Arial, Helvetica, sans-serif !important;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     overflow-x: hidden;
     font-weight: 300;
   }
@@ -49,9 +65,6 @@
     border-radius: 0;
   }
 
-  button {
-    cursor: pointer;
-  }
   .btn.btn-outline-secondary{
     background-image: url("../uploads/icons/check-solid.svg");
     background-repeat: no-repeat;
@@ -88,9 +101,6 @@
       transition: background-color 0.5s linear;
     }
 
-    .gradient:hover{
-        background-color: rgb(185, 174, 196);
-    }
     .content{
         margin: 0 2rem;
         padding:0 20px;
@@ -160,24 +170,6 @@
       .block{
           padding-top: 80px;
       }
-        
-      .item{
-          position: relative;
-          cursor: pointer;
-          padding:70px 40px;
-          margin: 10px;
-          background-color: aqua;
-          overflow: hidden;
-          border-radius: 10px;
-          box-shadow: 0.5rem 0.5rem black, -0.5rem -0.5rem #ccc;
-          font-weight: bold;
-      }
-
-      .e-flex-content {
-          position: absolute;
-          top: 20%;
-          left: 10%;     
-       }
 
       button {
           cursor: pointer;
@@ -282,6 +274,10 @@
       padding: 5px 10px;
       border-radius: 12px;
     }
+    .active-menu{
+      background-color: #005bc9;
+      color: white;
+    }
     #navbarDropdown{
       display: flex;
       align-items: center;
@@ -303,6 +299,20 @@
       border-radius: 7px;
       box-shadow: 0 2px 5px #e1eff9;
       margin-bottom: 15px;
+  }
+  .clock {
+    position: fixed;
+    font-weight: 800;
+    padding: 20px 10px;
+    right: 0%;
+    top: 17%;
+    color: #17D4FE;
+    font-size: 30px;
+    letter-spacing: 4px;
+    z-index: 10;
+    background-color: black;
+    border-radius: 40px;
+    
   }
 
 @media only screen and (max-width: 767px){
